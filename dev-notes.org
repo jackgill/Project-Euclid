@@ -1,0 +1,10 @@
+#+TITLE: dev-notes
+* sqlite
+** list tables
+SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
+SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
+* Misc
+first, generate scaffolding for the major domain entities
+then, generate database migrations to establish foreign-key relationships between them
+
+rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
