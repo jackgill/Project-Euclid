@@ -8,3 +8,4 @@ first, generate scaffolding for the major domain entities
 then, generate database migrations to establish foreign-key relationships between them
 
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
+rails generate controller account login logout index

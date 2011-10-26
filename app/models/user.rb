@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   def self.authenticate(login, clear_password)
     user = self.find_by_login(login)
     if user
-      provided_password = hash_password(password, user.salt)
+      provided_password = hash_password(clear_password, user.salt)
       if provided_password != user.hashed_password
         user = nil
       end
