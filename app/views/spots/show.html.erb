@@ -1,11 +1,6 @@
 <p>
   <b>Building:</b>
-  <%= @spot.building_id %>
-</p>
-
-<p>
-  <b>Number:</b>
-  <%= @spot.number %>
+  <%= Building.find(@spot.building_id).name %>
 </p>
 
 <p>
@@ -14,8 +9,14 @@
 </p>
 
 <p>
+  <b>Number:</b>
+  <%= @spot.number %>
+</p>
+
+<p>
   <b>Owner:</b>
-  <%= @spot.owner_id %>
+  <% _user = User.find(@spot.owner_id) %>
+  <%= _user.first_name + ' ' + _user.last_name %>
 </p>
 
 

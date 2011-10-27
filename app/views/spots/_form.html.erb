@@ -16,13 +16,14 @@
     <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
   </div>
   <div class="field">
-    <%= f.label :number %><br />
-    <%= f.number_field :number %>
-  </div>
-  <div class="field">
     <%= f.label :floor %><br />
     <%= f.number_field :floor %>
   </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+
   <div class="field">
     <%= f.label :owner_id %><br />
     <%= f.select :owner_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>	

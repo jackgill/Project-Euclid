@@ -3,8 +3,8 @@
 <table>
   <tr>
     <th>Building</th>
-    <th>Number</th>
     <th>Floor</th>
+    <th>Number</th>
     <th>Owner</th>
     <th></th>
     <th></th>
@@ -13,10 +13,11 @@
 
 <% @spots.each do |spot| %>
   <tr>
-    <td><%= spot.building_id %></td>
-    <td><%= spot.number %></td>
+    <td><%= Building.find(spot.building_id).name %></td>
     <td><%= spot.floor %></td>
-    <td><%= spot.owner_id %></td>
+    <td><%= spot.number %></td>
+	<% _user = User.find(spot.owner_id) %>
+    <td><%= _user.first_name + ' ' + _user.last_name %></td>
     <td><%= link_to 'Show', spot %></td>
     <td><%= link_to 'Edit', edit_spot_path(spot) %></td>
     <td><%= link_to 'Destroy', spot, confirm: 'Are you sure?', method: :delete %></td>
