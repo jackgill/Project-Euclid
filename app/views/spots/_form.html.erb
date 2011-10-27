@@ -1,0 +1,33 @@
+<%= form_for(@spot) do |f| %>
+  <% if @spot.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@spot.errors.count, "error") %> prohibited this spot from being saved:</h2>
+
+      <ul>
+      <% @spot.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :building_id %><br />
+    <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :number %><br />
+    <%= f.number_field :number %>
+  </div>
+  <div class="field">
+    <%= f.label :floor %><br />
+    <%= f.number_field :floor %>
+  </div>
+  <div class="field">
+    <%= f.label :owner_id %><br />
+    <%= f.select :owner_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>	
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

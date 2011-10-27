@@ -1,12 +1,19 @@
 #+TITLE: dev-notes
 * sqlite
 ** list tables
+sqlite3 db\development.sqlite3;
 SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
-* Misc
-first, generate scaffolding for the major domain entities
-then, generate database migrations to establish foreign-key relationships between them
-
+* git
+git push -u origin master
+* scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate controller account login logout
 rails generate scaffold building name:string address:text
+rails generate scaffold spot building_id:integer number:integer floor:integer owner_id:integer
+* Misc
+strategy:
+first, generate scaffolding for the major domain entities
+then, generate database migrations to establish foreign-key relationships between them
+
+need to set up "new spot" form to allow selection from pick list of buildings

@@ -1,0 +1,23 @@
+<p>
+  <b>Building:</b>
+  <%= @spot.building_id %>
+</p>
+
+<p>
+  <b>Number:</b>
+  <%= @spot.number %>
+</p>
+
+<p>
+  <b>Floor:</b>
+  <%= @spot.floor %>
+</p>
+
+<p>
+  <b>Owner:</b>
+  <%= @spot.owner_id %>
+</p>
+
+
+<%= link_to 'Edit', edit_spot_path(@spot) %> |
+<%= link_to 'Back', spots_path %>

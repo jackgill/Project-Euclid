@@ -17,7 +17,7 @@
 	  <%= link_to "Home", :controller => "home", :action => "Index" %>
 	</div>
 	<div class="right">
-	Welcome, <%= get_name(@user) %>
+	  Welcome, <%= get_name(@user) %>
 	<%=
 	   if session[:user_id] && session[:user_id] != :logged_out
 	   link_to "Log out", :controller => "account", :action => :logout

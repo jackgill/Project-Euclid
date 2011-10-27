@@ -1,4 +1,6 @@
 Euclid::Application.routes.draw do
+  resources :spots
+
   resources :buildings
 
   get "account/login"
