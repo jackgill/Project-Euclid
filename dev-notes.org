@@ -17,3 +17,4 @@ first, generate scaffolding for the major domain entities
 then, generate database migrations to establish foreign-key relationships between them
 
 need to set up "new spot" form to allow selection from pick list of buildings
+http://stormy-sunset-4353.heroku.com
