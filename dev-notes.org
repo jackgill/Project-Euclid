@@ -4,6 +4,16 @@
 sqlite3 db\development.sqlite3;
 SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
+* postgres
+to start the database server: 
+ postgres -D (path to dat directory)
+initially, connect as user 'postgres' and create a new role, a new database, and set privleges:
+ psql -U postgres
+ create user jack password 'password' (NOTE: user name will be lower-cased)
+ create database (database name);
+ grant all privileges on (database name) to (user name);
+to connect to the database server: psql -d (database name) -U (user name)
+
 * git
 git push -u origin master
 * scaffolding
@@ -18,3 +28,9 @@ then, generate database migrations to establish foreign-key relationships betwee
 
 need to set up "new spot" form to allow selection from pick list of buildings
 http://stormy-sunset-4353.heroku.com
+
+ok, I've got postgres running
+user name jack
+password foo
+
+ now, I have to make sure that I have the postgres adapter for ruby, and possibly the ActiveRecord adapter for postgres
