@@ -1,5 +1,7 @@
 class Spot < ActiveRecord::Base
   belongs_to :building
+  belongs_to :user
+  has_many :listing
 
   validates :building_id, :presence => true
   validates :number, :presence => true

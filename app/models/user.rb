@@ -1,6 +1,9 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_many :spot
+  has_many :listing
+
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :email, :presence => true

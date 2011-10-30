@@ -1,4 +1,6 @@
 Euclid::Application.routes.draw do
+  resources :listings
+
   resources :spots
 
   resources :buildings

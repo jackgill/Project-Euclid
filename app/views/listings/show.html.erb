@@ -1,0 +1,28 @@
+<p>
+  <b>Lister:</b>
+  <%= format_lister(@listing.lister) %>
+</p>
+
+<p>
+  <b>Spot:</b>
+  <%= format_spot(@listing.spot) %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @listing.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @listing.end_date %>
+</p>
+
+<p>
+  <b>Ask price:</b>
+  <%= @listing.ask_price %>
+</p>
+
+
+<%= link_to 'Edit', edit_listing_path(@listing) %> |
+<%= link_to 'Back', listings_path %>

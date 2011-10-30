@@ -35,5 +35,3 @@ http://electric-lightning-9621.herokuapp.com/
 strategy:
 first, generate scaffolding for the major domain entities
 then, generate database migrations to establish foreign-key relationships between them
-
-
