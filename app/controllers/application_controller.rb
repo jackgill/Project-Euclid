@@ -6,7 +6,12 @@ class ApplicationController < ActionController::Base
 
   def find_user
     if session[:user_id] && session[:user_id] != :logged_out
-      @user = User.find(session[:user_id])
+      begin
+        @user = User.find(session[:user_id])
+        rescue ActiveRecord::RecordNotFound
+        @user = nil
+      end
+
     end
   end
 end
