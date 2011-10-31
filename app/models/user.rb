@@ -1,9 +1,10 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :spot
-  has_many :listing
-
+  has_many :spot, :foreign_key => :owner_id
+  has_many :listing, :foreign_key => :lister_id
+  has_many :request, :foreign_key => :requester_id
+  
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :email, :presence => true

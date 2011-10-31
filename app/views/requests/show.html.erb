@@ -1,0 +1,25 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Requester:</b>
+  <%= @request.requester_id %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @request.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @request.end_date %>
+</p>
+
+<p>
+  <b>Bid price:</b>
+  <%= @request.bid_price %>
+</p>
+
+
+<%= link_to 'Edit', edit_request_path(@request) %> |
+<%= link_to 'Back', requests_path %>
