@@ -1,5 +1,5 @@
 class Request < ActiveRecord::Base
-  belongs_to :requester, :foreign_key => :requestoer_id, :class_name => 'User'
+  belongs_to :requester, :foreign_key => :requester_id, :class_name => 'User'
   
   validates :requester_id, :presence => true
   validates :start_date, :presence => true

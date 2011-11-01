@@ -1,8 +1,6 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Requester:</b>
-  <%= @request.requester_id %>
+  <%= format_user(@request.requester) %>
 </p>
 
 <p>

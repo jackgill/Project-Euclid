@@ -13,7 +13,7 @@
 
 <% @requests.each do |request| %>
   <tr>
-    <td><%= request.requester_id %></td>
+    <td><%= format_user(request.requester) %></td>
     <td><%= request.start_date %></td>
     <td><%= request.end_date %></td>
     <td><%= request.bid_price %></td>

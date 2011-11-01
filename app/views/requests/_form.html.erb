@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :requester_id %><br />
-    <%= f.number_field :requester_id %>
+	<%= f.select :requester_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br />

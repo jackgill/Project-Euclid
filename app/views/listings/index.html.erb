@@ -14,7 +14,7 @@
 
 <% @listings.each do |listing| %>
   <tr>
-    <td><%= format_lister(listing.lister) %></td>
+    <td><%= format_user(listing.lister) %></td>
     <td><%= format_spot(listing.spot) %></td>
     <td><%= listing.start_date %></td>
     <td><%= listing.end_date %></td>
