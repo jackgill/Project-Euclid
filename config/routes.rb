@@ -1,4 +1,6 @@
 Euclid::Application.routes.draw do
+  resources :transactions
+
   resources :requests
 
   resources :listings

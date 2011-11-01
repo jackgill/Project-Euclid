@@ -1,0 +1,41 @@
+<%= form_for(@transaction) do |f| %>
+  <% if @transaction.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@transaction.errors.count, "error") %> prohibited this transaction from being saved:</h2>
+
+      <ul>
+      <% @transaction.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :spot_id %><br />
+	<%= f.select :spot_id, Spot.all.collect { |s| [ s.building.name + ' ' + s.number.to_s, s.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :buyer_id %><br />
+	<%= f.select :buyer_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :seller_id %><br />
+	<%= f.select :seller_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="field">
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

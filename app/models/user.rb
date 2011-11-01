@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   has_many :spot, :foreign_key => :owner_id
   has_many :listing, :foreign_key => :lister_id
   has_many :request, :foreign_key => :requester_id
+  has_many :transaction_as_seller, :foreign_key => :seller_id, :class_name => 'Transaction'
+  has_many :transaction_as_buyer, :foreign_key => :buyer_id, :class_name => 'Transaction'
   
   validates :first_name, :presence => true
   validates :last_name, :presence => true
