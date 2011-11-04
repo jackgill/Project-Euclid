@@ -27,6 +27,7 @@ rails generate controller account login logout
 rails generate scaffold building name:string address:text
 rails generate scaffold spot building_id:integer number:integer floor:integer owner_id:integer
 rails generate scaffold request requester_id:integer start_date:date end_date:date bid_price:decimal
+rails generate scaffold transaction spot_id:integer buyer_id:integer seller_id:integer start_date:date end_date:date price:decimal
 * Heroku
 heroku create --stack cedar
 git push heroku master
