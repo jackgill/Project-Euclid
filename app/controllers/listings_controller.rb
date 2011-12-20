@@ -22,6 +22,7 @@ class ListingsController < ApplicationController
   end
 
   def search
+    @buildings = Building.all
     respond_to do |format|
       format.html # search.html.erb
     end

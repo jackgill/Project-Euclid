@@ -1,1 +1,17 @@
 <h1>Find a Spot</h1>
+<%= form_tag("/listings/search", :method => "post") do %>
+
+
+<%= label_tag(:building, "Building:") %> <%= select_tag(:building,
+options_for_select( @buildings.map { |b| [b.name, b.id] })) %> <br/>
+
+<%= label_tag(:start_date, "Start date:") %>
+<%= date_select(Date.today, :start_date) %>
+<br/>
+
+<%= label_tag(:end_date, "End date:") %>
+<%= date_select(Date.today + 1, :end_date) %>
+<br/>
+
+<%= submit_tag("Search") %>
+<% end %>
