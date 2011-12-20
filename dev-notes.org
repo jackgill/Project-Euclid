@@ -37,3 +37,20 @@ http://electric-lightning-9621.herokuapp.com/
 strategy:
 first, generate scaffolding for the major domain entities
 then, generate database migrations to establish foreign-key relationships between them
+
+counter offers:
+field for transaction owner
+two fields for each party assenting to the transaction
+facilitate counter offers by resetting "owner" field
+transaction is complete when both parties assent
+TODO: mutable or immutable transactions?
+
+
+need messaging -- release valve
+need link-to-listing feature
+
+lightning offers
+
+need a transaction queue
+need fine-grained management of notifications
+private offer facility

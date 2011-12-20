@@ -21,6 +21,12 @@ class ListingsController < ApplicationController
     end
   end
 
+  def search
+    respond_to do |format|
+      format.html # search.html.erb
+    end
+  end
+
   # GET /listings/new
   # GET /listings/new.json
   def new
