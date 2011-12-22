@@ -6,11 +6,11 @@
 options_for_select( @buildings.map { |b| [b.name, b.id] })) %> <br/>
 
 <%= label_tag(:start_date, "Start date:") %>
-<%= date_select(Date.today, :start_date) %>
+<%= date_select(:start_date, :date, :default => Date.today) %>
 <br/>
 
 <%= label_tag(:end_date, "End date:") %>
-<%= date_select(Date.today + 1, :end_date) %>
+<%= date_select(:end_date, :date, :default => Date.today + 1) %>
 <br/>
 
 <%= submit_tag("Search") %>

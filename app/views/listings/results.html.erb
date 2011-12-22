@@ -1,2 +1,25 @@
-<h1>Find a Spot</h1>
-<%= params %>
+<h1>Search Results</h1>
+
+<table>
+  <tr>
+    <th>Lister</th>
+	<th>Building</th>
+    <th>Spot</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Ask price</th>
+    <th></th>
+  </tr>
+
+<% @listings.each do |listing| %>
+  <tr>
+    <td><%= format_user(listing.lister) %></td>
+    <td><%= listing.building.name %></td>
+    <td><%= listing.spot.number %></td>
+    <td><%= listing.start_date %></td>
+    <td><%= listing.end_date %></td>
+    <td><%= listing.ask_price %></td>
+    <td><%= link_to 'Show', listing %></td>
+  </tr>
+<% end %>
+</table>
