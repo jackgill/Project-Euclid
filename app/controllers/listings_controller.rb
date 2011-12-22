@@ -28,6 +28,14 @@ class ListingsController < ApplicationController
     end
   end
 
+  def results
+    @listings = Listing.where(
+                              :building => params[:building])
+    respond_to do |format|
+      format.html # results.html.erb
+    end
+  end
+
   # GET /listings/new
   # GET /listings/new.json
   def new

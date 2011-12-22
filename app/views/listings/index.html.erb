@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Lister</th>
+	<th>Building</th>
     <th>Spot</th>
     <th>Start date</th>
     <th>End date</th>
@@ -15,7 +16,8 @@
 <% @listings.each do |listing| %>
   <tr>
     <td><%= format_user(listing.lister) %></td>
-    <td><%= format_spot(listing.spot) %></td>
+    <td><%= listing.building.name %></td>
+    <td><%= listing.spot.number %></td>
     <td><%= listing.start_date %></td>
     <td><%= listing.end_date %></td>
     <td><%= listing.ask_price %></td>

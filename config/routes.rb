@@ -1,5 +1,6 @@
 Euclid::Application.routes.draw do
   get "listings/search"
+  get "listings/results"  
   
   resources :transactions
 
