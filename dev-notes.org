@@ -20,7 +20,9 @@ sudo gem install pg
 psql -d euclid_development -U euclid
 * git
 to push changes to github:
-git push -u origin master
+git push github master
+to update local repo from github:
+git pull github master
 * scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate controller account login logout
