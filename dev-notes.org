@@ -8,6 +8,7 @@ SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
 to start the database server: 
  postgres -D (path to dat directory)
  C:\Users\Jack\PostgreSQL\9.1\bin\postgres.exe -D C:\Users\Jack\PostgreSQL\9.1\data
+ postgres -D ~/postgres_data/
 initially, connect as user 'postgres' and create a new role, a new database, and set privleges:
  psql -U postgres
  create user jack password 'password' (NOTE: user name will be lower-cased)
