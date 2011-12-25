@@ -5,9 +5,10 @@ sqlite3 db\development.sqlite3;
 SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
 * postgres
-to start the database server: 
+** to start the database server: 
  postgres -D (path to dat directory)
  C:\Users\Jack\PostgreSQL\9.1\bin\postgres.exe -D C:\Users\Jack\PostgreSQL\9.1\data
+
 initially, connect as user 'postgres' and create a new role, a new database, and set privleges:
  psql -U postgres
  create user jack password 'password' (NOTE: user name will be lower-cased)
@@ -23,6 +24,12 @@ pg_ctl restart -D C:\Users\Jack\PostgreSQL\9.1\data
 * git
 to push changes to github:
 git push -u origin master
+* Heroku
+heroku create --stack cedar
+git push heroku master
+heroku run rake db:migrate
+heroku open
+http://electric-lightning-9621.heroku.com/
 * scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate controller account login logout
@@ -30,32 +37,51 @@ rails generate scaffold building name:string address:text
 rails generate scaffold spot building_id:integer number:integer floor:integer owner_id:integer
 rails generate scaffold request requester_id:integer start_date:date end_date:date bid_price:decimal
 rails generate scaffold transaction spot_id:integer buyer_id:integer seller_id:integer start_date:date end_date:date price:decimal
-* Heroku
-heroku create --stack cedar
-git push heroku master
-heroku run rake db:migrate
-heroku open
-http://electric-lightning-9621.herokuapp.com/
-* Misc
-strategy:
-first, generate scaffolding for the major domain entities
-then, generate database migrations to establish foreign-key relationships between them
+* Business
+What is a business?
+An LLC.
+A memorandum of understanding?
+It has:
+- a domain
+- email
+- a mailing address, usually a PO Box
+- a web site
+- a phone number?
+When you start a small business, the LLC is a legal shim that stands between you and liability. 
+The various means to contacts a business - email, phone, snail mail - all fall through to the personal
+equivalents for the founders. 
+Likewise, the income and taxes fall through to the founders.
 
-counter offers:
+So when you start an LLC, you're basically creating a thin layer between your person and the rest of 
+the world.
+
+Need to do some cost projections based on various hosting scenarios.
+Need to research these hosting providers in depth: Heroku, Engine Yard, EC2. (others: Rackspace, Linode) 
+Need to write a position paper on PaaS vs IaaS.
+Need to do some revenue projections based on usage volume, and our cut.
+
+cost project + revenue = rudimentary business model?
+
+* Brainstorming
+** counter offers:
 field for transaction owner
 two fields for each party assenting to the transaction
 facilitate counter offers by resetting "owner" field
 transaction is complete when both parties assent
 TODO: mutable or immutable transactions?
+* Features
+** messaging -- release valve
+** link-to-listing
+** lightning offers
+** transaction queue (on user dashboard)
+** fine-grained management of notifications
+** private offer facility
+* Misc
+so, now we have an issue w/ the listing details page
+if you're an admin, you want the ability to edit a listing (and in the future, you might want the ability to 
+However, if you're just searching for a spot to rent, you should see a "rent" button and not an "edit" button.
 
+What to do?
+Presumably, render the page differently based on the user's role. 
 
-need messaging -- release valve
-need link-to-listing feature
-
-lightning offers
-
-need a transaction queue
-need fine-grained management of notifications
-private offer facility
-
-need to add building to listings
+it therefore becomes clear that we need to tag users as admins
