@@ -4,7 +4,7 @@ class AccountController < ApplicationController
       user = User.authenticate(params[:login], params[:password])
       if user
         session[:user_id] = user.id
-        redirect_to(:controller => "home", :action => "Index")
+        redirect_to(:controller => "home", :action => "index")
       else
         flash.now[:notice] = "Invalid user/password combination"
       end
