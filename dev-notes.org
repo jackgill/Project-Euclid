@@ -103,5 +103,7 @@ Presumably, render the page differently based on the user's role.
 it therefore becomes clear that we need to tag users as admins
 jump page to login as user or admin?
 
+if a user views their own listing, they shouldn't see a "Rent" button
+
 Tonight:
 - add "Is Admin" column to db
