@@ -6,32 +6,46 @@ SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
 * postgres
 ** to start the database server: 
- postgres -D (path to dat directory)
- C:\Users\Jack\PostgreSQL\9.1\bin\postgres.exe -D C:\Users\Jack\PostgreSQL\9.1\data
- postgres -D ~/postgres_data/
+- postgres -D (path to data directory)
+- C:\Users\Jack\PostgreSQL\9.1\bin\postgres.exe -D C:\Users\Jack\PostgreSQL\9.1\data
+- postgres -D ~/postgres_data/
+** connect to the database server: 
+psql -d (database name) -U (user name)
+psql -d euclid_development -U euclid
+(password for user euclid is foo)
+special bonus command:
+psql -d euclid_development -U euclid -c "select * from Users;"
+** set up new PG db
 initially, connect as user 'postgres' and create a new role, a new database, and set privleges:
  psql -U postgres
  create user jack password 'password' (NOTE: user name will be lower-cased)
  create database (database name);
  grant all privileges on (database name) to (user name);
-to connect to the database server: psql -d (database name) -U (user name)
-
-to get the postgres db adapter for ruby:
+** to get the postgres db adapter for ruby:
 sudo gem install pg
-
-psql -d euclid_development -U euclid
+** restart postgres server process
 pg_ctl restart -D C:\Users\Jack\PostgreSQL\9.1\data
+** show columns
+show columns \d (table name)
 * git
-to push changes to github:
+** push changes to github:
 git push github master
-to update local repo from github:
+** update local repo from github:
 git pull github master
 * Heroku
+** create new heroku app
 heroku create --stack cedar
+** deploy new version to heroku
 git push heroku master
+** run database migration on heroku db
 heroku run rake db:migrate
+** open site on heroku
 heroku open
 http://electric-lightning-9621.heroku.com/
+* Rails
+** generate a database migration to add a column to an existing table
+rails generate migration AddColumnToTable column:type
+rails generate migration AddIsAdminToUsers is_admin:boolean
 * scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate controller account login logout
@@ -87,3 +101,7 @@ What to do?
 Presumably, render the page differently based on the user's role. 
 
 it therefore becomes clear that we need to tag users as admins
+jump page to login as user or admin?
+
+Tonight:
+- add "Is Admin" column to db
