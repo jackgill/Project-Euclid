@@ -36,9 +36,9 @@
 </p>
 
 
-<% if (@user.is_admin) %>
+<% if (@user.is_admin || @user.id == @listing.lister.id) %>
 <%= link_to 'Edit', edit_listing_path(@listing) %>
-<% elseif @listing.taken == false %>
+<% elsif @listing.taken == false %>
 <%= link_to 'Rent this spot', :controller => 'listings', :action => 'rent', :listing => @listing.id %> | 
 <% end %>
 <%= link_to 'Back', listings_path %>
