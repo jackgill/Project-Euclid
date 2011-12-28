@@ -2,7 +2,8 @@ Euclid::Application.routes.draw do
   # Listings
   get "listings/search"
   get "listings/results"  
-
+  get "listings/rent"
+  
   # Account
   get "account/login"
   get "account/logout"

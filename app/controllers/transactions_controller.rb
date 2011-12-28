@@ -80,8 +80,4 @@ class TransactionsController < ApplicationController
       format.json { head :ok }
     end
   end
-
-  def rent
-    
-  end
 end

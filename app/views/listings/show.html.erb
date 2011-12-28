@@ -1,3 +1,10 @@
+
+<% if @listing.taken == true %>
+<p>
+  This spot is taken.
+</p>
+<% end %>
+
 <p>
   <b>Lister:</b>
   <%= format_user(@listing.lister) %>
@@ -31,7 +38,7 @@
 
 <% if (@user.is_admin) %>
 <%= link_to 'Edit', edit_listing_path(@listing) %>
-<% else %>
-<%= link_to 'Rent this spot', %>
+<% elseif @listing.taken == false %>
+<%= link_to 'Rent this spot', :controller => 'listings', :action => 'rent', :listing => @listing.id %> | 
 <% end %>
- | <%= link_to 'Back', listings_path %>
+<%= link_to 'Back', listings_path %>
