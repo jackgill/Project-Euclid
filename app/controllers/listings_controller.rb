@@ -33,6 +33,7 @@ class ListingsController < ApplicationController
     @end_date = build_date_from_params(params[:end_date])
     @listings = Listing.
       where(:building_id => params[:building]).
+      where(:taken => false).
       where("start_date >= ?", @start_date).
       where("end_date <= ?", @end_date)
     

@@ -108,4 +108,4 @@ if a user views their own listing, they shouldn't see a "Rent" button
 only admin users should be able to view the admin controller
 
 Tonight:
-- user jump page
+
