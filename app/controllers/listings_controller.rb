@@ -102,6 +102,11 @@ class ListingsController < ApplicationController
     end
   end
 
+  # to rent a spot
+  def rent
+
+  end
+
   private
 
   def build_date_from_params(params)

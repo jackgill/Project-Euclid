@@ -29,5 +29,9 @@
 </p>
 
 
-<%= link_to 'Edit', edit_listing_path(@listing) %> |
-<%= link_to 'Back', listings_path %>
+<% if (@user.is_admin) %>
+<%= link_to 'Edit', edit_listing_path(@listing) %>
+<% else %>
+<%= link_to 'Rent this spot', %>
+<% end %>
+ | <%= link_to 'Back', listings_path %>
