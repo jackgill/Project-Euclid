@@ -46,9 +46,10 @@ http://electric-lightning-9621.heroku.com/
 ** generate a database migration to add a column to an existing table
 rails generate migration AddColumnToTable column:type
 rails generate migration AddIsAdminToUsers is_admin:boolean
+** generate a controller
+rails generate controller account login logout
 * scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
-rails generate controller account login logout
 rails generate scaffold building name:string address:text
 rails generate scaffold spot building_id:integer number:integer floor:integer owner_id:integer
 rails generate scaffold request requester_id:integer start_date:date end_date:date bid_price:decimal
@@ -104,6 +105,7 @@ it therefore becomes clear that we need to tag users as admins
 jump page to login as user or admin?
 
 if a user views their own listing, they shouldn't see a "Rent" button
+only admin users should be able to view the admin controller
 
 Tonight:
-- add "Is Admin" column to db
+- user jump page
