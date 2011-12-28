@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   end
 
   def jump
+    @users = User.all
   end
 
   def impersonate
