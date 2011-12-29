@@ -19,5 +19,7 @@
 </p>
 
 
-<%= link_to 'Edit', edit_spot_path(@spot) %> |
-<%= link_to 'Back', spots_path %>
+<%= link_to 'Edit', edit_spot_path(@spot) %>
+<% if @spot.owner_id == session[:user_id] %>
+| Make Spot Available
+<% end %>

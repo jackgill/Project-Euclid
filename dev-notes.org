@@ -94,19 +94,6 @@ TODO: mutable or immutable transactions?
 ** fine-grained management of notifications
 ** private offer facility
 * Misc
-so, now we have an issue w/ the listing details page
-if you're an admin, you want the ability to edit a listing (and in the future, you might want the ability to 
-However, if you're just searching for a spot to rent, you should see a "rent" button and not an "edit" button.
-
-What to do?
-Presumably, render the page differently based on the user's role. 
-
-it therefore becomes clear that we need to tag users as admins
-jump page to login as user or admin?
-
-if a user views their own listing, they shouldn't see a "Rent" button
-only admin users should be able to view the admin controller
-
-- jump page
+- only admin users should be able to view the admin controller
 - rent this spot
 

@@ -9,6 +9,9 @@ Euclid::Application.routes.draw do
   get "account/logout"
   get "account/index"
 
+  # Spots
+  get "spots/yours"
+
   # Home
   get "home/index"
 

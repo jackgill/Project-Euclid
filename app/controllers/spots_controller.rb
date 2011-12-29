@@ -80,4 +80,8 @@ class SpotsController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def yours
+    @your_spots = Spot.where(:owner_id => session[:user_id])
+  end
 end
