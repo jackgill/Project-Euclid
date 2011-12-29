@@ -28,6 +28,8 @@
     <%= f.label :owner_id %><br />
     <%= f.select :owner_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>	
   </div>
+  <% else %>
+  <%= f.hidden_field :owner_id, :value => @user.id %>
   <% end %>
   <div class="actions">
     <%= f.submit %>
