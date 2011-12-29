@@ -82,6 +82,12 @@ class SpotsController < ApplicationController
   end
 
   def yours
+    if @user == nil
+      session[:requested_path] = Rails.application.routes.recognize_path request.env['PATH_INFO']
+      redirect_to :action => 'login', :controller => 'account'
+      return
+    end
+
     @your_spots = Spot.where(:owner_id => session[:user_id])
   end
 end
