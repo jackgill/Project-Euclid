@@ -3,6 +3,8 @@
 ** Install
 *** Fedora
 sudo yum install git
+git config --global user.name "Jack Gill"
+git config --global user.email jack@jackmgill.com
 *** Ubuntu
 sudo apt-get instlal g
 *** Windows
@@ -12,6 +14,8 @@ http://git-scm.com/download
 git push github master
 ** update local repo from github:
 git pull github master
+** add remote
+git remote add github git@github.com:jackgill/Project-Euclid.git
 * Ruby
 ** Install
 *** Linux
@@ -29,6 +33,10 @@ sqlite3 db\development.sqlite3;
 SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
 SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
 * postgres
+** Install
+*** Fedora
+sudo yum install postgresql-server
+mkdir ~/postgres_data
 ** to start the database server: 
 - postgres -D (path to data directory)
 *** Windows
