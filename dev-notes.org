@@ -1,4 +1,28 @@
 #+TITLE: dev-notes
+* git
+** Install
+*** Fedora
+sudo yum install git
+*** Ubuntu
+sudo apt-get instlal g
+*** Windows
+Download windows installer:
+http://git-scm.com/download
+** push changes to github:
+git push github master
+** update local repo from github:
+git pull github master
+* Ruby
+** Install
+*** Linux
+use the bash snippet on the rvm home page:
+http://beginrescueend.com/
+install all of the rvm dependencies (specified in the shell output from the rvm installer)
+rvm install 1.9.2
+rvm use 1.9.2 --default
+*** Windows
+use the Rails Installer:
+http://railsinstaller.org/
 * sqlite
 ** list tables
 sqlite3 db\development.sqlite3;
@@ -7,7 +31,9 @@ SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
 * postgres
 ** to start the database server: 
 - postgres -D (path to data directory)
+*** Windows
 - C:\Users\Jack\PostgreSQL\9.1\bin\postgres.exe -D C:\Users\Jack\PostgreSQL\9.1\data
+*** Ubuntu
 - postgres -D ~/postgres_data/
 ** connect to the database server: 
 psql -d (database name) -U (user name)
@@ -27,11 +53,6 @@ sudo gem install pg
 pg_ctl restart -D C:\Users\Jack\PostgreSQL\9.1\data
 ** show columns
 show columns \d (table name)
-* git
-** push changes to github:
-git push github master
-** update local repo from github:
-git pull github master
 * Heroku
 ** create new heroku app
 heroku create --stack cedar
@@ -43,6 +64,12 @@ heroku run rake db:migrate
 heroku open
 http://electric-lightning-9621.heroku.com/
 * Rails
+** Install
+*** Linux
+gem install rails
+*** Windows
+Use the Rails Installer:
+http://railsinstaller.org/
 ** generate a database migration to add a column to an existing table
 rails generate migration AddColumnToTable column:type
 rails generate migration AddIsAdminToUsers is_admin:boolean
