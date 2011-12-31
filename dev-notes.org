@@ -95,5 +95,4 @@ TODO: mutable or immutable transactions?
 ** private offer facility
 * Misc
 - only admin users should be able to view the admin controller
-- rent this spot
-
+- "Make spot available" should pre-select spot ID
