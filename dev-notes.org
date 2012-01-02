@@ -35,8 +35,16 @@ SELECT sql FROM sqlite_master WHERE type = 'table' AND tbl_name = 'table_name';
 * postgres
 ** Install
 *** Fedora
-sudo yum install postgresql-server
-mkdir ~/postgres_data
+sudo yum install postgresql-server postgres-devel
+su root
+mkdir /usr/local/pgsql/data
+chown postgres /usr/local/pgsql/data
+su - postgres
+initdb -D /usr/local/pgsql/data
+pg_ctl start -D /usr/local/pgsql/data
+createuser -P (create user euclid, password foo)
+createuser -P (create user jack, password foo)
+createdb euclid_development
 ** to start the database server: 
 - postgres -D (path to data directory)
 *** Windows
@@ -61,6 +69,12 @@ sudo gem install pg
 pg_ctl restart -D C:\Users\Jack\PostgreSQL\9.1\data
 ** show columns
 show columns \d (table name)
+* emacs
+use nxhtml for syntax highlighting erb files
+use M-x customize-group RET mumamo RET to change the background color
+* project
+bundle install
+rake db:seed
 * Heroku
 ** create new heroku app
 heroku create --stack cedar
@@ -131,3 +145,5 @@ TODO: mutable or immutable transactions?
 * Misc
 - only admin users should be able to view the admin controller
 - "Make spot available" should pre-select spot ID
+- account creation page
+- if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system

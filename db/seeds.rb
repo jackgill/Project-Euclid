@@ -6,13 +6,14 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-def add_user(name)
+def add_user(name, is_admin)
   user = User.new
   user.first_name = name
   user.last_name = 'LNU'
   user.email = name + '@example.com'
   user.login = name
   user.password = name
+  user.is_admin = is_admin
   user.save()
   return user.id
 end
@@ -35,9 +36,11 @@ def add_spot(building_id, number, floor, owner_id)
   return spot.id
 end
 
-bob = add_user('bob')
-alice = add_user('alice')
-eve = add_user('eve')
+bob = add_user('bob', false)
+alice = add_user('alice', false)
+eve = add_user('eve', false)
+jack = add_user('jack', true)
+justin = add_user('justin', true)
 
 timber_ridge = add_building('Timber Ridge', '2980 Euclid Ave., Boulder, CO 80303')
 spire = add_building('The Spire', 'Somewhere around 15th and Champa')
