@@ -42,7 +42,21 @@ class UsersController < ApplicationController
 
     respond_to do |format|
       if @shown_user.save
-        format.html { redirect_to @shown_user, notice: 'User was successfully created.' }
+        format.html {
+          # If this was new account creation, log in the user
+          # and send them to the path they initially requested
+          if @user == nil
+            session[:user_id] = @shown_user.id
+            flash[:notice] = "Welcome, #{@shown_user.first_name + ' ' + @shown_user.last_name}"
+            if session[:requested_path]
+              redirect_to session[:requested_path]
+            else
+              redirect_to :controller => 'spots', :action => 'yours'
+            end
+          else
+            redirect_to @shown_user, notice: 'User was successfully created.'
+          end
+        }
         format.json { render json: @shown_user, status: :created, location: @shown_user }
       else
         format.html { render action: "new" }

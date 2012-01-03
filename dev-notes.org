@@ -97,6 +97,8 @@ rails generate migration AddColumnToTable column:type
 rails generate migration AddIsAdminToUsers is_admin:boolean
 ** generate a controller
 rails generate controller account login logout
+** Response.Write from controller
+render :text => "hello"
 * scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate scaffold building name:string address:text
@@ -144,6 +146,6 @@ TODO: mutable or immutable transactions?
 ** private offer facility
 * Misc
 - only admin users should be able to view the admin controller
-- "Make spot available" should pre-select spot ID
 - account creation page
 - if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
+- give justin his spire resident card
