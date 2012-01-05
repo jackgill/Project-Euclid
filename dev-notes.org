@@ -76,6 +76,10 @@ use M-x customize-group RET mumamo RET to change the background color
 bundle install
 rake db:seed
 * Heroku
+** Install
+gem install heroku
+git remote add heroku git@heroku.com:electric-lightning-9621.git
+heroku keys:add
 ** create new heroku app
 heroku create --stack cedar
 ** deploy new version to heroku
@@ -148,4 +152,4 @@ TODO: mutable or immutable transactions?
 - only admin users should be able to view the admin controller
 - account creation page
 - if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
-- give justin his spire resident card
+
