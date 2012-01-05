@@ -51,6 +51,9 @@ createdb euclid_development
 - C:\Users\Jack\PostgreSQL\9.1\bin\postgres.exe -D C:\Users\Jack\PostgreSQL\9.1\data
 *** Ubuntu
 - postgres -D ~/postgres_data/
+*** Fedora
+- sudo postgres
+- postgres -D /usr/local/pgsql/data &
 ** connect to the database server: 
 psql -d (database name) -U (user name)
 psql -d euclid_development -U euclid
@@ -152,4 +155,8 @@ TODO: mutable or immutable transactions?
 - only admin users should be able to view the admin controller
 - account creation page
 - if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
-
+- transactions need to be hooked in
+** partial availability
+- availability by the day, the day is defined as 10am - 10am, w/ a button to request late check in / check out
+- listing partial availability: introduce a "day" resource, each listing has multiple days.
+- alternatively, stick w/ single listings, and reference a "taken" table -- everything runs off timestamps

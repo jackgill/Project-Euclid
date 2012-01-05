@@ -24,6 +24,8 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
+    return unless require_login
+    
     @request = Request.new
 
     respond_to do |format|

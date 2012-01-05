@@ -14,11 +14,7 @@ class ListingsController < ApplicationController
   # GET /listings/1.json
   def show
 
-    if @user == nil
-      session[:requested_path] = Rails.application.routes.recognize_path request.env['PATH_INFO']
-      redirect_to :action => 'login', :controller => 'account'
-      return
-    end
+    return unless require_login
 
 
     @listing = Listing.find(params[:id])
