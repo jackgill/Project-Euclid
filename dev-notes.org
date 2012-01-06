@@ -28,6 +28,10 @@ rvm use 1.9.2 --default
 use the Rails Installer:
 http://railsinstaller.org/
 * sqlite
+** to create a new database
+sqlite3 foo.db
+** to create a new table
+create table name(x integer primary key, y text, z double, a date)
 ** list tables
 sqlite3 db\development.sqlite3;
 SELECT name FROM sqlite_master WHERE type='table' ORDER BY name;
@@ -160,3 +164,86 @@ TODO: mutable or immutable transactions?
 - availability by the day, the day is defined as 10am - 10am, w/ a button to request late check in / check out
 - listing partial availability: introduce a "day" resource, each listing has multiple days.
 - alternatively, stick w/ single listings, and reference a "taken" table -- everything runs off timestamps
+
+taken needs  foreign key to listings
+
+# create tables
+create table listings(id integer primary key, start_date date, end_date date);
+create table taken(id integer primary key, start_date date, end_date date, foreign key(id) references listings(id));
+
+# insert some dummy data
+insert into listings (start_date, end_date) values('2012-01-01', '2012-01-02');
+insert into listings (start_date, end_date) values('2012-01-01', '2012-01-12');
+insert into taken (start_date, end_date, listing_id) values('2012-01-03', '2012-01-08', 2);
+
+query (listings + taken) for available time slots
+two step query:
+retrieve all listings meeting query criteria
+for each listing, retrieve taken entries using foreign key
+(this will be SLOW)
+what to return?
+pseudo-listings?
+
+business requirement: 
+users can create listings for arbitrary time periods
+other users can taken arbitrary subsets of these listings
+but me must still be able to efficiently query for available listings
+
+
+
+------------------
+chunks
+day-sized chunks
+each chunk has a listing id
+this makes it easy to reconstitute a listing from its chunks
+
+wait a minute
+what about a table called days
+each day w/ a reference to a listing
+and/or a taken entry
+
+calendar-per-building?
+each day entry would need a list of listings and a list of taken
+no...
+you would pull a listing id off a day when it's taken
+
+----------------------
+currently "Taken" is a boolean property of listing
+should it instead be a date range
+should we introduce additional "available" date ranges?
+should a listing advertise when it has availability?
+zero more availability ranges
+(perhaps we should be thinking in terms of storing "Taken", since after all we want to query on availability)
+multiple rows per listing w/ different availabilities?
+or just a separate availability table, w/ a foreign key to listings?
+when taking availabily, computer appropriate alterations to availability table
+need a separate "rentals" table? or is "transactions" covering that?
+
+so on insert, fragment availability table? seems bogus.
+
+essentially, the problem is how to represent time intervals, sub-intervals, and efficient querying on the difference between the two.
+
+the key to efficiency seems to be pre-computing the desired quantity and representing it compactly.
+
+the desired quantity is availability, not "taken-ness", so that's what we should be pre-computing and storing. the question is the most efficient format for storing availability? From a query perspective, we're doing fine with time spans
+
+I'm thinking of an interval as being defined by its endpoints, but postgres seems to think of it as an offset and a length
+
+I think I've got the most efficient query syntax possible
+
+so the key this is the separation of a listing and availabilty
+essentially, transforming "taken" from a bool to a set of ranges (and inverting that set of ranges)
+the trick is to do the math on insert, which is expected to take a bit, and not on query, which is expected to be fast.
+
+ok, so on creation of a listing, an availability entry is created, with date endpoints corresponding to the listing's endpoints.
+when someone wants to "take" part of a listing, the initial availability entry is split into two new availability entries, with a gap corresponding to what's been "taken"
+(each "take" action is limited to at most 1 deletion and 2 inserts)
+querying of the availability table is still efficient since it doesn't require any addition calculations at query time.
+
+now, how to do this w/ the rails ORM is rather a differ matter. presumably, create an Availability object. that should be that hard, actually.
+
+so I need to generate a rails model for availability. it will have a foreign key to the listings table, a start date, and an end date. The spots search will target this table, doing a join into listings to get the display info.
+
+On creation of a new listing, create a new availability entry with the same endpoints.
+
+On creation of a transaction, delete the corresponding availability entry (or mark it as defunct?), and create two new availability objects corresponding to the remaining portions of the original availabilty object. 
