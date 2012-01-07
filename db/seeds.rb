@@ -1,41 +1,42 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+# Wipe the resources tables
+# Note: order matters due to foreign key constraints
+Availability.delete_all
+Listing.delete_all
+Spot.delete_all
+Building.delete_all
+Request.delete_all
+Transaction.delete_all
+User.delete_all
 
+# Utility methods to add new resources objects
 def add_user(name, is_admin)
-  user = User.new
-  user.first_name = name
-  user.last_name = 'LNU'
-  user.email = name + '@example.com'
-  user.login = name
-  user.password = name
-  user.is_admin = is_admin
-  user.save()
-  return user.id
+  User.create(
+              first_name: name,
+              last_name: 'LNU',
+              email: name + '@example.com',
+              login: name,
+              password: 'foo',
+              is_admin: is_admin,
+              ).id
 end
 
 def add_building(name, address)
-  building = Building.new
-  building.name = name
-  building.address = address
-  building.save()
-  return building.id
+  Building.create(
+                  name: name,
+                  address: address,
+                  ).id
 end
 
 def add_spot(building_id, number, floor, owner_id)
-  spot = Spot.new
-  spot.building_id = building_id
-  spot.number = number
-  spot.floor = floor
-  spot.owner_id = owner_id
-  spot.save()
-  return spot.id
+  Spot.create(
+              building_id: building_id,
+              number: number,
+              floor: floor,
+              owner_id: owner_id,
+              ).id
 end
 
+# Add the seed data
 bob = add_user('bob', false)
 alice = add_user('alice', false)
 eve = add_user('eve', false)
