@@ -35,21 +35,22 @@ class ListingsController < ApplicationController
   def results
     @start_date = build_date_from_params(params[:start_date])
     @end_date = build_date_from_params(params[:end_date])
-    @listings = Listing.
+    @availabilities = Availability.
       where(:building_id => params[:building]).
-      where(:taken => false).
       where("start_date >= ?", @start_date).
       where("end_date <= ?", @end_date)
     
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @listings }
+      format.json { render json: @availabilities }
     end
   end
 
   # GET /listings/new
   # GET /listings/new.json
   def new
+    return unless require_login
+    
     @listing = Listing.new
 
     respond_to do |format|
@@ -70,6 +71,15 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
       if @listing.save
+
+        @availability = Availability.new({
+                                           listing_id: @listing.id,
+                                           building_id: @listing.building_id,
+                                           start_date: @listing.start_date,
+                                           end_date: @listing.end_date,
+                                         })
+        @availability.save # TODO: handle case where save fails
+
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render json: @listing, status: :created, location: @listing }
       else
@@ -84,6 +94,7 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
 
+    # TODO: find and update the appropriate availability entries
     respond_to do |format|
       if @listing.update_attributes(params[:listing])
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }

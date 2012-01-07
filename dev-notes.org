@@ -74,6 +74,7 @@ initially, connect as user 'postgres' and create a new role, a new database, and
 sudo gem install pg
 ** restart postgres server process
 pg_ctl restart -D C:\Users\Jack\PostgreSQL\9.1\data
+pg_ctl restart -D /usr/local/pgsql/data/
 ** show columns
 show columns \d (table name)
 * emacs
@@ -110,14 +111,13 @@ rails generate migration AddIsAdminToUsers is_admin:boolean
 rails generate controller account login logout
 ** Response.Write from controller
 render :text => "hello"
-** migration syntax for foreign key
-:options => "CONSTRAINT fk_buildings REFERENCES buildings(id)"
-* scaffolding
+** scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate scaffold building name:string address:text
 rails generate scaffold spot building_id:integer number:integer floor:integer owner_id:integer
 rails generate scaffold request requester_id:integer start_date:date end_date:date bid_price:decimal
 rails generate scaffold transaction spot_id:integer buyer_id:integer seller_id:integer start_date:date end_date:date price:decimal
+rails generate scaffold availability listing_id:integer building_id:integer start_date:date end_date:date
 * Business
 What is a business?
 An LLC.
@@ -157,11 +157,6 @@ TODO: mutable or immutable transactions?
 ** transaction queue (on user dashboard)
 ** fine-grained management of notifications
 ** private offer facility
-* Misc
-- only admin users should be able to view the admin controller
-- account creation page
-- if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
-- transactions need to be hooked in
 ** partial availability
 - availability by the day, the day is defined as 10am - 10am, w/ a button to request late check in / check out
 - listing partial availability: introduce a "day" resource, each listing has multiple days.
@@ -250,3 +245,15 @@ so I need to generate a rails model for availability. it will have a foreign key
 On creation of a new listing, create a new availability entry with the same endpoints.
 
 On creation of a transaction, delete the corresponding availability entry (or mark it as defunct?), and create two new availability objects corresponding to the remaining portions of the original availabilty object. 
+
+oh god, gonna need update logic as well
+
+* Misc
+- only admin users should be able to view the admin controller
+- account creation page
+- if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
+- transactions need to be hooked in
+- need to validate date range on listing creation form
+
+- need to update "search for a spot" to hit availabilities instead of listings
+- then update "rent" to split the availability

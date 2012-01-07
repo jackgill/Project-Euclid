@@ -3,6 +3,7 @@
 <table>
   <tr>
     <th>Listing</th>
+	<th>Building</th>
     <th>Start date</th>
     <th>End date</th>
     <th></th>
@@ -12,7 +13,8 @@
 
 <% @availabilities.each do |availability| %>
   <tr>
-    <td><%= availability.listing_id %></td>
+	  <td><%= availability.listing_id %></td>
+	  <td><%= availability.building.name %></td>
     <td><%= availability.start_date %></td>
     <td><%= availability.end_date %></td>
     <td><%= link_to 'Show', availability %></td>
