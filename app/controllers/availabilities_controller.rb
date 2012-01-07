@@ -80,4 +80,27 @@ class AvailabilitiesController < ApplicationController
       format.json { head :ok }
     end
   end
+
+  def search
+    @buildings = Building.all
+    respond_to do |format|
+      format.html # search.html.erb
+    end
+  end
+
+  def results
+    @start_date = build_date_from_params(params[:start_date])
+    @end_date = build_date_from_params(params[:end_date])
+    @availabilities = Availability.
+      where(:building_id => params[:building]).
+      where("start_date >= ?", @start_date).
+      where("end_date <= ?", @end_date)
+    
+    respond_to do |format|
+      format.html # results.html.erb
+      format.json { render json: @availabilities }
+    end
+  end
+
+
 end

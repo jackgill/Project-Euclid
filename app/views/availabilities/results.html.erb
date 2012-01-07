@@ -1,0 +1,25 @@
+<h1>Search Results</h1>
+
+<table>
+  <tr>
+    <th>Lister</th>
+	<th>Building</th>
+    <th>Spot</th>
+    <th>Start date</th>
+    <th>End date</th>
+    <th>Ask price</th>
+    <th></th>
+  </tr>
+
+<% @availabilities.each do |availability| %>
+  <tr>
+    <td><%= format_user(availability.listing.lister) %></td>
+    <td><%= availability.building.name %></td>
+    <td><%= availability.listing.spot.number %></td>
+    <td><%= availability.start_date %></td>
+    <td><%= availability.end_date %></td>
+    <td><%= availability.listing.ask_price %></td>
+    <td><%= link_to 'Show', availability.listing %></td>
+  </tr>
+<% end %>
+</table>

@@ -1,8 +1,8 @@
 Euclid::Application.routes.draw do
 
   # Listings
-  get "listings/search"
-  get "listings/results"  
+  get "availabilities/search"
+  get "availabilities/results"  
   get "listings/rent"
   
   # Account

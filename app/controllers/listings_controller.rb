@@ -25,27 +25,6 @@ class ListingsController < ApplicationController
     end
   end
 
-  def search
-    @buildings = Building.all
-    respond_to do |format|
-      format.html # search.html.erb
-    end
-  end
-
-  def results
-    @start_date = build_date_from_params(params[:start_date])
-    @end_date = build_date_from_params(params[:end_date])
-    @availabilities = Availability.
-      where(:building_id => params[:building]).
-      where("start_date >= ?", @start_date).
-      where("end_date <= ?", @end_date)
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @availabilities }
-    end
-  end
-
   # GET /listings/new
   # GET /listings/new.json
   def new
@@ -145,13 +124,5 @@ class ListingsController < ApplicationController
         end
       end
     end
-  end
-
-  private
-
-  def build_date_from_params(params)
-    Date.new(params["date(1i)"].to_i, 
-             params["date(2i)"].to_i, 
-             params["date(3i)"].to_i)
   end
 end
