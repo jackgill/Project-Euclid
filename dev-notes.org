@@ -110,6 +110,8 @@ rails generate migration AddIsAdminToUsers is_admin:boolean
 rails generate controller account login logout
 ** Response.Write from controller
 render :text => "hello"
+** migration syntax for foreign key
+:options => "CONSTRAINT fk_buildings REFERENCES buildings(id)"
 * scaffolding
 rails generate scaffold user first_name:string last_name:string email:string login:string hashed_password:string salt:string
 rails generate scaffold building name:string address:text
@@ -242,6 +244,7 @@ querying of the availability table is still efficient since it doesn't require a
 
 now, how to do this w/ the rails ORM is rather a differ matter. presumably, create an Availability object. that should be that hard, actually.
 
+SOLUTION:
 so I need to generate a rails model for availability. it will have a foreign key to the listings table, a start date, and an end date. The spots search will target this table, doing a join into listings to get the display info.
 
 On creation of a new listing, create a new availability entry with the same endpoints.

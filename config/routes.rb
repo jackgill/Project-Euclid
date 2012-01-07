@@ -1,4 +1,5 @@
 Euclid::Application.routes.draw do
+
   # Listings
   get "listings/search"
   get "listings/results"  
@@ -25,7 +26,8 @@ Euclid::Application.routes.draw do
   resources :spots
   resources :buildings
   resources :users
-
+  resources :availabilities
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

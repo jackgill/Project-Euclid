@@ -1,5 +1,5 @@
-class PGMigration < ActiveRecord::Migration
-  def foreign_key(from_table, from_column, to_table)
+module PGMigration
+  def add_foreign_key(from_table, from_column, to_table)
     constraint_name = "fk_#{from_table}_#{from_column}"
     
     execute %{ALTER TABLE #{from_table}

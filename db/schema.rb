@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111228040317) do
+ActiveRecord::Schema.define(:version => 20120107044401) do
+
+  create_table "availabilities", :force => true do |t|
+    t.integer  "listing_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "buildings", :force => true do |t|
     t.string   "name"

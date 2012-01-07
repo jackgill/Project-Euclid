@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Listing:</b>
+  <%= @availability.listing_id %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @availability.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @availability.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
+<%= link_to 'Back', availabilities_path %>
