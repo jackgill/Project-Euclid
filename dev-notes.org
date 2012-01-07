@@ -255,5 +255,8 @@ oh god, gonna need update logic as well
 - transactions need to be hooked in
 - need to validate date range on listing creation form
 
-- need to update "search for a spot" to hit availabilities instead of listings
 - then update "rent" to split the availability
+you rent availability, not a listing
+the search page needs to pass start_date and end_date to the show page, through to the "rent" action
+basically, start date and end date need to come into the "Rent" action so that the availability can be split appropriately
+separate form for "rent"?
