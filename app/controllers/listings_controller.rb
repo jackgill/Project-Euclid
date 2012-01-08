@@ -96,33 +96,4 @@ class ListingsController < ApplicationController
       format.json { head :ok }
     end
   end
-
-  # to rent a spot
-  def rent
-    # retrieve the listing
-    @listing = Listing.find(params[:listing])
-
-    # if the listing isn't already taken, take it
-    if @listing.taken == false
-      @listing.taken = true
-    else
-      @already_taken = true
-    end
-
-    # tell the user how it went
-    respond_to do |format|
-      if @already_taken
-        format.html { redirect_to @listing, notice: 'Oh no, some one else has rented this spot whilst you were dilly-dallying' }
-        format.json { render json: @listing, status: :already_taken, location: @listing }
-      else
-        if @listing.save
-        format.html { redirect_to @listing, notice: 'Congratulations, you have successfully reserved this spot' }
-          format.json { render json: @listing, status: :created, location: @listing }
-        else
-          format.html { redirect_to @listing, notice: 'Sorry, there was a problem with our system. Please try again later.' }
-          format.json { render json: @listing.errors, status: :unprocessable_entity }
-        end
-      end
-    end
-  end
 end

@@ -93,8 +93,12 @@ class AvailabilitiesController < ApplicationController
     @end_date = build_date_from_params(params[:end_date])
     @availabilities = Availability.
       where(:building_id => params[:building]).
-      where("start_date >= ?", @start_date).
-      where("end_date <= ?", @end_date)
+      where("start_date <= ?", @start_date).
+      where("end_date >= ?", @end_date)
+
+    # Load these into session so that "Rent" action can access them
+    session[:start_date] = @start_date
+    session[:end_date] = @end_date
     
     respond_to do |format|
       format.html # results.html.erb
@@ -102,5 +106,31 @@ class AvailabilitiesController < ApplicationController
     end
   end
 
+  # to rent a spot
+  def rent
+    # retrieve the availability
+    @availability = Availability.find(params[:availability])
 
+    # Get dates from session
+    @start_date = session[:start_date]
+    @end_date = session[:end_date]
+
+    
+
+    # tell the user how it went
+    respond_to do |format|
+      if @already_taken
+        format.html { redirect_to @listing, notice: 'Oh no, some one else has rented this spot whilst you were dilly-dallying' }
+        format.json { render json: @listing, status: :already_taken, location: @listing }
+      else
+        if @listing.save
+        format.html { redirect_to @listing, notice: 'Congratulations, you have successfully reserved this spot' }
+          format.json { render json: @listing, status: :created, location: @listing }
+        else
+          format.html { redirect_to @listing, notice: 'Sorry, there was a problem with our system. Please try again later.' }
+          format.json { render json: @listing.errors, status: :unprocessable_entity }
+        end
+      end
+    end
+  end
 end

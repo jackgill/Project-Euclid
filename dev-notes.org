@@ -119,10 +119,14 @@ rails generate scaffold request requester_id:integer start_date:date end_date:da
 rails generate scaffold transaction spot_id:integer buyer_id:integer seller_id:integer start_date:date end_date:date price:decimal
 rails generate scaffold availability listing_id:integer building_id:integer start_date:date end_date:date
 ** testing
-rake db:migrate
-rake db:test:prepare
-rake db:test:load
+*** to run all tests
+rake test
+*** to run 1 test
 ruby -Itest test/functional/users_controller_test.rb
+*** test database
+the tests ignore seed data and only look at fixtures
+rake db:fixtures:load loads the fixture data into the dev database, which is *not* what we want
+to reference a foreign key in a fixture, you should use the fixture NAME, not the ID
 * Business
 What is a business?
 An LLC.
@@ -266,15 +270,3 @@ the search page needs to pass start_date and end_date to the show page, through 
 basically, start date and end date need to come into the "Rent" action so that the availability can be split appropriately
 separate form for "rent"?
 
-I should probably get at least the default unit tests to pass. Not saying that I'm going to go crazy w/ the unit testing, but testing is one of the major benefits of the rails framework and I'm basically denying myself that benefit by letting all the default tests fail.
-
-
-so the tests ignore seed data and only look at fixtures
-rake db:test:load loads the fixtures into the test database. I think.
-rake db:fixtures:load loads the fixture data into the dev database, which is *not* what we want
-for some reason, the transaction fixture isn't pointing to a real spot
-something about the load order of the fixtures breakin foreign key constraints?
-
-WELL
-it seems that to reference a foreign key, you should use the fixture NAME, not the ID
-JESUS
