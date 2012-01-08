@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  spot_id: 1
-  buyer_id: 1
-  seller_id: 1
+  spot: one
+  buyer_id: one
+  seller_id: two
   start_date: 2011-10-31
   end_date: 2011-10-31
   price: 9.99
 
 two:
-  spot_id: 1
-  buyer_id: 1
-  seller_id: 1
+  spot: two
+  buyer: two
+  seller: one
   start_date: 2011-10-31
   end_date: 2011-10-31
   price: 9.99

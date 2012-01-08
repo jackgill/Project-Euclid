@@ -1,15 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  lister_id: 1
-  spot_id: 1
+  lister: one
+  spot: one
+  building: one
   start_date: 2011-10-29
   end_date: 2011-10-29
   ask_price: 9.99
 
 two:
-  lister_id: 1
-  spot_id: 1
+  lister: one
+  spot: two
+  building: one
   start_date: 2011-10-29
   end_date: 2011-10-29
   ask_price: 9.99

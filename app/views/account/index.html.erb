@@ -1,1 +1,5 @@
+<% if @user %>
 <h1>Hi, <%= @user.first_name %> </h1>
+<% else %>
+<h1>Hi, Guest</h1>
+<% end %>

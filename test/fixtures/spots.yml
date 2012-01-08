@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  building_id: 1
+  building: one
   number: 1
   floor: 1
-  owner_id: 1
+  owner: one
 
 two:
-  building_id: 1
+  building: two
   number: 1
   floor: 1
-  owner_id: 1
+  owner: two

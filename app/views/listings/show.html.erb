@@ -36,7 +36,7 @@
 </p>
 
 
-<% if (@user.is_admin || @user.id == @listing.lister.id) %>
+<% if @user && (@user.is_admin || @user.id == @listing.lister.id) %>
 <%= link_to 'Edit', edit_listing_path(@listing) %>
 <% elsif @listing.taken == false %>
 <%= link_to 'Rent this spot', :controller => 'listings', :action => 'rent', :listing => @listing.id %>

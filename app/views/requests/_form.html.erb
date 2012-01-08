@@ -10,13 +10,13 @@
       </ul>
     </div>
   <% end %>
-  <% if @user.is_admin %>
+  <% if @user && @user.is_admin %>
   <div class="field">
     <%= f.label :requester_id %><br />
 	<%= f.select :requester_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>
   </div>
     <% else %>
-  <%= f.hidden_field :requester_id, :value => @user.id %>
+  <%= f.hidden_field :requester_id, :value => @user != nil ? @user.id : nil %>
   <% end %>
   <div class="field">
     <%= f.label :start_date %><br />
