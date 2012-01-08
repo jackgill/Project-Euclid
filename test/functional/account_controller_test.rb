@@ -8,7 +8,7 @@ class AccountControllerTest < ActionController::TestCase
 
   test "should get logout" do
     get :logout
-    assert_response :success
+    assert_response :redirect
   end
 
   test "should get index" do

@@ -13,7 +13,9 @@ class ListingsControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    assert_response :success
+    # Currently asserting this to be a redirect since @user will be nil
+    # TODO: figure out how to inject @user and test both cases
+    assert_response :redirect
   end
 
   test "should create listing" do
@@ -26,7 +28,9 @@ class ListingsControllerTest < ActionController::TestCase
 
   test "should show listing" do
     get :show, id: @listing.to_param
-    assert_response :success
+    # Currently asserting this to be a redirect since @user will be nil
+    # TODO: figure out how to inject @user and test both cases
+    assert_response :redirect
   end
 
   test "should get edit" do
