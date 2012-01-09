@@ -111,25 +111,20 @@ class AvailabilitiesController < ApplicationController
     # retrieve the availability
     @availability = Availability.find(params[:availability])
 
-    # Get dates from session
-    @start_date = session[:start_date]
-    @end_date = session[:end_date]
+    # Set up rental parameters
+    start_date = session[:start_date]
+    end_date = session[:end_date]
+    buyer = @user
+    seller = @availability.listing.lister
 
-    
-
-    # tell the user how it went
+    # attempt to rent the spot
     respond_to do |format|
-      if @already_taken
-        format.html { redirect_to @listing, notice: 'Oh no, some one else has rented this spot whilst you were dilly-dallying' }
-        format.json { render json: @listing, status: :already_taken, location: @listing }
+      if @availability.rent(start_date, end_date, buyer, seller)
+        format.html { redirect_to @availability, notice: 'Congratulations, you have successfully reserved this spot' }
+        format.json { render json: @availability, status: :created, location: @listing }
       else
-        if @listing.save
-        format.html { redirect_to @listing, notice: 'Congratulations, you have successfully reserved this spot' }
-          format.json { render json: @listing, status: :created, location: @listing }
-        else
-          format.html { redirect_to @listing, notice: 'Sorry, there was a problem with our system. Please try again later.' }
-          format.json { render json: @listing.errors, status: :unprocessable_entity }
-        end
+        format.html { redirect_to @availability, notice: 'Oh no, some one else has rented this spot whilst you were dilly-dallying' }
+        format.json { render json: @availability, status: :already_taken, location: @listing }
       end
     end
   end

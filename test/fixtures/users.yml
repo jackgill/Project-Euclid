@@ -1,17 +1,17 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  login: MyString
-  hashed_password: MyString
-  salt: MyString
+bob:
+  first_name: Bob
+  last_name: LNU
+  email: bob@example.com
+  login: bob
+  salt: foo
+  hashed_password: as if
 
-two:
-  first_name: MyString
-  last_name: MyString
-  email: MyString
-  login: MyString
-  hashed_password: MyString
-  salt: MyString
+alice:
+  first_name: Alice
+  last_name: LNU
+  email: alice@example.com
+  login: alice
+  salt: foo
+  hashed_password: as if

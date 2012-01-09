@@ -2,7 +2,8 @@ class Listing < ActiveRecord::Base
   belongs_to :lister, :foreign_key => :lister_id, :class_name => 'User'
   belongs_to :spot
   belongs_to :building
-
+  has_many :availability
+  
   validates :lister_id, :presence => true
   validates :building_id, :presence => true
   validates :spot_id, :presence => true

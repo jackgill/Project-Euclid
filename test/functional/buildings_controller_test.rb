@@ -2,7 +2,7 @@ require 'test_helper'
 
 class BuildingsControllerTest < ActionController::TestCase
   setup do
-    @building = buildings(:one)
+    @building = buildings(:timber_ridge)
   end
 
   test "should get index" do

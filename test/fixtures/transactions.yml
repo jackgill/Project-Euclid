@@ -2,16 +2,16 @@
 
 one:
   spot: one
-  buyer_id: one
-  seller_id: two
+  buyer: bob
+  seller: alice
   start_date: 2011-10-31
   end_date: 2011-10-31
   price: 9.99
 
 two:
   spot: two
-  buyer: two
-  seller: one
+  buyer: alice
+  seller: bob
   start_date: 2011-10-31
   end_date: 2011-10-31
   price: 9.99

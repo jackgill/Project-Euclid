@@ -3,7 +3,7 @@ Euclid::Application.routes.draw do
   # Listings
   get "availabilities/search"
   get "availabilities/results"  
-  get "listings/rent"
+  get "availabilities/rent"
   
   # Account
   get "account/login"
