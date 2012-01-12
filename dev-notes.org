@@ -265,3 +265,8 @@ oh god, gonna need update logic as well
 - need to validate date range on listing creation form
 - separate form for "rent"?
 - remove "Taken" column from listings table
+
+Release Notes:
+- Deleting a listing now deletes the availability related to that listing (cascading deletes)
+- Added user dashboard
+
