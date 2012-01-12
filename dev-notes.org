@@ -263,6 +263,5 @@ oh god, gonna need update logic as well
 - only admin users should be able to view the admin controller
 - if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
 - need to validate date range on listing creation form
-- need cascading deletes for listings / availabilities
 - separate form for "rent"?
-- remove "Taken" column
+- remove "Taken" column from listings table

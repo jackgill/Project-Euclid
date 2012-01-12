@@ -15,7 +15,8 @@ Euclid::Application.routes.draw do
 
   # Home
   get "home/index"
-
+  get "home/dashboard"
+  
   # Admin
   get "admin/index"
 
