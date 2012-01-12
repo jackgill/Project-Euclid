@@ -161,6 +161,7 @@ facilitate counter offers by resetting "owner" field
 transaction is complete when both parties assent
 TODO: mutable or immutable transactions?
 * Features
+** store search terms in session?
 ** messaging -- release valve
 ** link-to-listing
 ** lightning offers
@@ -260,17 +261,8 @@ oh god, gonna need update logic as well
 
 * Misc
 - only admin users should be able to view the admin controller
-- account creation page
 - if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
-- transactions need to be hooked in
 - need to validate date range on listing creation form
 - need cascading deletes for listings / availabilities
-
-- then update "rent" to split the availability
-you rent availability, not a listing
-the search page needs to pass start_date and end_date to the show page, through to the "rent" action
-basically, start date and end date need to come into the "Rent" action so that the availability can be split appropriately
-separate form for "rent"?
-
-
-
+- separate form for "rent"?
+- remove "Taken" column
