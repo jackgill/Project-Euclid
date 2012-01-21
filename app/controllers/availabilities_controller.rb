@@ -108,6 +108,8 @@ class AvailabilitiesController < ApplicationController
 
   # to rent a spot
   def rent
+    return unless require_login
+    
     # retrieve the availability
     @availability = Availability.find(params[:availability])
 
