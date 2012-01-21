@@ -108,4 +108,28 @@ class RequestsController < ApplicationController
     end
   end
 
+  def fulfill
+    return unless require_login
+    
+    @spots = Spot.where(owner_id: @user.id)
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def rent
+    return unless require_login
+
+    @request = Request.find(params[:request])
+    spot_id = params[:spot]
+    result = @request.fulfill(@user, params[:spot_id])
+    respond_to do |format|
+      if (result == true)
+        format.html { redirect_to @request, notice: 'You have fulfilled this request' }
+      else
+        format.html { redirect_to @request, notice: 'Sorry, this fulfillment could not be processed' }
+      end
+    end
+  end
 end

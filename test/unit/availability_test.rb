@@ -47,7 +47,7 @@ class AvailabilityTest < ActiveSupport::TestCase
     transactions = Transaction.where(
                                      start_date: rental_start_date,
                                      end_date: rental_end_date)
-    assert_equal transactions.length, 1
+    assert_equal 1, transactions.length
   end
   
   test "rent beginning of availability" do

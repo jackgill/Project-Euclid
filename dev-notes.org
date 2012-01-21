@@ -270,12 +270,13 @@ oh god, gonna need update logic as well
 
 - need "fulfill this request" functionality:
  - link from request details page creates transaction
+ah, but with which spot?
 
 TODO
-- search for requests per building
 - fulfill a request, no partial fulfillment, no confirmation
 
 
 Release notes
 - Removed "Start Date", "End Date", and "Show" from availability search
 - Added "Rent this spot" to availability search
+- Added "View requests" (aka search for requests)

@@ -1,0 +1,10 @@
+<h1>Fulfill a Request</h1>
+<%= form_tag("/requests/rent", :method => "get") do %>
+  <%= hidden_field_tag 'request', params[:request] %>
+  <div class="field">
+    <%= label_tag :spot_id %><br />
+	<%= select_tag :spot_id, (@spots.collect { |s|  '<option value="' + s.id.to_s + '">' + s.building.name + ' ' + s.number.to_s + '</option>'  }).join('').html_safe %>
+  </div>
+
+  <%= submit_tag("Fulfill") %>
+<% end %>
