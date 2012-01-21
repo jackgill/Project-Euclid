@@ -20,6 +20,10 @@ Euclid::Application.routes.draw do
   # Admin
   get "admin/index"
 
+  # Requests
+  get "requests/search"
+  get "requests/results"
+
   # Resources
   resources :transactions
   resources :requests

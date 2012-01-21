@@ -160,6 +160,8 @@ two fields for each party assenting to the transaction
 facilitate counter offers by resetting "owner" field
 transaction is complete when both parties assent
 TODO: mutable or immutable transactions?
+* Icebox
+- requester needs to confirm fulfillment
 * Features
 ** store search terms in session?
 ** messaging -- release valve
@@ -266,7 +268,14 @@ oh god, gonna need update logic as well
 - separate form for "rent"?
 - remove "Taken" column from listings table
 
-Release Notes:
-- Deleting a listing now deletes the availability related to that listing (cascading deletes)
-- Added user dashboard
+- need "fulfill this request" functionality:
+ - link from request details page creates transaction
 
+TODO
+- search for requests per building
+- fulfill a request, no partial fulfillment, no confirmation
+
+
+Release notes
+- Removed "Start Date", "End Date", and "Show" from availability search
+- Added "Rent this spot" to availability search

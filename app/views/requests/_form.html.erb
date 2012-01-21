@@ -19,6 +19,10 @@
   <%= f.hidden_field :requester_id, :value => @user != nil ? @user.id : nil %>
   <% end %>
   <div class="field">
+    <%= f.label :building_id %><br />
+    <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
+  </div>
+  <div class="field">
     <%= f.label :start_date %><br />
     <%= f.date_select :start_date %>
   </div>

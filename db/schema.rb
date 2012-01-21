@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120107071852) do
+ActiveRecord::Schema.define(:version => 20120121043549) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "listing_id"
@@ -48,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20120107071852) do
     t.decimal  "bid_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "building_id"
   end
 
   create_table "spots", :force => true do |t|
