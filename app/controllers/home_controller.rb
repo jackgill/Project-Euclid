@@ -3,6 +3,8 @@ class HomeController < ApplicationController
   end
 
   def dashboard
+    return unless require_login
+    
     @listings = Listing.where(lister_id: @user.id)
     @requests = Request.where(requester_id: @user.id)
     @transactions_buyer = Transaction.where(buyer_id: @user.id)
