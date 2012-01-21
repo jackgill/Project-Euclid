@@ -12,7 +12,7 @@ class Request < ActiveRecord::Base
 
   def fulfill(seller, spot_id)
     # delete this request
-    #destroy
+    destroy
 
     # create a new transaction between the buyer and the seller
     transaction = Transaction.new(
