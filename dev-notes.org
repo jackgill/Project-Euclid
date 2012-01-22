@@ -268,15 +268,4 @@ oh god, gonna need update logic as well
 - separate form for "rent"?
 - remove "Taken" column from listings table
 
-- need "fulfill this request" functionality:
- - link from request details page creates transaction
-ah, but with which spot?
-
-TODO
-- fulfill a request, no partial fulfillment, no confirmation
-
-
-Release notes
-- Removed "Start Date", "End Date", and "Show" from availability search
-- Added "Rent this spot" to availability search
-- Added "View requests" (aka search for requests)
+- need ability to create listing or request via email?
