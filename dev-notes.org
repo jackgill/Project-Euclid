@@ -274,9 +274,9 @@ oh god, gonna need update logic as well
 - calendar to view your spot's availability?
 
 Tonight
-- renting a spot or fulfilling a request should take the user to a confirmation page
 - fix ability to delete users via admin tool
 
 Release Notes
 - removed date select from requests search
 - users can now delete items from their dashboards
+- renting a spot or fulfilling a request now takes the user to a 'message' page (like a confirmation page, but not necessarily confirming)
