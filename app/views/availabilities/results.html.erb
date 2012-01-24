@@ -4,7 +4,7 @@
   <tr>
     <th>Lister</th>
 	<th>Building</th>
-    <th>Spot</th>
+    <th>Floor</th>
     <th>Ask price</th>
     <th></th>
   </tr>
@@ -13,7 +13,7 @@
   <tr>
     <td><%= format_user(availability.listing.lister) %></td>
     <td><%= availability.building.name %></td>
-    <td><%= availability.listing.spot.number %></td>
+    <td><%= availability.listing.spot.floor %></td>
     <td><%= availability.listing.ask_price %></td>
 	<td>
 <%= link_to 'Rent this spot',

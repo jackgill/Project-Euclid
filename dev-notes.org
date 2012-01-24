@@ -268,7 +268,7 @@ oh god, gonna need update logic as well
 - need to validate date range on listing creation form
 - separate form for "rent"?
 - remove "Taken" column from listings table
-
+- add "confirmation number"
 - need ability to create listing or request via email?
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - calendar to view your spot's availability?
