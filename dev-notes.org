@@ -272,7 +272,9 @@ oh god, gonna need update logic as well
 - need ability to create listing or request via email?
 
 Tonight
-- remove date select from requests search
 - ability to delete things from user dashboard
 - renting a spot or fulfilling a request should take the user to a confirmation page
 - fix ability to delete users via admin tool
+
+Release Notes
+- removed date select from requests search

@@ -78,7 +78,8 @@ class RequestsController < ApplicationController
     @request.destroy
 
     respond_to do |format|
-      format.html { redirect_to requests_url }
+      flash[:notice] = 'You have successfully deleted this request'
+      format.html { redirect_to controller: 'home', action: 'confirmation' }
       format.json { head :ok }
     end
   end

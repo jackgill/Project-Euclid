@@ -14,4 +14,7 @@ class HomeController < ApplicationController
       format.html
     end
   end
+
+  def confirmation
+  end
 end
