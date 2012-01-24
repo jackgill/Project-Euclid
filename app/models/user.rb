@@ -1,8 +1,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :spot, :foreign_key => :owner_id, dependent: :destroy
   has_many :listing, :foreign_key => :lister_id, dependent: :destroy
+  has_many :spot, :foreign_key => :owner_id, dependent: :destroy
   has_many :request, :foreign_key => :requester_id, dependent: :destroy
   has_many :transaction_as_seller, :foreign_key => :seller_id, :class_name => 'Transaction', dependent: :destroy
   has_many :transaction_as_buyer, :foreign_key => :buyer_id, :class_name => 'Transaction', dependent: :destroy
