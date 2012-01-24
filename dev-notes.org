@@ -56,8 +56,9 @@ createdb euclid_development
 *** Ubuntu
 - postgres -D ~/postgres_data/
 *** Fedora
-- sudo postgres
+- su postgres
 - postgres -D /usr/local/pgsql/data &
+- su postgres -c "postgres -D /usr/local/pgsql/data &"
 ** connect to the database server: 
 psql -d (database name) -U (user name)
 psql -d euclid_development -U euclid
@@ -269,3 +270,9 @@ oh god, gonna need update logic as well
 - remove "Taken" column from listings table
 
 - need ability to create listing or request via email?
+
+Tonight
+- remove date select from requests search
+- ability to delete things from user dashboard
+- renting a spot or fulfilling a request should take the user to a confirmation page
+- fix ability to delete users via admin tool

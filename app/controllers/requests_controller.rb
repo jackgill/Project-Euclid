@@ -91,12 +91,12 @@ class RequestsController < ApplicationController
   end
 
   def results
-    @start_date = build_date_from_params(params[:start_date])
-    @end_date = build_date_from_params(params[:end_date])
+    # @start_date = build_date_from_params(params[:start_date])
+    # @end_date = build_date_from_params(params[:end_date])
     @requests = Request.
-      where(:building_id => params[:building]).
-      where("start_date <= ?", @start_date).
-      where("end_date >= ?", @end_date)
+      where(:building_id => params[:building])#.
+      #where("start_date <= ?", @start_date).
+      #where("end_date >= ?", @end_date)
 
     # Load these into session so that "Fulfill" action can access them
     session[:start_date] = @start_date
