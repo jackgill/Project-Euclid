@@ -92,8 +92,7 @@ class ListingsController < ApplicationController
     @listing.destroy
 
     respond_to do |format|
-      flash[:notice] = 'You have successfully deleted this listing'
-      format.html { redirect_to controller: 'home', action: 'confirmation' }
+      format.html { return message 'You have successfully deleted this listing' }
       format.json { head :ok }
     end
   end

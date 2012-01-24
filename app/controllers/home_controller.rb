@@ -15,6 +15,6 @@ class HomeController < ApplicationController
     end
   end
 
-  def confirmation
+  def message
   end
 end

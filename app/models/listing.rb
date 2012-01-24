@@ -3,8 +3,6 @@ class Listing < ActiveRecord::Base
   belongs_to :spot
   belongs_to :building
   has_many :availability, dependent: :destroy
-  #before_destroy :cancel_pending_transactions
-  # TODO: figure out correct way to propagate deletions to transactions
 
   validates :lister_id, :presence => true
   validates :building_id, :presence => true

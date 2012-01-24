@@ -78,8 +78,7 @@ class RequestsController < ApplicationController
     @request.destroy
 
     respond_to do |format|
-      flash[:notice] = 'You have successfully deleted this request'
-      format.html { redirect_to controller: 'home', action: 'confirmation' }
+      format.html { message('You have successfully deleted this request') }
       format.json { head :ok }
     end
   end
@@ -125,12 +124,13 @@ class RequestsController < ApplicationController
     @request = Request.find(params[:request])
     spot_id = params[:spot]
     result = @request.fulfill(@user, params[:spot_id])
+
+    msg = result ?
+      'You have fulfilled this request' :
+      'Sorry, this fulfillment could not be processed'
+    
     respond_to do |format|
-      if (result == true)
-        format.html { redirect_to @request, notice: 'You have fulfilled this request' }
-      else
-        format.html { redirect_to @request, notice: 'Sorry, this fulfillment could not be processed' }
-      end
+      format.html { return message(msg) }
     end
   end
 end

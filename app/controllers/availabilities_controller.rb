@@ -122,9 +122,11 @@ class AvailabilitiesController < ApplicationController
     # attempt to rent the spot
     respond_to do |format|
       if @availability.rent(start_date, end_date, buyer, seller)
-        format.html { redirect_to @availability, notice: 'Congratulations, you have successfully reserved this spot' }
+        flash[:notice] = 'Congratulations, you have successfully reserved this spot'
+        format.html { redirect_to controller: 'home', action: 'confirmation' }
         format.json { render json: @availability, status: :created, location: @listing }
       else
+        # TODO: do we need a "negation" page to redirect to?
         format.html { redirect_to @availability, notice: 'Oh no, some one else has rented this spot whilst you were dilly-dallying' }
         format.json { render json: @availability, status: :already_taken, location: @listing }
       end

@@ -76,8 +76,7 @@ class TransactionsController < ApplicationController
     @transaction.destroy
 
     respond_to do |format|
-      flash[:notice] = 'You have successfully cancelled this transaction'
-      format.html { redirect_to controller: 'home', action: 'confirmation' }
+      format.html { message('You have successfully cancelled this transaction') }
       format.json { head :ok }
     end
   end

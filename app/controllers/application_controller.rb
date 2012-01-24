@@ -30,4 +30,8 @@ class ApplicationController < ActionController::Base
              params["date(3i)"].to_i)
   end
 
+  def message(message_text)
+    flash[:message] = message_text
+    redirect_to controller: 'home', action: 'message'
+  end
 end
