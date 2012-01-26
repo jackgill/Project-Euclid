@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
 
   def require_login
     if @user == nil
-      session[:requested_path] = Rails.application.routes.recognize_path request.env['PATH_INFO']
+      session[:requested_path] = request.parameters
       redirect_to :action => 'login', :controller => 'account'
       return false
     end
