@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  building_id: 1
+  building: timber_ridge
   number: 1
   floor: 1
-  owner_id: 1
+  owner: bob
 
 two:
-  building_id: 1
+  building: spire
   number: 1
   floor: 1
-  owner_id: 1
+  owner: alice

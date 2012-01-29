@@ -10,10 +10,17 @@
       </ul>
     </div>
   <% end %>
-
+  <% if @user && @user.is_admin %>
   <div class="field">
     <%= f.label :requester_id %><br />
 	<%= f.select :requester_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>
+  </div>
+    <% else %>
+  <%= f.hidden_field :requester_id, :value => @user != nil ? @user.id : nil %>
+  <% end %>
+  <div class="field">
+    <%= f.label :building_id %><br />
+    <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
   </div>
   <div class="field">
     <%= f.label :start_date %><br />

@@ -1,6 +1,7 @@
 require 'test_helper'
 
 class TransactionsControllerTest < ActionController::TestCase
+  
   setup do
     @transaction = transactions(:one)
   end

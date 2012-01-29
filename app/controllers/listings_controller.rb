@@ -13,6 +13,10 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
+
+    return unless require_login
+
+
     @listing = Listing.find(params[:id])
 
     respond_to do |format|
@@ -21,30 +25,11 @@ class ListingsController < ApplicationController
     end
   end
 
-  def search
-    @buildings = Building.all
-    respond_to do |format|
-      format.html # search.html.erb
-    end
-  end
-
-  def results
-    @start_date = build_date_from_params(params[:start_date])
-    @end_date = build_date_from_params(params[:end_date])
-    @listings = Listing.
-      where(:building_id => params[:building]).
-      where("start_date >= ?", @start_date).
-      where("end_date <= ?", @end_date)
-    
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @listings }
-    end
-  end
-
   # GET /listings/new
   # GET /listings/new.json
   def new
+    return unless require_login
+    
     @listing = Listing.new
 
     respond_to do |format|
@@ -65,6 +50,15 @@ class ListingsController < ApplicationController
 
     respond_to do |format|
       if @listing.save
+
+        @availability = Availability.new({
+                                           listing_id: @listing.id,
+                                           building_id: @listing.building_id,
+                                           start_date: @listing.start_date,
+                                           end_date: @listing.end_date,
+                                         })
+        @availability.save # TODO: handle case where save fails
+
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render json: @listing, status: :created, location: @listing }
       else
@@ -79,6 +73,7 @@ class ListingsController < ApplicationController
   def update
     @listing = Listing.find(params[:id])
 
+    # TODO: find and update the appropriate availability entries
     respond_to do |format|
       if @listing.update_attributes(params[:listing])
         format.html { redirect_to @listing, notice: 'Listing was successfully updated.' }
@@ -97,16 +92,8 @@ class ListingsController < ApplicationController
     @listing.destroy
 
     respond_to do |format|
-      format.html { redirect_to listings_url }
+      format.html { return message 'You have successfully deleted this listing' }
       format.json { head :ok }
     end
-  end
-
-  private
-
-  def build_date_from_params(params)
-    Date.new(params["date(1i)"].to_i, 
-             params["date(2i)"].to_i, 
-             params["date(3i)"].to_i)
   end
 end

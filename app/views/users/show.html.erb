@@ -18,5 +18,10 @@
   <%= @shown_user.login %>
 </p>
 
+<p>
+  <b>Is Admin:</b>
+  <%= @shown_user.is_admin %>
+</p>
+
 <%= link_to 'Edit', edit_user_path(@shown_user) %> |
 <%= link_to 'Back', users_path %>

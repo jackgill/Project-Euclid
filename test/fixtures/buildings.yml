@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
-  address: MyText
+timber_ridge:
+  name: Timber Ridge
+  address: Somewhere in Boulder
 
-two:
-  name: MyString
+spire:
+  name: The Spire
   address: MyText

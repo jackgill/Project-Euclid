@@ -1,0 +1,6 @@
+<h1>Your Spots</h1>
+<% for spot in @your_spots %>
+<%= link_to spot.building.name + ' ' + spot.number.to_s, :controller => :spots, :action => :show, :id => spot.id %> <br/>
+<% end %>
+<br/>
+<%= link_to "Register a spot", :controller => :spots, :action => :new %>

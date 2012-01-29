@@ -1,0 +1,31 @@
+<h1>Search Results</h1>
+
+<table>
+  <tr>
+    <th>Lister</th>
+	<th>Building</th>
+    <th>Spot</th>
+    <th>Ask price</th>
+    <th></th>
+  </tr>
+
+<% @availabilities.each do |availability| %>
+  <tr>
+    <td><%= format_user(availability.listing.lister) %></td>
+    <td><%= availability.building.name %></td>
+    <td><%= availability.listing.spot.number %></td>
+    <td><%= availability.listing.ask_price %></td>
+	<td>
+<%= link_to 'Rent this spot',
+:controller => 'availabilities',
+:action => 'rent',
+:availability => availability.id,
+:start_date => availability.start_date,
+:end_date => availability.end_date,
+%>
+	</td>
+  </tr>
+<% end %>
+</table>
+<br/>
+<em>Didn't find what you were looking for? <%= link_to "Make a Request", controller: :requests, action: :new %></em>

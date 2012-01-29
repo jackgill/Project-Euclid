@@ -1,0 +1,45 @@
+<h1>User Dashboard</h1>
+<h2>Listings</h2>
+<ul>
+<% for listing in @listings %>
+  <li>
+	  <%= "#{listing.building.name} #{listing.spot.number}: #{listing.start_date} to #{listing.end_date}"%>
+	  |
+       <%= link_to 'Remove', listing, confirm: 'Are you sure?', method: :delete %>
+  </li> 
+<% end %>
+</ul>
+
+<h2>Requests</h2>
+<ul>
+<% for request in @requests %>
+  <li>
+	  <%= "#{request.start_date} to #{request.end_date} at $#{request.bid_price}"%>
+	  |
+	  <%= link_to 'Remove', request, confirm: 'Are you sure?', method: :delete %>
+  </li> 
+<% end %>
+</ul>
+
+<h2>Spots I am renting from others</h2>
+<ul>
+<% for transaction in @transactions_buyer %>
+  <li>
+  <%= "#{transaction.spot.building.name} #{transaction.spot.number}: #{transaction.start_date} to #{transaction.end_date} at $#{transaction.price}"%>
+  |
+  <%= link_to 'Cancel', transaction, confirm: 'Are you sure?', method: :delete %>
+  </li> 
+<% end %>
+</ul>
+
+
+<h2>Spots others are renting from me</h2>
+<ul>
+<% for transaction in @transactions_seller %>
+  <li>
+  <%= "#{transaction.spot.building.name} #{transaction.spot.number}: #{transaction.start_date} to #{transaction.end_date} at $#{transaction.price}"%>
+  |
+  <%= link_to 'Cancel', transaction, confirm: 'Are you sure?', method: :delete %>
+  </li> 
+<% end %>
+</ul>

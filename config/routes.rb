@@ -1,28 +1,40 @@
 Euclid::Application.routes.draw do
-  get "listings/search"
-  get "listings/results"  
+
+  # Listings
+  get "availabilities/search"
+  get "availabilities/results"  
+  get "availabilities/rent"
   
-  resources :transactions
-
-  resources :requests
-
-  resources :listings
-
-  resources :spots
-
-  resources :buildings
-
+  # Account
   get "account/login"
-
   get "account/logout"
-
   get "account/index"
 
-  resources :users
+  # Spots
+  get "spots/yours"
 
+  # Home
   get "home/index"
+  get "home/dashboard"
+  
+  # Admin
   get "admin/index"
 
+  # Requests
+  get "requests/search"
+  get "requests/results"
+  get "requests/fulfill"
+  get "requests/rent"
+
+  # Resources
+  resources :transactions
+  resources :requests
+  resources :listings
+  resources :spots
+  resources :buildings
+  resources :users
+  resources :availabilities
+  
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

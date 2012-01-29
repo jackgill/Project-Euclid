@@ -1,0 +1,33 @@
+<%= form_for(@availability) do |f| %>
+  <% if @availability.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@availability.errors.count, "error") %> prohibited this availability from being saved:</h2>
+
+      <ul>
+      <% @availability.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :listing_id %><br />
+  <%= f.select :listing_id, Listing.all.collect { |listing| [ "#{listing.lister.first_name} #{listing.lister.last_name} #{listing.start_date} to #{listing.end_date}", listing.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :building_id %><br />
+    <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
+  </div>
+  <div class="field">
+    <%= f.label :start_date %><br />
+    <%= f.date_select :start_date %>
+  </div>
+  <div class="field">
+    <%= f.label :end_date %><br />
+    <%= f.date_select :end_date %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

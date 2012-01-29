@@ -18,6 +18,7 @@
   <%= @request.bid_price %>
 </p>
 
+<% if @user && (@user.is_admin || @user.id == @request.requester.id) %>
+  <%= link_to 'Edit', edit_request_path(@request) %>
+<% end %>
 
-<%= link_to 'Edit', edit_request_path(@request) %> |
-<%= link_to 'Back', requests_path %>

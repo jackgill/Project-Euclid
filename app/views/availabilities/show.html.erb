@@ -1,0 +1,37 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Listing:</b>
+  <%= @availability.listing_id %>
+</p>
+
+<p>
+  <b>Building:</b>
+  <%= @availability.building.name %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @availability.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @availability.end_date %>
+</p>
+
+
+<%= link_to 'Edit', edit_availability_path(@availability) %> |
+<%= link_to 'Back', availabilities_path %>
+
+<% if @user && @user.is_admin %>
+<%= link_to 'Edit', edit_availability_path(@availability) %>
+<% else %>
+<%= link_to 'Rent this spot',
+:controller => 'availabilities',
+:action => 'rent',
+:availability => @availability.id,
+:start_date => @availability.start_date,
+:end_date => @availability.end_date,
+%>
+<% end %>

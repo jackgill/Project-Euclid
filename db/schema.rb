@@ -11,7 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20111222043532) do
+ActiveRecord::Schema.define(:version => 20120121043549) do
+
+  create_table "availabilities", :force => true do |t|
+    t.integer  "listing_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "building_id"
+  end
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
@@ -29,6 +38,7 @@ ActiveRecord::Schema.define(:version => 20111222043532) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "building_id"
+    t.boolean  "taken",       :default => false, :null => false
   end
 
   create_table "requests", :force => true do |t|
@@ -38,6 +48,7 @@ ActiveRecord::Schema.define(:version => 20111222043532) do
     t.decimal  "bid_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "building_id"
   end
 
   create_table "spots", :force => true do |t|
@@ -69,6 +80,7 @@ ActiveRecord::Schema.define(:version => 20111222043532) do
     t.string   "salt"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_admin",        :default => false, :null => false
   end
 
 end

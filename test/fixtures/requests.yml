@@ -1,13 +1,13 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  requester_id: 1
+  requester: bob
   start_date: 2011-10-30
-  end_date: 2011-10-30
+  end_date: 2011-10-31
   bid_price: 9.99
 
 two:
-  requester_id: 1
+  requester: alice
   start_date: 2011-10-30
-  end_date: 2011-10-30
+  end_date: 2011-10-31
   bid_price: 9.99

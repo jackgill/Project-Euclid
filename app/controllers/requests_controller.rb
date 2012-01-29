@@ -24,6 +24,8 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
+    return unless require_login
+    
     @request = Request.new
 
     respond_to do |format|
@@ -76,8 +78,59 @@ class RequestsController < ApplicationController
     @request.destroy
 
     respond_to do |format|
-      format.html { redirect_to requests_url }
+      format.html { message('You have successfully deleted this request') }
       format.json { head :ok }
+    end
+  end
+
+  def search
+    @buildings = Building.all
+    respond_to do |format|
+      format.html # search.html.erb
+    end
+  end
+
+  def results
+    # @start_date = build_date_from_params(params[:start_date])
+    # @end_date = build_date_from_params(params[:end_date])
+    @requests = Request.
+      where(:building_id => params[:building])#.
+      #where("start_date <= ?", @start_date).
+      #where("end_date >= ?", @end_date)
+
+    # Load these into session so that "Fulfill" action can access them
+    session[:start_date] = @start_date
+    session[:end_date] = @end_date
+    
+    respond_to do |format|
+      format.html # results.html.erb
+      format.json { render json: @requests }
+    end
+  end
+
+  def fulfill
+    return unless require_login
+    
+    @spots = Spot.where(owner_id: @user.id)
+
+    respond_to do |format|
+      format.html
+    end
+  end
+
+  def rent
+    return unless require_login
+
+    @request = Request.find(params[:request])
+    spot_id = params[:spot]
+    result = @request.fulfill(@user, params[:spot_id])
+
+    msg = result ?
+      'You have fulfilled this request' :
+      'Sorry, this fulfillment could not be processed'
+    
+    respond_to do |format|
+      format.html { return message(msg) }
     end
   end
 end

@@ -14,4 +14,24 @@ class ApplicationController < ActionController::Base
 
     end
   end
+
+  def require_login
+    if @user == nil
+      session[:requested_path] = Rails.application.routes.recognize_path request.env['PATH_INFO']
+      redirect_to :action => 'login', :controller => 'account'
+      return false
+    end
+    return true
+  end
+
+  def build_date_from_params(params)
+    Date.new(params["date(1i)"].to_i, 
+             params["date(2i)"].to_i, 
+             params["date(3i)"].to_i)
+  end
+
+  def message(message_text)
+    flash[:message] = message_text
+    redirect_to controller: 'home', action: 'message'
+  end
 end
