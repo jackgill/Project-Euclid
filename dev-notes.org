@@ -59,6 +59,8 @@ createdb euclid_development
 - su postgres
 - postgres -D /usr/local/pgsql/data &
 - su postgres -c "postgres -D /usr/local/pgsql/data &"
+*** Fedora (laptop)
+postgres -D ~/postgres_data &
 ** connect to the database server: 
 psql -d (database name) -U (user name)
 psql -d euclid_development -U euclid
@@ -280,3 +282,35 @@ Release Notes
 - removed date select from requests search
 - users can now delete items from their dashboards
 - renting a spot or fulfilling a request now takes the user to a 'message' page (like a confirmation page, but not necessarily confirming)
+
+User preference page:
+- select default building
+- notification preferences
+
+Need to constrain UI to only present users with a single building
+
+Notification system
+- support for multiple delivery systems? email, SMS, site messages? start w/ email, later add SMS and messaging.
+
+Bidding system
+- offer / counter-offer system
+- hybrid system allows immediate acceptance of an offer, or counter-offer
+- confirmation of rental
+
+skin before early UI testing
+put building in cookie
+per building page - projectchampa.com/spire
+
+Splash page
+- ask the user which building they live in
+- set this in a cookie and store
+- if their building isn't available, a form to request it
+- in header, "you're currently browsing the spire - change building"
+- has only search and rent, home has others
+
+Features
+- Splash page
+- user preference page ("settings")
+- building constraint
+- notification system
+- negotiation system
