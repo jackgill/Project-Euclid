@@ -273,10 +273,4 @@ oh god, gonna need update logic as well
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - calendar to view your spot's availability?
 - need to add notifications when a transaction you're involved in is cancelled
-Tonight
-
-Release Notes
-- removed date select from requests search
-- users can now delete items from their dashboards
-- renting a spot or fulfilling a request now takes the user to a 'message' page (like a confirmation page, but not necessarily confirming)
-- implemented cascading deletes for users
+- switch to using filters instead of require_login
