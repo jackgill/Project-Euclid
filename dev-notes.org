@@ -303,7 +303,6 @@ oh god, gonna need update logic as well
 - only admin users should be able to view the admin controller
 - users should be able to modify/delete their own items
 * Misc
-- remove "Taken" column from listings table
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - switch to using filters instead of require_login
 - upgrade to prod web server
@@ -313,3 +312,4 @@ Release Notes
 - Added date range validation for listings, requests, and transactions. Date range validation ensures that:
 1) The start date is not in the past
 2) The end date is greater than the start date
+- Removed "taken" column from listings table, since we are now implementing this functionality using the availability table.

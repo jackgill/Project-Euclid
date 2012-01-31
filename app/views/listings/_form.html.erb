@@ -16,11 +16,6 @@
     <%= f.label :lister_id %><br />
 	<%= f.select :lister_id, User.all.collect { |u| [ u.first_name + ' ' + u.last_name, u.id ] } %>
   </div>
-
-  <div class="field">
-    <%= f.label :taken %><br />
-    <%= f.check_box :taken %>
-  </div>
   <% else %>
   <%= f.hidden_field :lister_id, :value => @user != nil ? @user.id : nil %>
   <% end %>
