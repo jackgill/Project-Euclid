@@ -83,9 +83,10 @@ show columns \d (table name)
 * emacs
 use nxhtml for syntax highlighting erb files
 use M-x customize-group RET mumamo RET to change the background color
-* project
-bundle install
-rake db:seed
+* Product Development Roadmap
+** Name, domain registration
+** Skin
+** UI testing w/ family/friends
 * Heroku
 ** Install
 gem install heroku
@@ -107,6 +108,9 @@ gem install rails
 *** Windows
 Use the Rails Installer:
 http://railsinstaller.org/
+** Initialize new project
+bundle install
+rake db:seed
 ** generate a database migration to add a column to an existing table
 rails generate migration AddColumnToTable column:type
 rails generate migration AddIsAdminToUsers is_admin:boolean
@@ -132,6 +136,7 @@ the tests ignore seed data and only look at fixtures
 rake db:fixtures:load loads the fixture data into the dev database, which is *not* what we want
 to reference a foreign key in a fixture, you should use the fixture NAME, not the ID
 * Business
+** General musings
 What is a business?
 An LLC.
 A memorandum of understanding?
@@ -155,7 +160,8 @@ Need to write a position paper on PaaS vs IaaS.
 Need to do some revenue projections based on usage volume, and our cut.
 
 cost project + revenue = rudimentary business model?
-
+** Purpose
+A lot of tech startups are criticized for being "products, not companies". A company is something that exists across multiple product lines and generations of leadership. Do we want a company? Or are we content with just a product? Either would be fine, and really there's very little difference between them in the early stages. But it seems like a company might be a good vehicle for our longer-term financial and social ambitions. A company would need a statement of purpose such as "applying a lean products methodology to interesting and lucrative problems." The various products offered by this company would offer us a revenue stream which would allow us to lead a somewhat more comfortable lifestyle than would otherwise be possible.
 * Brainstorming
 ** counter offers:
 field for transaction owner
@@ -163,16 +169,6 @@ two fields for each party assenting to the transaction
 facilitate counter offers by resetting "owner" field
 transaction is complete when both parties assent
 TODO: mutable or immutable transactions?
-* Icebox
-- requester needs to confirm fulfillment
-* Features
-** store search terms in session?
-** messaging -- release valve
-** link-to-listing
-** lightning offers
-** transaction queue (on user dashboard)
-** fine-grained management of notifications
-** private offer facility
 ** partial availability
 - availability by the day, the day is defined as 10am - 10am, w/ a button to request late check in / check out
 - listing partial availability: introduce a "day" resource, each listing has multiple days.
@@ -264,48 +260,56 @@ On creation of a transaction, delete the corresponding availability entry (or ma
 
 oh god, gonna need update logic as well
 
-* Misc
-- only admin users should be able to view the admin controller
-- if we're going to passing around URL parameters and whatnot, we're going to need an entitlements system
-- need to validate date range on listing creation form
-- separate form for "rent"?
-- remove "Taken" column from listings table
-- add "confirmation number"
-- need ability to create listing or request via email?
-- need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
-- calendar to view your spot's availability?
-- need to add notifications when a transaction you're involved in is cancelled
-- switch to using filters instead of require_login
+* Icebox
+** requester needs to confirm fulfillment
+** store search terms in session?
+** Messaging system
+- Analagous to facebook messaging
+- Provides an "escape valve" for behaviors that aren't captured in the system
+- Another mechanism for notifications
+- Insulates user's private emails from one another
+** lightning offers
+- I have forgotten what this feature is supposed to do.
+** private offer facility
+** confirmation number
+- create a "actions" table
+- each row contains an action ID and enough information to debug problems with the action
+- the user is given the action ID as a "confirmation number" in case they need customer support
+** creation of listing or request via email
+- probably don't need this
+** calendar to view your spot's availability
+- would be a nice UI touch
 
-User preference page:
-- select default building
-- notification preferences
-
-Need to constrain UI to only present users with a single building
-
-Notification system
-- support for multiple delivery systems? email, SMS, site messages? start w/ email, later add SMS and messaging.
-
-Bidding system
-- offer / counter-offer system
-- hybrid system allows immediate acceptance of an offer, or counter-offer
-- confirmation of rental
-
-skin before early UI testing
-put building in cookie
-per building page - projectchampa.com/spire
-
-Splash page
+** per building page - projectchampa.com/spire
+* Features
+** Splash page
 - ask the user which building they live in
 - set this in a cookie and store
 - if their building isn't available, a form to request it
 - in header, "you're currently browsing the spire - change building"
 - has only search and rent, home has others
+** User preference page
+- select default building
+- notification preferences
+** Need to constrain UI to only present users with a single building
+** Notifications system
+- need to add notifications when a transaction you're involved in is cancelled
+- support for multiple delivery systems? email, SMS, site messages? start w/ email, later add SMS and messaging.
+** Negotiation system
+- offer / counter-offer system
+- hybrid system allows immediate acceptance of an offer, or counter-offer
+- confirmation of rental
+** Entitlements system
+- only admin users should be able to view the admin controller
+- users should be able to modify/delete their own items
+* Misc
+- remove "Taken" column from listings table
+- need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
+- switch to using filters instead of require_login
+- upgrade to prod web server
+- upgrade to rails 3.2
 
-Features
-- Splash page
-- user preference page ("settings")
-- building constraint
-- notification system
-- negotiation system
-
+Release Notes
+- Added date range validation for listings, requests, and transactions. Date range validation ensures that:
+1) The start date is not in the past
+2) The end date is greater than the start date

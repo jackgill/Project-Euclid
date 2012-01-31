@@ -1,4 +1,8 @@
+require 'DateRangeValidator.rb'
+
 class Request < ActiveRecord::Base
+  include ActiveModel::Validations
+  
   belongs_to :requester, :foreign_key => :requester_id, :class_name => 'User'
   belongs_to :building
   
@@ -8,8 +12,9 @@ class Request < ActiveRecord::Base
             :end_date,
             :bid_price,
             :presence => true)
-  #TODO: validate end_date > start_date
 
+  validates_with DateRangeValidator
+  
   def fulfill(seller, spot_id)
     # delete this request
     destroy
