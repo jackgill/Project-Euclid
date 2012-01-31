@@ -16,10 +16,11 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     buyer = users(:bob)
     seller = users(:alice)
-    rental_start_date = Date.new(2012, 1, 8)
-    rental_end_date = Date.new(2012, 1, 10)
-
     original_availability = availabilities(:one)
+
+    rental_start_date = original_availability.start_date + 2
+    rental_end_date = original_availability.end_date - 2
+
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
     # The original availability is deleted
@@ -27,11 +28,10 @@ class AvailabilityTest < ActiveSupport::TestCase
       Availability.find(original_availability.id)
     end
 
-    # The earlier availability was created
     availabilities = Availability.where(:listing_id => original_availability.listing_id)
 
     # Two new availabilities were created
-    assert_equal availabilities.length, 2
+    assert_equal 2, availabilities.length, 'Two new availabilities were created'
 
     # The earlier availability was created correctly
     earlier_availability = availabilities[0]
@@ -55,10 +55,11 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     buyer = users(:bob)
     seller = users(:alice)
-    rental_start_date = Date.new(2012, 1, 6)
-    rental_end_date = Date.new(2012, 1, 10)
-
     original_availability = availabilities(:one)
+
+    rental_start_date = original_availability.start_date
+    rental_end_date = original_availability.start_date + 2
+
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
     # The original availability is deleted
@@ -70,7 +71,7 @@ class AvailabilityTest < ActiveSupport::TestCase
     availabilities = Availability.where(:listing_id => original_availability.listing_id)
 
     # One new availability was created
-    assert_equal availabilities.length, 1
+    assert_equal 1, availabilities.length, "Earlier availability was created"
 
     # The later availability was created correctly
     later_availability = availabilities[0]
@@ -81,7 +82,7 @@ class AvailabilityTest < ActiveSupport::TestCase
     transactions = Transaction.where(
                                      start_date: rental_start_date,
                                      end_date: rental_end_date)
-    assert_equal transactions.length, 1
+    assert_equal 1, transactions.length
 
   end
 
@@ -90,10 +91,11 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     buyer = users(:bob)
     seller = users(:alice)
-    rental_start_date = Date.new(2012, 1, 8)
-    rental_end_date = Date.new(2012, 1, 12)
-
     original_availability = availabilities(:one)
+
+    rental_start_date = original_availability.start_date + 2
+    rental_end_date = original_availability.end_date
+
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
     # The original availability is deleted
@@ -116,7 +118,7 @@ class AvailabilityTest < ActiveSupport::TestCase
     transactions = Transaction.where(
                                      start_date: rental_start_date,
                                      end_date: rental_end_date)
-    assert_equal transactions.length, 1
+    assert_equal 1, transactions.length
   end
 
   test "rent all of an availability" do
@@ -124,10 +126,11 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     buyer = users(:bob)
     seller = users(:alice)
-    rental_start_date = Date.new(2012, 1, 6)
-    rental_end_date = Date.new(2012, 1, 12)
-
     original_availability = availabilities(:one)
+
+    rental_start_date = original_availability.start_date
+    rental_end_date = original_availability.end_date
+
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
     # The original availability is deleted
@@ -143,6 +146,6 @@ class AvailabilityTest < ActiveSupport::TestCase
     transactions = Transaction.where(
                                      start_date: rental_start_date,
                                      end_date: rental_end_date)
-    assert_equal transactions.length, 1
+    assert_equal 1, transactions.length
   end
 end

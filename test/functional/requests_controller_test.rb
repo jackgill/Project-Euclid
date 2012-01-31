@@ -46,6 +46,6 @@ class RequestsControllerTest < ActionController::TestCase
       delete :destroy, id: @test_request.to_param
     end
 
-    assert_redirected_to requests_path
+    assert_redirected_to '/home/message'
   end
 end

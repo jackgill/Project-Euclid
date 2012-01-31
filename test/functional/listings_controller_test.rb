@@ -48,6 +48,6 @@ class ListingsControllerTest < ActionController::TestCase
       delete :destroy, id: @listing.to_param
     end
 
-    assert_redirected_to listings_path
+    assert_redirected_to '/home/message'
   end
 end

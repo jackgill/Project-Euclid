@@ -2,9 +2,10 @@
 
 one:
   requester: bob
-  start_date: 2011-10-30
-  end_date: 2011-10-31
+  start_date: <%= DateTime.now %>
+  end_date: <%= DateTime.now + 1 %>
   bid_price: 9.99
+  building: spire
 
 two:
   requester: alice
