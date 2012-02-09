@@ -56,9 +56,8 @@ createdb euclid_development
 *** Ubuntu
 - postgres -D ~/postgres_data/
 *** Fedora
-- su postgres
-- postgres -D /usr/local/pgsql/data &
-- su postgres -c "postgres -D /usr/local/pgsql/data &"
+su postgres -c "postgres -D /usr/local/pgsql/data &"
+(password is postgres)
 *** Fedora (laptop)
 postgres -D ~/postgres_data &
 ** connect to the database server: 
@@ -260,6 +259,24 @@ On creation of a transaction, delete the corresponding availability entry (or ma
 
 oh god, gonna need update logic as well
 
+** user preferences
+user preference table?
+store each prefence in a db table?
+or just use a json / xml string?
+relational database will make running reports easier
+
+should there be a separate user preference table? or just add to the current users table? separate notification preferences table?
+
+using the same table is simpler and faster for small amounts of data. using a separate table facilitates lazy-loading, which may be more efficient for large amounts of data.
+
+general opinion seems to favor normalization, so a separate preferences table
+
+THE DECISION:
+
+we're doing a separate table (yay normalization!)
+each preference will be a column (yay efficient reports!)
+initial table will only contain default_building_id, notification prefs to come
+
 * Icebox
 ** requester needs to confirm fulfillment
 ** store search terms in session?
@@ -308,8 +325,13 @@ oh god, gonna need update logic as well
 - upgrade to prod web server
 - upgrade to rails 3.2
 
-Release Notes
-- Added date range validation for listings, requests, and transactions. Date range validation ensures that:
-1) The start date is not in the past
-2) The end date is greater than the start date
-- Removed "taken" column from listings table, since we are now implementing this functionality using the availability table.
+
+keep session in a cookie, or implement db-based sessions?
+keeping session in a cookie would facilitate temporary storage of a building preference
+
+keep session in a cookie for now, but maybe a permanent cookie for building_id?
+
+on page load:
+- check to see if a user is logged in. if they are, pull the building_id from the user preference. if they aren't, check to see if there's a building id in session. if there's not, redirect to the splash page to get a building id.
+
+need to create preferences w/ user creation
