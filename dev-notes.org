@@ -335,3 +335,4 @@ on page load:
 - check to see if a user is logged in. if they are, pull the building_id from the user preference. if they aren't, check to see if there's a building id in session. if there's not, redirect to the splash page to get a building id.
 
 need to create preferences w/ user creation
+need ability to edit user preferences

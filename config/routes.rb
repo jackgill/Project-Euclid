@@ -1,10 +1,10 @@
 Euclid::Application.routes.draw do
 
+  # User Preferences
   get "user_preferences/show"
-
   get "user_preferences/edit"
-
   get "user_preferences/update"
+  resources :user_preferences
 
   # Listings
   get "availabilities/search"
