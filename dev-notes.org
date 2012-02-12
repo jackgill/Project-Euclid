@@ -298,13 +298,12 @@ initial table will only contain default_building_id, notification prefs to come
 - would be a nice UI touch
 
 ** per building page - projectchampa.com/spire
+** remove password from logs
+config.filter_parameters << :password
+** whitelist vs blacklist for require a user / requiring an admin
 * Features
 ** Splash page
-- ask the user which building they live in
-- set this in a cookie and store
 - if their building isn't available, a form to request it
-- in header, "you're currently browsing the spire - change building"
-- has only search and rent, home has others
 ** User preference page
 - select default building
 - notification preferences
@@ -321,18 +320,15 @@ initial table will only contain default_building_id, notification prefs to come
 - users should be able to modify/delete their own items
 * Misc
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
-- switch to using filters instead of require_login
 - upgrade to prod web server
 - upgrade to rails 3.2
+- user preference should be NOT NULL (reverse direction of foreign key)
+
+Release Notes:
+- User preferences are now editable
+- There is now a splash page, containing just two links
+- The user's default building is now stored in the session cookie. All pages require a default building, so if this cookie is not set then the user will be redirected to a page which allows them to select a default building.
+- Add "clear session" action to admin page to allow testing of session-related features
+- Previously, all pages were public, and few actions specifically required a login. Now, all pages are private, and few actions are whitelisted as public: the splash page, the building selection page, and the availaiblity search and search results.
 
 
-keep session in a cookie, or implement db-based sessions?
-keeping session in a cookie would facilitate temporary storage of a building preference
-
-keep session in a cookie for now, but maybe a permanent cookie for building_id?
-
-on page load:
-- check to see if a user is logged in. if they are, pull the building_id from the user preference. if they aren't, check to see if there's a building id in session. if there's not, redirect to the splash page to get a building id.
-
-need to create preferences w/ user creation
-need ability to edit user preferences

@@ -13,10 +13,6 @@ class ListingsController < ApplicationController
   # GET /listings/1
   # GET /listings/1.json
   def show
-
-    return unless require_login
-
-
     @listing = Listing.find(params[:id])
 
     respond_to do |format|
@@ -28,8 +24,6 @@ class ListingsController < ApplicationController
   # GET /listings/new
   # GET /listings/new.json
   def new
-    return unless require_login
-    
     @listing = Listing.new
 
     respond_to do |format|

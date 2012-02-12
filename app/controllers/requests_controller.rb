@@ -24,8 +24,6 @@ class RequestsController < ApplicationController
   # GET /requests/new
   # GET /requests/new.json
   def new
-    return unless require_login
-    
     @request = Request.new
 
     respond_to do |format|
@@ -109,8 +107,6 @@ class RequestsController < ApplicationController
   end
 
   def fulfill
-    return unless require_login
-    
     @spots = Spot.where(owner_id: @user.id)
 
     respond_to do |format|
@@ -119,8 +115,6 @@ class RequestsController < ApplicationController
   end
 
   def rent
-    return unless require_login
-
     @request = Request.find(params[:request])
     spot_id = params[:spot]
     result = @request.fulfill(@user, params[:spot_id])

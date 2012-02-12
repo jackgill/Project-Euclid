@@ -1,10 +1,11 @@
 class HomeController < ApplicationController
+  skip_before_filter :require_login, only: [ :splash, :building ]
+  skip_before_filter :require_building, only: [ :splash, :building ]
+  
   def index
   end
 
   def dashboard
-    return unless require_login
-    
     @listings = Listing.where(lister_id: @user.id)
     @requests = Request.where(requester_id: @user.id)
     @transactions_buyer = Transaction.where(buyer_id: @user.id)
@@ -16,5 +17,16 @@ class HomeController < ApplicationController
   end
 
   def message
+  end
+
+  def splash
+  end
+
+  def building
+    if request.post?
+      # TODO: check that this is a valid building id
+      session[:building_id] = params[:building_id]
+      redirect_to session[:requested_path]
+    end
   end
 end

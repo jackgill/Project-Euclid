@@ -1,4 +1,6 @@
 class AccountController < ApplicationController
+  skip_before_filter :require_login
+  
   def login
     if request.post?
       user = User.authenticate(params[:login], params[:password])

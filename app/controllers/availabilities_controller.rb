@@ -1,4 +1,6 @@
 class AvailabilitiesController < ApplicationController
+  skip_before_filter :require_login, only: [ :search, :results ]
+  
   # GET /availabilities
   # GET /availabilities.json
   def index
@@ -108,8 +110,6 @@ class AvailabilitiesController < ApplicationController
 
   # to rent a spot
   def rent
-    return unless require_login
-    
     # retrieve the availability
     @availability = Availability.find(params[:availability])
 

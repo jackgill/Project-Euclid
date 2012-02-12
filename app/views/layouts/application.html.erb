@@ -17,6 +17,14 @@
 	  <%= link_to "Home", :controller => "home", :action => "index" %> |
 	  <%= link_to "Admin", :controller => "admin", :action => "index" %> |
 	  <%= link_to "Jump", :controller => "admin", :action => "jump" %>
+	  <% if @building != nil %>
+	  | Your current building is <%=@building.name%>.
+	  <% if @user == nil %>
+	   <%= link_to "Change", :controller => "home", :action => "building" %>
+	  <% else %>
+	  <%= link_to "Change", :controller => "user_preferences", :action => "edit", :id => @user.user_preference.id %>
+	  <% end %>
+	  <% end %>
 	</div>
 	<div class="right">
 		Welcome, 

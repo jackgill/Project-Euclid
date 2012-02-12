@@ -1,10 +1,7 @@
 <h1>Find a Spot</h1>
 <%= form_tag("/availabilities/results", :method => "get") do %>
 
-
-<%= label_tag(:building, "Building:") %> <%= select_tag(:building,
-options_for_select( @buildings.map { |b| [b.name, b.id] })) %> <br/>
-
+<%= hidden_field_tag(:building, @building.id) %>
 <%= label_tag(:start_date, "Start date:") %>
 <%= date_select(:start_date, :date, :default => Date.today) %>
 <br/>
