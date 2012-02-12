@@ -81,18 +81,18 @@ class RequestsController < ApplicationController
     end
   end
 
-  def search
-    @buildings = Building.all
-    respond_to do |format|
-      format.html # search.html.erb
-    end
-  end
+  # def search
+  #   @buildings = Building.all
+  #   respond_to do |format|
+  #     format.html # search.html.erb
+  #   end
+  # end
 
   def results
     # @start_date = build_date_from_params(params[:start_date])
     # @end_date = build_date_from_params(params[:end_date])
     @requests = Request.
-      where(:building_id => params[:building])#.
+      where(:building_id => @building.id)#.
       #where("start_date <= ?", @start_date).
       #where("end_date >= ?", @end_date)
 
