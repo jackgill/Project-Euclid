@@ -14,6 +14,7 @@ class AdminController < ApplicationController
 
   def clear_session
     reset_session
-    redirect_to controller: 'home', action: 'splash', notice: 'Session Cleared'
+    flash[:notice] = 'Session Cleared'
+    redirect_to controller: 'home', action: 'splash'
   end
 end

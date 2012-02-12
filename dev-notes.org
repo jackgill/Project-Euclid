@@ -302,15 +302,12 @@ initial table will only contain default_building_id, notification prefs to come
 config.filter_parameters << :password
 ** whitelist vs blacklist for require a user / requiring an admin
 * Features
-** Splash page
-- if their building isn't available, a form to request it
-** User preference page
-- select default building
-- notification preferences
-** Need to constrain UI to only present users with a single building
 ** Notifications system
 - need to add notifications when a transaction you're involved in is cancelled
 - support for multiple delivery systems? email, SMS, site messages? start w/ email, later add SMS and messaging.
+- user preferences to configure notifications
+** Choose building page
+- if the users building isn't available, there should be a form to request it
 ** Negotiation system
 - offer / counter-offer system
 - hybrid system allows immediate acceptance of an offer, or counter-offer
@@ -328,6 +325,7 @@ Release Notes:
 - User preferences are now editable
 - There is now a splash page, containing just two links
 - The user's default building is now stored in the session cookie. All pages require a default building, so if this cookie is not set then the user will be redirected to a page which allows them to select a default building.
+- The building select has been removed from all forms for non-admin users, the default building is used instead
 - Add "clear session" action to admin page to allow testing of session-related features
 - Previously, all pages were public, and few actions specifically required a login. Now, all pages are private, and few actions are whitelisted as public: the splash page, the building selection page, and the availaiblity search and search results.
 

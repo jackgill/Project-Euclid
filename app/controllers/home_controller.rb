@@ -20,6 +20,9 @@ class HomeController < ApplicationController
   end
 
   def splash
+    if @user != nil
+      redirect_to controller: "home", action: "index"
+    end
   end
 
   def building

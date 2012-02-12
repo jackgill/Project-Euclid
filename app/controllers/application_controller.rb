@@ -1,18 +1,25 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
+  before_filter :find_user
   before_filter :require_login
   before_filter :require_building
   
   private
 
-  def require_login
+  def find_user
     if session[:user_id] && session[:user_id] != :logged_out
       begin
         @user = User.find(session[:user_id])
       rescue ActiveRecord::RecordNotFound
-        session[:requested_path] = request.parameters
-        redirect_to :action => 'login', :controller => 'account'
+        @user = nil
       end
+    end
+  end
+
+  def require_login
+    if @user == nil
+      session[:requested_path] = request.parameters
+      redirect_to :action => 'login', :controller => 'account'
     end
   end
 
