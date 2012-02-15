@@ -319,6 +319,5 @@ config.filter_parameters << :password
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - upgrade to prod web server
 - upgrade to rails 3.2
-- user preference should be NOT NULL (reverse direction of foreign key)
 - should check that two users don't create the same spot
-- check unit tests
+
