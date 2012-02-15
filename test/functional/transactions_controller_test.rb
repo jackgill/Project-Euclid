@@ -3,6 +3,9 @@ require 'test_helper'
 class TransactionsControllerTest < ActionController::TestCase
   
   setup do
+    session[:building_id] = buildings(:timber_ridge).id
+    session[:user_id] = users(:bob).id
+    @user = users(:bob)
     @transaction = transactions(:one)
   end
 

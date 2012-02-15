@@ -2,6 +2,9 @@ require 'test_helper'
 
 class BuildingsControllerTest < ActionController::TestCase
   setup do
+    session[:building_id] = buildings(:timber_ridge).id
+    session[:user_id] = users(:bob).id
+    @user = users(:bob)
     @building = buildings(:timber_ridge)
   end
 

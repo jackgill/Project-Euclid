@@ -1,11 +1,4 @@
 Euclid::Application.routes.draw do
-
-  # User Preferences
-  get "user_preferences/show"
-  get "user_preferences/edit"
-  get "user_preferences/update"
-  resources :user_preferences
-
   # Listings
   get "availabilities/search"
   get "availabilities/results"  
@@ -40,6 +33,7 @@ Euclid::Application.routes.draw do
   resources :buildings
   resources :users
   resources :availabilities
+  resources :user_preferences
   
   # The priority is based upon order of creation:
   # first created -> highest priority.

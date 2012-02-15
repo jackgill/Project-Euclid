@@ -2,6 +2,8 @@ require 'test_helper'
 
 class UsersControllerTest < ActionController::TestCase
   setup do
+    session[:building_id] = buildings(:timber_ridge).id
+    session[:user_id] = users(:bob).id
     @user = users(:bob)
     # change these fields so that the model validation which
     # prevent duplicate logins/emails won't prevent create/update

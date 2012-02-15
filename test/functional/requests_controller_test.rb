@@ -2,6 +2,9 @@ require 'test_helper'
 
 class RequestsControllerTest < ActionController::TestCase
   setup do
+    session[:building_id] = buildings(:timber_ridge).id
+    session[:user_id] = users(:bob).id
+    @user = users(:bob)    
     @test_request = requests(:one)
   end
 
@@ -13,9 +16,7 @@ class RequestsControllerTest < ActionController::TestCase
 
   test "should get new" do
     get :new
-    # Currently asserting this to be a redirect since @user will be nil
-    # TODO: figure out how to inject @user and test both cases
-    assert_response :redirect
+    assert_response :success
   end
 
   test "should create request" do

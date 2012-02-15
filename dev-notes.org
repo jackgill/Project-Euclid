@@ -320,13 +320,5 @@ config.filter_parameters << :password
 - upgrade to prod web server
 - upgrade to rails 3.2
 - user preference should be NOT NULL (reverse direction of foreign key)
-
-Release Notes:
-- User preferences are now editable
-- There is now a splash page, containing just two links
-- The user's default building is now stored in the session cookie. All pages require a default building, so if this cookie is not set then the user will be redirected to a page which allows them to select a default building.
-- The building select has been removed from all forms for non-admin users, the default building is used instead
-- Add "clear session" action to admin page to allow testing of session-related features
-- Previously, all pages were public, and few actions specifically required a login. Now, all pages are private, and few actions are whitelisted as public: the splash page, the building selection page, and the availaiblity search and search results.
-
-
+- should check that two users don't create the same spot
+- check unit tests

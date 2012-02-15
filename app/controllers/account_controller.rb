@@ -1,5 +1,6 @@
 class AccountController < ApplicationController
   skip_before_filter :require_login
+  skip_before_filter :require_building
   
   def login
     if request.post?

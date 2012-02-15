@@ -1,7 +1,8 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
 
 one:
-  default_building: 1
-
+  building: timber_ridge
+  user: bob
 two:
-  default_building: 1
+  building: spire
+  user: alice
