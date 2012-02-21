@@ -1,4 +1,6 @@
 class BuildingsController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
+  
   # GET /buildings
   # GET /buildings.json
   def index

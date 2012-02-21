@@ -1,4 +1,6 @@
 class TransactionsController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
+  
   # GET /transactions
   # GET /transactions.json
   def index

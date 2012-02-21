@@ -1,4 +1,6 @@
 class SpotsController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
+  
   # GET /spots
   # GET /spots.json
   def index

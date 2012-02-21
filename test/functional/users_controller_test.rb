@@ -14,8 +14,7 @@ class UsersControllerTest < ActionController::TestCase
 
   test "should get index" do
     get :index
-    assert_response :success
-    assert_not_nil assigns(:users)
+    assert_redirected_to controller: :account, action: :login
   end
 
   test "should get new" do

@@ -1,4 +1,6 @@
 class RequestsController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
+  
   # GET /requests
   # GET /requests.json
   def index

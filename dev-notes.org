@@ -323,3 +323,7 @@ config.filter_parameters << :password
 require_owner_or_admin (global, whitelist public pages)
 only for non-GET verbs? nah - transactions should be GET-protected
 
+Release Notes:
+- "Jump" link has been moved from page header to admin tool
+- Users must now actually be admins in order to see the "Admin" link in the header and view the admin page
+- TODO: verify admin accounts in prod

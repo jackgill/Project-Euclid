@@ -1,4 +1,5 @@
 class AvailabilitiesController < ApplicationController
+  before_filter :require_admin, only: [ :index ]  
   skip_before_filter :require_login, only: [ :search, :results ]
   
   # GET /availabilities

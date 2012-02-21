@@ -15,7 +15,7 @@
   <div id="header">
 	<div class="left">
 	  <%= link_to "Home", :controller => "home", :action => "index" %>
-	  <% if @user.is_admin %>
+	  <% if @user && @user.is_admin %>
 	    | <%= link_to "Admin", :controller => "admin", :action => "index" %>
 	  <% end %>
 	  <% if @building != nil %>

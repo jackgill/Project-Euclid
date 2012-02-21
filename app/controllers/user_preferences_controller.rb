@@ -1,4 +1,6 @@
 class UserPreferencesController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
+  
   def show
     @prefs = @user.user_preference
   end

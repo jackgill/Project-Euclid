@@ -1,4 +1,6 @@
 class ListingsController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
+  
   # GET /listings
   # GET /listings.json
   def index

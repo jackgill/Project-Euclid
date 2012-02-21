@@ -19,12 +19,4 @@ class AdminController < ApplicationController
     flash[:notice] = 'Session Cleared'
     redirect_to controller: 'home', action: 'splash'
   end
-
-  def require_admin
-    unless @user && @user.is_admin
-      session[:requested_path] = request.parameters
-      flash[:notice] = "You must be an admin to view this page"
-      redirect_to :action => 'login', :controller => 'account'
-    end
-  end
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  before_filter :require_admin, only: [ :index ]
   skip_before_filter :require_login, only: [ :new, :create ]
   
   # GET /users

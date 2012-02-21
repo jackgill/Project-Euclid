@@ -23,6 +23,15 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def require_admin
+    unless @user && @user.is_admin
+      session[:requested_path] = request.parameters
+      flash[:notice] = "You must be an admin to view this page"
+      redirect_to :action => 'login', :controller => 'account'
+    end
+  end
+
+
   def require_building
     # If we have a user, set the building from their preferences
     if @user != nil && @user.user_preference != nil
