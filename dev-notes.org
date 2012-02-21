@@ -302,9 +302,7 @@ initial table will only contain default_building_id, notification prefs to come
 config.filter_parameters << :password
 * Features
 ** Entitlements system
-- only admin users should be able to view the admin controller
 - users should be able to modify/delete their own items
-- links are only displayed when clickable
 ** Notifications system
 - need to add notifications when a transaction you're involved in is cancelled
 - fuck it, let's just do email
@@ -327,3 +325,13 @@ Release Notes:
 - "Jump" link has been moved from page header to admin tool
 - Users must now actually be admins in order to see the "Admin" link in the header and view the admin page
 - TODO: verify admin accounts in prod
+
+need per-controller implementations of require_owner_or_admin?
+what about the model supplying a definition of is_owner, allowing for multiple owners?
+buildings controller should require admin for all actions
+the problem being that each table has a different column name for the owner/owners
+need to protect edit, update, delete (and occasionally show)
+need a protect_resource helper for this
+possibly accepting an attribute name or list of attribute names
+maybe not a filter, but an ordinary method accepting a resource object, and a list of column names?
+or perhaps filter-per-controller, calling this method

@@ -31,7 +31,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
-
+  def require_owner_or_admin
+    
+  end
+  
   def require_building
     # If we have a user, set the building from their preferences
     if @user != nil && @user.user_preference != nil
