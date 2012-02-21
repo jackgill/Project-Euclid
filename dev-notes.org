@@ -300,11 +300,14 @@ initial table will only contain default_building_id, notification prefs to come
 ** per building page - projectchampa.com/spire
 ** remove password from logs
 config.filter_parameters << :password
-** whitelist vs blacklist for require a user / requiring an admin
 * Features
+** Entitlements system
+- only admin users should be able to view the admin controller
+- users should be able to modify/delete their own items
+- links are only displayed when clickable
 ** Notifications system
 - need to add notifications when a transaction you're involved in is cancelled
-- support for multiple delivery systems? email, SMS, site messages? start w/ email, later add SMS and messaging.
+- fuck it, let's just do email
 - user preferences to configure notifications
 ** Choose building page
 - if the users building isn't available, there should be a form to request it
@@ -312,9 +315,11 @@ config.filter_parameters << :password
 - offer / counter-offer system
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
-** Entitlements system
-- only admin users should be able to view the admin controller
-- users should be able to modify/delete their own items
 * Misc
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - should check that two users don't create the same spot
+- need a rake task to expire old listings / availability (w/ notifications)
+
+require_owner_or_admin (global, whitelist public pages)
+only for non-GET verbs? nah - transactions should be GET-protected
+
