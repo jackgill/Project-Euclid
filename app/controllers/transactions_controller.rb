@@ -1,5 +1,7 @@
 class TransactionsController < ApplicationController
   before_filter :require_admin, only: [ :index ]
+  before_filter :find_transaction, only: [ :show, :edit, :update, :destroy ]
+  before_filter :require_owner_or_admin, only: [ :edit, :update, :destroy ]
   
   # GET /transactions
   # GET /transactions.json
@@ -15,8 +17,6 @@ class TransactionsController < ApplicationController
   # GET /transactions/1
   # GET /transactions/1.json
   def show
-    @transaction = Transaction.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @transaction }
@@ -36,7 +36,6 @@ class TransactionsController < ApplicationController
 
   # GET /transactions/1/edit
   def edit
-    @transaction = Transaction.find(params[:id])
   end
 
   # POST /transactions
@@ -58,8 +57,6 @@ class TransactionsController < ApplicationController
   # PUT /transactions/1
   # PUT /transactions/1.json
   def update
-    @transaction = Transaction.find(params[:id])
-
     respond_to do |format|
       if @transaction.update_attributes(params[:transaction])
         format.html { redirect_to @transaction, notice: 'Transaction was successfully updated.' }
@@ -74,12 +71,17 @@ class TransactionsController < ApplicationController
   # DELETE /transactions/1
   # DELETE /transactions/1.json
   def destroy
-    @transaction = Transaction.find(params[:id])
     @transaction.destroy
 
     respond_to do |format|
       format.html { message('You have successfully cancelled this transaction') }
       format.json { head :ok }
     end
+  end
+
+  private
+
+  def find_transaction
+    @resource = @transaction = Transaction.find(params[:id])
   end
 end

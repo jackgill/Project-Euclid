@@ -32,7 +32,11 @@ class ApplicationController < ActionController::Base
   end
 
   def require_owner_or_admin
-    
+    unless @user && @resource && (@user.is_admin || @resource.is_owner(@user))
+      session[:requested_path] = request.parameters
+      flash[:notice] = "You must own this item to modify it"
+      redirect_to :action => 'login', :controller => 'account'
+    end
   end
   
   def require_building

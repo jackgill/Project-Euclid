@@ -1,8 +1,8 @@
 class UserPreferencesController < ApplicationController
-  before_filter :require_admin, only: [ :index ]
+  before_filter :find_prefs, only: [ :show, :edit, :update ]
+  before_filter :require_owner_or_admin, only: [ :edit, :update ]
   
   def show
-    @prefs = @user.user_preference
   end
 
   def edit
@@ -10,7 +10,6 @@ class UserPreferencesController < ApplicationController
   end
 
   def update
-    @prefs = UserPreference.find(params[:id])
     respond_to do |format|
       if @prefs.update_attributes(params[:user_preference])
         format.html { redirect_to @prefs, notice: "Preferences were successfully updated" }
@@ -20,4 +19,7 @@ class UserPreferencesController < ApplicationController
     end
   end
 
+  def find_prefs
+    @resource = @prefs = UserPreference.find(params[:id])
+  end
 end

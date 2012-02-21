@@ -1,16 +1,17 @@
 require 'test_helper'
 
 class BuildingsControllerTest < ActionController::TestCase
+  # TODO: test that this controller is inaccessible to non-admin users
+  
   setup do
     session[:building_id] = buildings(:timber_ridge).id
-    session[:user_id] = users(:bob).id
-    @user = users(:bob)
+    session[:user_id] = users(:admin).id
     @building = buildings(:timber_ridge)
   end
 
   test "should get index" do
     get :index
-    assert_redirected_to controller: :account, action: :login
+    assert_response :success
   end
 
   test "should get new" do

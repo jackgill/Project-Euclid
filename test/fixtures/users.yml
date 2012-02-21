@@ -15,3 +15,13 @@ alice:
   login: alice
   salt: foo
   hashed_password: as if
+
+admin:
+  first_name: Admin
+  last_name: LNU
+  email: admin@example.com
+  login: admin
+  salt: foo
+  hashed_password: as if
+  is_admin: true
+  

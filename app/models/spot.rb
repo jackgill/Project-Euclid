@@ -8,4 +8,8 @@ class Spot < ActiveRecord::Base
   validates :number, :presence => true
   validates :floor, :presence => true
   validates :owner_id, :presence => true
+
+  def is_owner(user)
+    return user.id == owner_id
+  end
 end

@@ -1,5 +1,7 @@
 class SpotsController < ApplicationController
   before_filter :require_admin, only: [ :index ]
+  before_filter :find_spot, only: [ :show, :edit, :update, :destroy ]
+  before_filter :require_owner_or_admin, only: [ :edit, :update, :destroy ]
   
   # GET /spots
   # GET /spots.json
@@ -15,8 +17,6 @@ class SpotsController < ApplicationController
   # GET /spots/1
   # GET /spots/1.json
   def show
-    @spot = Spot.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @spot }
@@ -36,7 +36,6 @@ class SpotsController < ApplicationController
 
   # GET /spots/1/edit
   def edit
-    @spot = Spot.find(params[:id])
   end
 
   # POST /spots
@@ -58,7 +57,6 @@ class SpotsController < ApplicationController
   # PUT /spots/1
   # PUT /spots/1.json
   def update
-    @spot = Spot.find(params[:id])
 
     respond_to do |format|
       if @spot.update_attributes(params[:spot])
@@ -74,7 +72,6 @@ class SpotsController < ApplicationController
   # DELETE /spots/1
   # DELETE /spots/1.json
   def destroy
-    @spot = Spot.find(params[:id])
     @spot.destroy
 
     respond_to do |format|
@@ -91,5 +88,11 @@ class SpotsController < ApplicationController
     end
 
     @your_spots = Spot.where(:owner_id => session[:user_id])
+  end
+
+  private
+
+  def find_spot
+    @resource = @spot = Spot.find(params[:id])
   end
 end

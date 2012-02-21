@@ -6,3 +6,6 @@ one:
 two:
   building: spire
   user: alice
+three:
+  building: timber_ridge
+  user: admin

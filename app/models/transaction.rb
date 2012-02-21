@@ -14,4 +14,8 @@ class Transaction < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :price, :presence => true
   validates_with DateRangeValidator
+
+  def is_owner(user)
+    return user.id == buyer_id || user.id == seller_id
+  end
 end

@@ -3,14 +3,14 @@ require 'test_helper'
 class AvailabilitiesControllerTest < ActionController::TestCase
   setup do
     session[:building_id] = buildings(:timber_ridge).id
-    session[:user_id] = users(:bob).id
+    session[:user_id] = users(:admin).id
 
     @availability = availabilities(:one)
   end
 
   test "should get index" do
     get :index
-    assert_redirected_to controller: :account, action: :login
+    assert_response :success
   end
 
   test "should get new" do

@@ -4,7 +4,7 @@ class SpotsControllerTest < ActionController::TestCase
   setup do
     session[:building_id] = buildings(:timber_ridge).id
     session[:user_id] = users(:bob).id
-    @user = users(:bob)
+
     @spot = spots(:one)
   end
 

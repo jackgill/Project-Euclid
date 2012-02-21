@@ -4,7 +4,6 @@ class ListingsControllerTest < ActionController::TestCase
   setup do
     session[:building_id] = buildings(:timber_ridge).id
     session[:user_id] = users(:bob).id
-    @user = users(:bob)    
     @listing = listings(:one)
   end
 
@@ -32,8 +31,14 @@ class ListingsControllerTest < ActionController::TestCase
   end
 
   test "should get edit" do
+    # Bob can request the edit page, since he owns the listing
     get :edit, id: @listing.to_param
     assert_response :success
+
+    # Alice cannot
+    session[:user_id] = users(:alice).id
+    get :edit, id: @listing.to_param
+    assert_redirected_to controller: :account, action: :login
   end
 
   test "should update listing" do

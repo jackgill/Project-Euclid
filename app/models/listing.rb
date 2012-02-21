@@ -15,4 +15,8 @@ class Listing < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :ask_price, :presence => true
   validates_with DateRangeValidator
+
+  def is_owner(user)
+    return user.id == lister_id
+  end
 end

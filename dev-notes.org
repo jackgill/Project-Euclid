@@ -317,9 +317,10 @@ config.filter_parameters << :password
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - should check that two users don't create the same spot
 - need a rake task to expire old listings / availability (w/ notifications)
-
-require_owner_or_admin (global, whitelist public pages)
-only for non-GET verbs? nah - transactions should be GET-protected
+- need some integration tests covering common user stories
+- need to beef up unit/functional test coverage
+- users should not see their own spots in search results
+- users should not be able to rent their own spots
 
 Release Notes:
 - "Jump" link has been moved from page header to admin tool
