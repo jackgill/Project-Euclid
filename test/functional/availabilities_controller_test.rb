@@ -48,4 +48,15 @@ class AvailabilitiesControllerTest < ActionController::TestCase
 
     assert_redirected_to availabilities_path
   end
+
+  test "rent your own space error" do
+    @availability = availabilities(:one)
+    session[:user_id] = @availability.listing.lister.id
+    session[:start_date] = @availability.start_date
+    session[:end_date] = @availability.end_date
+    
+    post :rent, availability: @availability.id
+
+    assert_redirected_to controller: :home, action: :message
+  end
 end

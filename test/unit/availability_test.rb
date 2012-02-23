@@ -148,4 +148,18 @@ class AvailabilityTest < ActiveSupport::TestCase
                                      end_date: rental_end_date)
     assert_equal 1, transactions.length
   end
+
+  test "User cannot rent their own availability" do
+    buyer = users(:bob)
+    seller = buyer # this should not be possible
+    
+    original_availability = availabilities(:one)
+
+    rental_start_date = original_availability.start_date + 2
+    rental_end_date = original_availability.end_date
+
+    assert_raise Exceptions::UserFacingException do
+      original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
+    end
+  end
 end

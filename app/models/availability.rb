@@ -13,6 +13,11 @@ class Availability < ActiveRecord::Base
     if rental_start_date == nil
       raise Exception("Rental start date is nil")
     end
+
+    if buyer.id == seller.id
+      raise Exceptions::UserFacingException.new("Oops! You can't rent your own spot.")
+    end
+    
     # delete this availability
     destroy
     

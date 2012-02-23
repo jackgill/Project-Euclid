@@ -1,3 +1,5 @@
+require 'exceptions'
+
 class AvailabilitiesController < ApplicationController
   before_filter :require_admin, except: [ :search, :results, :rent ]
   skip_before_filter :require_login, only: [ :search, :results ]
@@ -121,14 +123,18 @@ class AvailabilitiesController < ApplicationController
     seller = @availability.listing.lister
 
     # attempt to rent the spot
-    respond_to do |format|
-      if @availability.rent(start_date, end_date, buyer, seller)
-        format.html { message('Congratulations, you have successfully reserved this spot') }
-        format.json { render json: @availability, status: :created, location: @listing }
-      else
-        format.html { message('Oh no, some one else has rented this spot whilst you were dilly-dallying') }
-        format.json { render json: @availability, status: :already_taken, location: @listing }
+    begin
+      respond_to do |format|
+        if @availability.rent(start_date, end_date, buyer, seller)
+          format.html { message('Congratulations, you have successfully reserved this spot') }
+          format.json { render json: @availability, status: :created, location: @listing }
+        else
+          format.html { message('Oh no, some one else has rented this spot whilst you were dilly-dallying') }
+          format.json { render json: @availability, status: :already_taken, location: @listing }
+        end
       end
+    rescue Exceptions::UserFacingException => e
+      message(e.to_s)
     end
   end
 end

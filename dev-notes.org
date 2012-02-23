@@ -277,6 +277,16 @@ we're doing a separate table (yay normalization!)
 each preference will be a column (yay efficient reports!)
 initial table will only contain default_building_id, notification prefs to come
 
+** entitlements system
+need per-controller implementations of require_owner_or_admin?
+what about the model supplying a definition of is_owner, allowing for multiple owners?
+buildings controller should require admin for all actions
+the problem being that each table has a different column name for the owner/owners
+need to protect edit, update, delete (and occasionally show)
+need a protect_resource helper for this
+possibly accepting an attribute name or list of attribute names
+maybe not a filter, but an ordinary method accepting a resource object, and a list of column names?
+or perhaps filter-per-controller, calling this method
 * Icebox
 ** requester needs to confirm fulfillment
 ** store search terms in session?
@@ -301,8 +311,6 @@ initial table will only contain default_building_id, notification prefs to come
 ** remove password from logs
 config.filter_parameters << :password
 * Features
-** Entitlements system
-- users should be able to modify/delete their own items
 ** Notifications system
 - need to add notifications when a transaction you're involved in is cancelled
 - fuck it, let's just do email
@@ -314,25 +322,14 @@ config.filter_parameters << :password
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
 * Misc
-- need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 - should check that two users don't create the same spot
 - need a rake task to expire old listings / availability (w/ notifications)
 - need some integration tests covering common user stories
 - need to beef up unit/functional test coverage
 - users should not see their own spots in search results
 - users should not be able to rent their own spots
+- need better screen for post-user-creation
 
-Release Notes:
-- "Jump" link has been moved from page header to admin tool
-- Users must now actually be admins in order to see the "Admin" link in the header and view the admin page
-- TODO: verify admin accounts in prod
 
-need per-controller implementations of require_owner_or_admin?
-what about the model supplying a definition of is_owner, allowing for multiple owners?
-buildings controller should require admin for all actions
-the problem being that each table has a different column name for the owner/owners
-need to protect edit, update, delete (and occasionally show)
-need a protect_resource helper for this
-possibly accepting an attribute name or list of attribute names
-maybe not a filter, but an ordinary method accepting a resource object, and a list of column names?
-or perhaps filter-per-controller, calling this method
+- need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
+integration test?
