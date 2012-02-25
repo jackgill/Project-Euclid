@@ -15,8 +15,20 @@ class Listing < ActiveRecord::Base
   validates :end_date, :presence => true
   validates :ask_price, :presence => true
   validates_with DateRangeValidator
+  validate :is_unique_listing
 
   def is_owner(user)
     return user.id == lister_id
+  end
+
+  def is_unique_listing
+    listings = Listing.
+      where("start_date <= ?", end_date).
+      where("spot_id = ?", spot_id).
+      where("id != ?", id)
+    
+    for listing in listings
+      errors.add(:start_date, "Duplicate listing: #{listing.id}")
+    end
   end
 end

@@ -4,7 +4,7 @@ one:
   lister: bob
   spot: one
   building: timber_ridge
-  start_date: <%= DateTime.now %>
+  start_date: <%= DateTime.now + 1 %>
   end_date: <%= DateTime.now + 10 %>
   ask_price: 9.99
 
