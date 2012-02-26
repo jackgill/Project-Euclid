@@ -328,9 +328,3 @@ config.filter_parameters << :password
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
 * Misc
-- need a rake task to expire old listings / availability, and archive them in separate tables
-
-Release notes:
-- Users can no longer rent their own spots
-- Users can no longer rent out their spot to multiple people at the same time
-- Two users can no longer register the same spot
