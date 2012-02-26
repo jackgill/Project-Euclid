@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120209015707) do
+ActiveRecord::Schema.define(:version => 20120226191819) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "listing_id"
@@ -19,6 +19,15 @@ ActiveRecord::Schema.define(:version => 20120209015707) do
     t.date     "end_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "building_id"
+  end
+
+  create_table "availabilities_archive", :force => true do |t|
+    t.integer  "listing_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "building_id"
   end
 
@@ -37,6 +46,17 @@ ActiveRecord::Schema.define(:version => 20120209015707) do
     t.decimal  "ask_price"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "building_id"
+  end
+
+  create_table "listings_archive", :force => true do |t|
+    t.integer  "lister_id"
+    t.integer  "spot_id"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.decimal  "ask_price"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.integer  "building_id"
   end
 

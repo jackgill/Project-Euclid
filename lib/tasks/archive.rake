@@ -1,35 +1,18 @@
 desc "Archive expired listings and availability"
 task :archive => :environment do
-  #@listings = Listing.where("end_date < ?", DateTime.now)
-  #@availabilities = Availability.where("end_date < ?", DateTime.now)
+  now = DateTime.now.to_s
+  archive(now, 'availabilities')
+  archive(now, 'listings')
+end
 
-  sql = <<-SQL
-select * from listings;
-SQL
-  # used to connect active record to the database
+def archive(time, table)
+  insert_sql = "insert into #{table}_archive select * from #{table} where end_date < '#{time}';"
+  delete_sql = "delete from #{table} where end_date < '#{time}';"
+
   ActiveRecord::Base.establish_connection
-  #ActiveRecord::Base.connection.execute(sql)
-  records = ActiveRecord::Base.connection.exec_query(sql)
-  for record in records
-    puts record
-  end
+  ActiveRecord::Base.connection.execute(insert_sql)
+  ActiveRecord::Base.connection.execute(delete_sql)
 
-  #print_items(@listings)
-  #print_items(@availabilities)
-end
+  # TODO: error handling
 
-def archive_items(items, archive_class, destination)
-  for item in items
-    archive_item = archive_class.new(item.attributes)
-    archive_item.save
-    # TODO: handle save error
-  end
-end
-
-def print_items(items)
-  for item in items
-    puts "Item #{item.id}"
-    puts "\tstart date: #{item.start_date}"
-    puts "\t  end date: #{item.end_date}\n"
-  end
 end

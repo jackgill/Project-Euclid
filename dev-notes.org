@@ -329,15 +329,6 @@ config.filter_parameters << :password
 - confirmation of rental
 * Misc
 - need a rake task to expire old listings / availability, and archive them in separate tables
-do I really need a separate model here? or can I get away with just SQL?
-may need the ORM to make this effortless...
-basically should I handle this at the rails level or the postgres level
-postgres may be more efficient
-stored proc called from rake task?
-
-- need to create archive tables using migrations
-- need to figure out sql to move rows from one table to another
-
 
 Release notes:
 - Users can no longer rent their own spots
