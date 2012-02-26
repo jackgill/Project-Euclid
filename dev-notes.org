@@ -327,9 +327,10 @@ config.filter_parameters << :password
 - need some integration tests covering common user stories
 - need to beef up unit/functional test coverage
 - users should not see their own spots in search results
-- users should not be able to rent their own spots
 - need better screen for post-user-creation
-
+- upgrade to ruby 1.9.3?
+- specify versions of all gems in Gemfile
+- start using feature branches?
 
 - need to confirm that user's spot is available before allowing them to fulfill a transaction, or create a listing
 integration test?

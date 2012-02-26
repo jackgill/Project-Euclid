@@ -24,6 +24,10 @@ class ListingTest < ActiveSupport::TestCase
 
   test "can create unique listing" do
     listing = listings(:one)
+    
+    puts
+    puts listing.attributes
+    puts
     unique_listing = Listing.new(listing.attributes)
     unique_listing.start_date = listing.end_date + 1
     unique_listing.end_date = listing.end_date + 2

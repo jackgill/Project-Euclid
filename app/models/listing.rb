@@ -23,12 +23,18 @@ class Listing < ActiveRecord::Base
 
   def is_unique_listing
     listings = Listing.
-      where("start_date <= ?", end_date).
-      where("spot_id = ?", spot_id).
-      where("id != ?", id)
+      where("end_date > ?", start_date).
+      where("start_date < ?", end_date).
+      where("spot_id = ?", spot_id)
     
     for listing in listings
-      errors.add(:start_date, "Duplicate listing: #{listing.id}")
+      # If the listing id is the same, it's the same listing
+      # If the listing id is different, or not present, it's a duplicate
+      if listing.id != id
+        # TODO: this error message should link to the duplicate listing
+        # it should also be more grammatically correct
+        errors.add(:start_date, 'there is already a listing for this spot in this date range')
+      end
     end
   end
 end
