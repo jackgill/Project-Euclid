@@ -18,8 +18,12 @@ class ListingsControllerTest < ActionController::TestCase
   end
 
   test "should create listing" do
+    listing = @listing
+    listing.start_date = @listing.end_date + 1
+    listing.end_date = @listing.end_date + 2
+    
     assert_difference('Listing.count') do
-      post :create, listing: @listing.attributes
+      post :create, listing: listing.attributes
     end
 
     assert_redirected_to listing_path(assigns(:listing))
