@@ -317,10 +317,6 @@ config.filter_parameters << :password
 - need to beef up unit/functional test coverage
 - check UX for post-user-creation when no page was requested
 * Features
-** Notifications system
-- need to add notifications when a transaction you're involved in is cancelled
-- notifications will be email-only
-- user preferences to configure notifications
 ** Choose building page
 - if the users building isn't available, there should be a form to request it
 ** Negotiation system
@@ -328,3 +324,104 @@ config.filter_parameters << :password
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
 * Misc
+** Notifications system
+- need to add notifications when a transaction you're involved in is cancelled
+- notifications will be email-only
+- user preferences to configure notifications
+
+need a class to encapsulate notifications
+a model, presumably
+which will consult user notification preferences
+need an idea of an event?
+an event is the trigger for a notification
+users may subscribe/unsubscribe to notifications related to a certain event
+API:
+create_event(event_type, parameters (building_id, etc))
+may be an event object?
+Event.new
+use inheritance?
+NewRequestEvent < Event
+do we really want to pull the event name into a class hierarchy?
+it would allow for custom parameters
+
+event defines get_users method?
+
+def send_notification(event)
+  users = UserPreferences.get_subscribers(event)
+  for user in users
+    Notifier.notify(user, event)
+  end
+end
+
+The Event class exposes a get_users method, which queries the user preferences table to determine which users have registered to be notified by this event
+
+should there be a separate get_subscribers method in the UserPreferences model? Where exactly do we want to put this configuration?
+
+It seems like perhaps Events should be very simple, suitable for consumption by a variety of other classes
+
+Notifier exposes a single method, notify, which accepts a user and an event. It looks up the appropriate action to invoke based on an internal map, and then invokes that action with the user as a parameter.
+
+mailers are like controllers
+templates are like views
+
+Events:
+Multiple recipients:
+- new request in your building
+- new listing in your building
+Single recipient:
+- reservation reminder (both parties)
+- someone rented your spot
+- someone fulfilled a request for your spot
+
+Event
+NewRequestEvent
+- request
+NewListingEvent
+- listing
+ReminderEvent
+- transaction
+ListingFulfilledEvent
+- transaction
+RequestFulfilledEvent
+- transaction
+NewBuildingRequest
+- building
+
+
+So basically, there are three classes in play:
+Event - captures all information about an event
+UserPreference - knows which users have subscribed to notifications for a given event
+Notifier - actually sends notifications (maps events to actions/email templates)
+
+concerns - are we spreading knowledge of events across too many classes?
+UserPreference has to map events to subscribers -- should there be a separate class for this?
+Notifier has to map events to actions/templates
+
+The alternative is to centralize all this knowledge in the Event class
+of course, this means that the event class has to know a lot about the UserPreference and Notifier classes
+I kind of like having Event be a dumb struct
+and have UserPreference and Notifier be responsible for knowing what to do with this struct
+otherwise it seems like Event is at risk of becoming a big terrifiying monolith
+on the other hand, if all knowledge was centralized in Event, that might make it easier to add new events
+As it is, adding a new event would require touching code in UserPreference and Notifier as well.
+Of course, you'd probably have to do that anyways.
+
+Controllers need any easy way to set things in motion -- create an Event and then pass it off to some other entity for processing. An event handler? Event manager? A method on Event itself?
+Event.new
+Event.trigger / Event.fire / Event.notify
+EventManager.notify(event)
+Notifier.notify(event)
+or just wrap it into the event constructor? nah, probably want to keep that clean in case we find another use for events.
+or what about the controller base class? though do we really want to couple notifications with controllers -- probably not. what about triggering custom, one-off events?
+I'm kinda liking EventManager. It's generic, and not coupled to any existing component of the application. It's separate from Event, so we preserve the independence of Event.
+
+Ok, EventManager it is.
+
+Draft architecture:
+Event - base class which all specific events inherit from. An event is just state, no behavior. Each subclass represents a particular type of event, and includes attributes for any data specific to that event type.
+
+UserPreference - consumes an Event and emits a list of email addresses which have subscribed to that event
+
+Notifier - consumes an Event and an email address, and sends an email notification of the event.
+
+EventManager - consumes an event, queries UserPreference for a list of email addresses, and then passes the event and the list of email addresses to Notifier.
