@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120226191819) do
+ActiveRecord::Schema.define(:version => 20120228052306) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "listing_id"
@@ -95,6 +95,8 @@ ActiveRecord::Schema.define(:version => 20120226191819) do
     t.integer  "building_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "notify_new_request"
+    t.boolean  "notify_new_listing"
   end
 
   create_table "users", :force => true do |t|

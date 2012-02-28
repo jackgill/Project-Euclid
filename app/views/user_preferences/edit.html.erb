@@ -1,9 +1,18 @@
 <h1>Edit UserPreferences</h1>
 <%= form_for(@prefs) do |f| %>
 <div class="field">
-    <%= f.label :building_id %><br />
+    <%= f.label :building_id %>
     <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
 </div>
+<div class="field">
+    <%= f.label :notify_new_request %>
+    <%= f.check_box :notify_new_request %>
+</div>
+<div class="field">
+    <%= f.label :notify_new_listing %>
+    <%= f.check_box :notify_new_listing %>
+</div>
+
 <div class="actions">
 	<%= f.submit %>
 </div>

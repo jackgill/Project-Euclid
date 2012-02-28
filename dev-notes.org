@@ -287,48 +287,7 @@ need a protect_resource helper for this
 possibly accepting an attribute name or list of attribute names
 maybe not a filter, but an ordinary method accepting a resource object, and a list of column names?
 or perhaps filter-per-controller, calling this method
-* Icebox
-** requester needs to confirm fulfillment
-** store search terms in session?
-** Messaging system
-- Analagous to facebook messaging
-- Provides an "escape valve" for behaviors that aren't captured in the system
-- Another mechanism for notifications
-- Insulates user's private emails from one another
-** lightning offers
-- I have forgotten what this feature is supposed to do.
-** private offer facility
-** confirmation number
-- create a "actions" table
-- each row contains an action ID and enough information to debug problems with the action
-- the user is given the action ID as a "confirmation number" in case they need customer support
-** creation of listing or request via email
-- probably don't need this
-** calendar to view your spot's availability
-- would be a nice UI touch
-
-** per building page - projectchampa.com/spire
-** remove password from logs
-config.filter_parameters << :password
-* Someday/maybe
-- upgrade to ruby 1.9.3?
-- specify versions of all gems in Gemfile
-- need some integration tests covering common user stories
-- need to beef up unit/functional test coverage
-- check UX for post-user-creation when no page was requested
-* Features
-** Choose building page
-- if the users building isn't available, there should be a form to request it
-** Negotiation system
-- offer / counter-offer system
-- hybrid system allows immediate acceptance of an offer, or counter-offer
-- confirmation of rental
-* Misc
-** Notifications system
-- need to add notifications when a transaction you're involved in is cancelled
-- notifications will be email-only
-- user preferences to configure notifications
-
+** notifications system
 need a class to encapsulate notifications
 a model, presumably
 which will consult user notification preferences
@@ -425,3 +384,99 @@ UserPreference - consumes an Event and emits a list of email addresses which hav
 Notifier - consumes an Event and an email address, and sends an email notification of the event.
 
 EventManager - consumes an event, queries UserPreference for a list of email addresses, and then passes the event and the list of email addresses to Notifier.
+
+* Icebox
+** requester needs to confirm fulfillment
+** store search terms in session?
+** Messaging system
+- Analagous to facebook messaging
+- Provides an "escape valve" for behaviors that aren't captured in the system
+- Another mechanism for notifications
+- Insulates user's private emails from one another
+** lightning offers
+- I have forgotten what this feature is supposed to do.
+** private offer facility
+** confirmation number
+- create a "actions" table
+- each row contains an action ID and enough information to debug problems with the action
+- the user is given the action ID as a "confirmation number" in case they need customer support
+** creation of listing or request via email
+- probably don't need this
+** calendar to view your spot's availability
+- would be a nice UI touch
+
+** per building page - projectchampa.com/spire
+** remove password from logs
+config.filter_parameters << :password
+* Someday/maybe
+- upgrade to ruby 1.9.3?
+- specify versions of all gems in Gemfile
+- need some integration tests covering common user stories
+- need to beef up unit/functional test coverage
+- check UX for post-user-creation when no page was requested
+* Features
+** Choose building page
+- if the users building isn't available, there should be a form to request it
+** Negotiation system
+- offer / counter-offer system
+- hybrid system allows immediate acceptance of an offer, or counter-offer
+- confirmation of rental
+* Misc
+** Notifications system
+- need to add notifications when a transaction you're involved in is cancelled
+- notifications will be email-only
+- user preferences to configure notifications
+
+Draft architecture:
+Event - base class which all specific events inherit from. An event is just state, no behavior. Each subclass represents a particular type of event, and includes attributes for any data specific to that event type.
+
+UserPreference - consumes an Event and emits a list of email addresses which have subscribed to that event
+
+Notifier - consumes an Event and an email address, and sends an email notification of the event.
+
+EventManager - consumes an event, queries UserPreference for a list of email addresses, and then passes the event and the list of email addresses to Notifier.
+
+-------------------------------------------
+UserPreference
+- column per optional event
+  new request in your building
+  new listing in your building
+
+Event
+NewRequestEvent
+- request
+NewListingEvent
+- listing
+ReminderEvent
+- transaction
+ListingFulfilledEvent
+- transaction
+RequestFulfilledEvent
+- transaction
+NewBuildingRequest
+- building
+
+need to add notify_new_request and notify_new_listing columns to user_preferences table (default false)
+
+should get_subscribers be in event, not UserPreference?
+that would make it easier to add new events
+and get rid of the "big switch" code smell in UserPreference
+possibly also a send_notification method in event?
+
+def Event
+  def get_subscribers()
+    return UserPreference.where()
+  end
+
+  def send_notification(event)
+    users = get_subscribers(event)
+    for user in users
+      Notifier.notify(user, event)
+    end
+  end
+end
+
+this does eliminate EventManager, which is nice
+this seems simpler and more centralized
+gets rid of a couple big switches
+I say go for it!

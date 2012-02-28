@@ -30,7 +30,7 @@
 	<div class="right">
 		Welcome, 
 	<% if session[:user_id] && session[:user_id] != :logged_out %>
-	<%= link_to get_name(@user), :controller => 'user_preferences', :action => 'show' %>
+	<%= link_to get_name(@user), :controller => 'user_preferences', :action => 'show', :id => @user.user_preference.id %>
 	<%= link_to "Log out", :controller => "account", :action => :logout %>
 	<% else %>
 	<%= get_name(@user) %>
