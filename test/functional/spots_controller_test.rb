@@ -20,7 +20,9 @@ class SpotsControllerTest < ActionController::TestCase
 
   test "should create spot" do
     assert_difference('Spot.count') do
-      post :create, spot: @spot.attributes
+      spot = @spot
+      spot.number += 1
+      post :create, spot: spot.attributes
     end
 
     assert_redirected_to spot_path(assigns(:spot))
