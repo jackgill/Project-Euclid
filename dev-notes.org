@@ -124,6 +124,7 @@ rails generate scaffold spot building_id:integer number:integer floor:integer ow
 rails generate scaffold request requester_id:integer start_date:date end_date:date bid_price:decimal
 rails generate scaffold transaction spot_id:integer buyer_id:integer seller_id:integer start_date:date end_date:date price:decimal
 rails generate scaffold availability listing_id:integer building_id:integer start_date:date end_date:date
+rails generate mailer EventNotifier new_request new_listing listing_fulfilled request_fulfilled building_request transaction_reminder
 ** testing
 *** to run all tests
 rake test
@@ -456,7 +457,8 @@ RequestFulfilledEvent
 NewBuildingRequest
 - building
 
-need to add notify_new_request and notify_new_listing columns to user_preferences table (default false)
+
+** TODO need not null and default values for preferences table
 
 should get_subscribers be in event, not UserPreference?
 that would make it easier to add new events
@@ -480,3 +482,10 @@ this does eliminate EventManager, which is nice
 this seems simpler and more centralized
 gets rid of a couple big switches
 I say go for it!
+
+
+------------------------------
+- got user prefs squared away
+- generated scaffolding for notifier
+- next step is to get notifier up and running
+- possibly with scaffolding?
