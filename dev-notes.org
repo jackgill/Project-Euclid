@@ -16,6 +16,9 @@ git push github master
 git pull github master
 ** add remote
 git remote add github git@github.com:jackgill/Project-Euclid.git
+* Google Apps
+champa@jackmgill.com
+champa*rules
 * Ruby
 ** Install
 *** Linux
@@ -484,8 +487,6 @@ gets rid of a couple big switches
 I say go for it!
 
 
-------------------------------
-- got user prefs squared away
-- generated scaffolding for notifier
-- next step is to get notifier up and running
-- possibly with scaffolding?
+
+
+

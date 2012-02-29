@@ -1,15 +1,12 @@
 class EventNotifier < ActionMailer::Base
-  default from: "from@example.com"
+  default from: "champa@jackmgill.com"
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_notifier.new_request.subject
-  #
-  def new_request
-    @greeting = "Hi"
+  def new_request(request, subscribers)
+    @request = request
 
-    mail to: "to@example.org"
+    for email in subscribers
+      mail to: email, subject: "New request on project champa"
+    end
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
