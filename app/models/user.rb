@@ -13,7 +13,8 @@ class User < ActiveRecord::Base
   validates :email, :presence => true
   validates :login, :presence => true
 
-  validates_uniqueness_of :email
+  # TODO: turned off email uniqueness validation to allow testing, should re-enable this before launching
+  #validates_uniqueness_of :email
   validates_uniqueness_of :login
 
   attr_accessor :password_confirmation

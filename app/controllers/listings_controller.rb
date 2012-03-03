@@ -56,6 +56,8 @@ class ListingsController < ApplicationController
                                          })
         @availability.save # TODO: handle case where save fails
 
+        NewListingEvent.new(@listing).notify
+        
         format.html { redirect_to @listing, notice: 'Listing was successfully created.' }
         format.json { render json: @listing, status: :created, location: @listing }
       else

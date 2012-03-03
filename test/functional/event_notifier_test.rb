@@ -14,11 +14,13 @@ class EventNotifierTest < ActionMailer::TestCase
   end
 
   test "new_listing" do
-    mail = EventNotifier.new_listing
-    assert_equal "New listing", mail.subject
-    assert_equal ["to@example.org"], mail.to
+    listing = listings(:one)
+    user = users(:bob)
+    mail = EventNotifier.new_listing(listing, [ user ])
+    assert_equal EventNotifier.subjects[:new_listing], mail.subject
+    assert_equal [user.email], mail.to
     assert_equal [from_address], mail.from
-    assert_match "Hi", mail.body.encoded
+    assert_match "new listing", mail.body.encoded
   end
 
   test "listing_fulfilled" do
