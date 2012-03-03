@@ -1,7 +1,7 @@
 require 'test_helper'
 
 class EventNotifierTest < ActionMailer::TestCase
-  from_address = 'champa@jackmgill.com'
+  from_address = "champa@jackmgill.com"
   
   test "new_request" do
     request = requests(:one)

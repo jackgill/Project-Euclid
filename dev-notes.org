@@ -494,6 +494,6 @@ config.filter_parameters << :password
 ** why again does the 'view requests' page not show start and end dates?
 ** Notifications system
 - need to add notifications when a transaction you're involved in is cancelled
-
+should enable logging for mailings
 seeing a weird error where an undeliverable address causes a template parsing warning
 pull preferences into users table?

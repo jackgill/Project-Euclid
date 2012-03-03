@@ -1,6 +1,6 @@
 class EventNotifier < ActionMailer::Base
-  default from: "champa@jackmgill.com"
-
+  default from: "Project Champa <champa@jackmgill.com>"
+  
   @@subjects = {
     new_request: "New request on Project Champa",
     new_listing: "New listing on Project Champa",
