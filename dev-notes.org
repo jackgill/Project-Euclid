@@ -138,6 +138,10 @@ rake db:test:prepare - wipe the test db and load the schema
 the tests ignore seed data and only look at fixtures
 rake db:fixtures:load loads the fixture data into the dev database, which is *not* what we want
 to reference a foreign key in a fixture, you should use the fixture NAME, not the ID
+** send notification email
+EventNotifier.new_request(Request.first, [ 'jack@jackmgill.com' ]).deliver
+** requiring files
+if you define a class called NewRequestEvent, you had damn well better put it in a file called new_request_event.rb, or rails will not load the class, even if the directory is in the autoload path
 * Business
 ** General musings
 What is a business?
@@ -389,6 +393,63 @@ Notifier - consumes an Event and an email address, and sends an email notificati
 
 EventManager - consumes an event, queries UserPreference for a list of email addresses, and then passes the event and the list of email addresses to Notifier.
 
+---------------------------------------------------------------
+
+Draft architecture:
+Event - base class which all specific events inherit from. An event is just state, no behavior. Each subclass represents a particular type of event, and includes attributes for any data specific to that event type.
+
+UserPreference - consumes an Event and emits a list of email addresses which have subscribed to that event
+
+Notifier - consumes an Event and an email address, and sends an email notification of the event.
+
+EventManager - consumes an event, queries UserPreference for a list of email addresses, and then passes the event and the list of email addresses to Notifier.
+
+-------------------------------------------
+UserPreference
+- column per optional event
+  new request in your building
+  new listing in your building
+
+Event
+NewRequestEvent
+- request
+NewListingEvent
+- listing
+ReminderEvent
+- transaction
+ListingFulfilledEvent
+- transaction
+RequestFulfilledEvent
+- transaction
+NewBuildingRequest
+- building
+
+
+
+should get_subscribers be in event, not UserPreference?
+that would make it easier to add new events
+and get rid of the "big switch" code smell in UserPreference
+possibly also a send_notification method in event?
+
+def Event
+  def get_subscribers()
+    return UserPreference.where()
+  end
+
+  def send_notification(event)
+    users = get_subscribers(event)
+    for user in users
+      Notifier.notify(user, event)
+    end
+  end
+end
+
+this does eliminate EventManager, which is nice
+this seems simpler and more centralized
+gets rid of a couple big switches
+I say go for it!
+
+
 * Icebox
 ** requester needs to confirm fulfillment
 ** store search terms in session?
@@ -426,67 +487,13 @@ config.filter_parameters << :password
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
 * Misc
-** Notifications system
-- need to add notifications when a transaction you're involved in is cancelled
-- notifications will be email-only
-- user preferences to configure notifications
-
-Draft architecture:
-Event - base class which all specific events inherit from. An event is just state, no behavior. Each subclass represents a particular type of event, and includes attributes for any data specific to that event type.
-
-UserPreference - consumes an Event and emits a list of email addresses which have subscribed to that event
-
-Notifier - consumes an Event and an email address, and sends an email notification of the event.
-
-EventManager - consumes an event, queries UserPreference for a list of email addresses, and then passes the event and the list of email addresses to Notifier.
-
--------------------------------------------
-UserPreference
-- column per optional event
-  new request in your building
-  new listing in your building
-
-Event
-NewRequestEvent
-- request
-NewListingEvent
-- listing
-ReminderEvent
-- transaction
-ListingFulfilledEvent
-- transaction
-RequestFulfilledEvent
-- transaction
-NewBuildingRequest
-- building
-
-
+** TODO need a way for users to change their email. user prefs page?
 ** TODO need not null and default values for preferences table
 
-should get_subscribers be in event, not UserPreference?
-that would make it easier to add new events
-and get rid of the "big switch" code smell in UserPreference
-possibly also a send_notification method in event?
+** TODO need an admin interface to user preferences
+** why again does the 'view requests' page not show start and end dates?
+** Notifications system
+- need to add notifications when a transaction you're involved in is cancelled
 
-def Event
-  def get_subscribers()
-    return UserPreference.where()
-  end
-
-  def send_notification(event)
-    users = get_subscribers(event)
-    for user in users
-      Notifier.notify(user, event)
-    end
-  end
-end
-
-this does eliminate EventManager, which is nice
-this seems simpler and more centralized
-gets rid of a couple big switches
-I say go for it!
-
-
-
-
-
+seeing a weird error where an undeliverable address causes a template parsing warning
+pull preferences into users table?

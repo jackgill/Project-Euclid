@@ -1,0 +1,24 @@
+Hi <%= @user.first_name %>,
+<p>
+	A new listing has been created on Project Champa:
+</p>
+<p>
+  <b>Listing:</b>
+  <%= "#{@listing.lister.first_name} #{@listing.lister.last_name}"  %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @listing.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @listing.end_date %>
+</p>
+
+<p>
+  <b>Ask price:</b>
+  <%= @listing.ask_price %>
+</p>
+

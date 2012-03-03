@@ -1,3 +1,12 @@
-EventNotifier#new_listing
+Hi <%= @user.first_name %>,
 
-<%= @greeting %>, find me in app/views/app/views/event_notifier/new_listing.text.erb
+A new listing has been created on Project Champa:
+Lister: <%= "#{@listing.lister.first_name} #{@listing.lister.last_name}"  %>
+
+Start date: <%= @listing.start_date %>
+
+End date: <%= @listing.end_date %>
+
+Ask price: <%= @listing.ask_price %>
+
+

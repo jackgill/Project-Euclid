@@ -46,6 +46,8 @@ class RequestsController < ApplicationController
 
     respond_to do |format|
       if @request.save
+        NewRequestEvent.new(@request).notify
+        
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
         format.json { render json: @request, status: :created, location: @request }
       else
