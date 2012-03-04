@@ -20,44 +20,24 @@ class EventNotifier < ActionMailer::Base
     mail_subscribers(subscribers, @@subjects[:new_listing])
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_notifier.listing_fulfilled.subject
-  #
   def listing_fulfilled
     @greeting = "Hi"
 
     mail to: "to@example.org"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_notifier.request_fulfilled.subject
-  #
   def request_fulfilled
     @greeting = "Hi"
 
     mail to: "to@example.org"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_notifier.building_request.subject
-  #
   def building_request
     @greeting = "Hi"
 
     mail to: "to@example.org"
   end
 
-  # Subject can be set in your I18n file at config/locales/en.yml
-  # with the following lookup:
-  #
-  #   en.event_notifier.transaction_reminder.subject
-  #
   def transaction_reminder
     @greeting = "Hi"
 

@@ -491,9 +491,12 @@ config.filter_parameters << :password
 ** TODO need not null and default values for preferences table
 
 ** TODO need an admin interface to user preferences
+** TODO examine attr_accessible issue in light of github security breach:
+https://github.com/rails/rails/issues/5228
 ** why again does the 'view requests' page not show start and end dates?
 ** Notifications system
 - need to add notifications when a transaction you're involved in is cancelled
 should enable logging for mailings
 seeing a weird error where an undeliverable address causes a template parsing warning
 pull preferences into users table?
+need test for new listing subscribers
