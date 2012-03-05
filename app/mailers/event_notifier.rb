@@ -1,9 +1,11 @@
 class EventNotifier < ActionMailer::Base
   default from: "Project Champa <champa@jackmgill.com>"
-  
+
   @@subjects = {
     new_request: "New request on Project Champa",
     new_listing: "New listing on Project Champa",
+    listing_fulfilled_buyer: "You have reserved a spot on Project Champa",
+    listing_fulfilled_seller: "Your spot has been rented on Project Champa",
   }
 
   def self.subjects
@@ -20,12 +22,16 @@ class EventNotifier < ActionMailer::Base
     mail_subscribers(subscribers, @@subjects[:new_listing])
   end
 
-  def listing_fulfilled
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def listing_fulfilled_buyer(listing, subscribers)
+    @listing = listing
+    mail_subscribers(subscribers, @@subjects[:listing_fulfilled_buyer])
   end
 
+  def listing_fulfilled_seller(listing, subscribers)
+    @listing = listing
+    mail_subscribers(subscribers, @@subjects[:listing_fulfilled])
+  end
+  
   def request_fulfilled
     @greeting = "Hi"
 

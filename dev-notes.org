@@ -500,3 +500,9 @@ should enable logging for mailings
 seeing a weird error where an undeliverable address causes a template parsing warning
 pull preferences into users table?
 need test for new listing subscribers
+
+should event notifier accept an event as a parameter?
+
+several of these events require different notifications for different types of users
+
+this means the same event will trigger multiple notifications, with multiple templates

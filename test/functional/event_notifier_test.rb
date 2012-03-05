@@ -6,7 +6,9 @@ class EventNotifierTest < ActionMailer::TestCase
   test "new_request" do
     request = requests(:one)
     user = users(:bob)
+
     mail = EventNotifier.new_request(request, [ user ])
+
     assert_equal EventNotifier.subjects[:new_request], mail.subject
     assert_equal [user.email], mail.to
     assert_equal [from_address], mail.from
@@ -16,7 +18,9 @@ class EventNotifierTest < ActionMailer::TestCase
   test "new_listing" do
     listing = listings(:one)
     user = users(:bob)
+    
     mail = EventNotifier.new_listing(listing, [ user ])
+
     assert_equal EventNotifier.subjects[:new_listing], mail.subject
     assert_equal [user.email], mail.to
     assert_equal [from_address], mail.from
@@ -24,7 +28,11 @@ class EventNotifierTest < ActionMailer::TestCase
   end
 
   test "listing_fulfilled" do
-    mail = EventNotifier.listing_fulfilled
+    listing = listings(:one)
+    user = users(:bob)
+    
+    mail = EventNotifier.listing_fulfilled 
+
     assert_equal "Listing fulfilled", mail.subject
     assert_equal ["to@example.org"], mail.to
     assert_equal [from_address], mail.from
