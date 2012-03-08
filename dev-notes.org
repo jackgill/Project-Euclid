@@ -505,3 +505,5 @@ should event notifier accept an event as a parameter?
 several of these events require different notifications for different types of users
 
 this means the same event will trigger multiple notifications, with multiple templates
+
+need to factor out resource rendering and greeting into view helpers
