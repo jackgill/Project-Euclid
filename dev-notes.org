@@ -449,7 +449,6 @@ this seems simpler and more centralized
 gets rid of a couple big switches
 I say go for it!
 
-
 * Icebox
 ** requester needs to confirm fulfillment
 ** store search terms in session?

@@ -4,7 +4,8 @@ gem 'rails', '3.2.0'
 gem 'pg'
 gem 'minitest'
 gem 'jquery-rails'
-gem 'thin'
+#gem 'eventmachine', '1.0.0.beta.4.1'
+#gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
