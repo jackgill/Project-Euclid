@@ -6,10 +6,10 @@ Availability.delete_all
 Listing.delete_all
 Transaction.delete_all
 Spot.delete_all
-Building.delete_all
 Request.delete_all
 User.delete_all
 UserPreference.delete_all
+Building.delete_all
 
 # Utility methods to add new resources objects
 def add_user(name, is_admin, building_id, notify_new_request= false, notify_new_listing=false, email=nil)
