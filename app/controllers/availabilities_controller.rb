@@ -125,7 +125,9 @@ class AvailabilitiesController < ApplicationController
     # attempt to rent the spot
     begin
       respond_to do |format|
-        if @availability.rent(start_date, end_date, buyer, seller)
+        success, transaction = @availability.rent(start_date, end_date, buyer, seller)
+        if success
+          ListingFulfilledEvent.new(transaction).notify
           format.html { message('Congratulations, you have successfully reserved this spot') }
           format.json { render json: @availability, status: :created, location: @listing }
         else

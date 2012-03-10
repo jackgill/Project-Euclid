@@ -1,11 +1,12 @@
 class EventNotifier < ActionMailer::Base
   default from: "Project Champa <champa@jackmgill.com>"
-
+  add_template_helper(ApplicationHelper)
+  
   @@subjects = {
     new_request: "New request on Project Champa",
     new_listing: "New listing on Project Champa",
-    listing_fulfilled_buyer: "You have reserved a spot on Project Champa",
-    listing_fulfilled_seller: "Your spot has been rented on Project Champa",
+    new_transaction_buyer: "You have rented a parking spot on Project Champa",
+    new_transaction_seller: "Your parking spot has been rented on Project Champa",
   }
 
   def self.subjects
@@ -22,21 +23,41 @@ class EventNotifier < ActionMailer::Base
     mail_subscribers(subscribers, @@subjects[:new_listing])
   end
 
-  def listing_fulfilled_buyer(listing, subscribers)
-    @listing = listing
-    mail_subscribers(subscribers, @@subjects[:listing_fulfilled_buyer])
+  def listing_fulfilled_buyer(transaction)
+    @greeting = "Hi #{transaction.buyer.first_name},"
+    @message = "You reserved a parking spot on Project Champa!"
+    @transaction = transaction
+    mail(to: transaction.buyer.email,
+         subject: @@subjects[:new_transaction_buyer],
+         template_name: 'new_transaction')
   end
 
-  def listing_fulfilled_seller(listing, subscribers)
-    @listing = listing
-    mail_subscribers(subscribers, @@subjects[:listing_fulfilled])
+  def listing_fulfilled_seller(transaction)
+    @greeting = "Hi #{transaction.seller.first_name},"
+    @message = "Someone reserved your parking spot on Project Champa!"
+    @transaction = transaction
+    mail(to: transaction.seller.email,
+         subject: @@subjects[:new_transaction_seller],
+         template_name: 'new_transaction')
   end
   
-  def request_fulfilled
-    @greeting = "Hi"
-
-    mail to: "to@example.org"
+  def request_fulfilled_buyer(transaction)
+    @greeting = "Hi #{transaction.buyer.first_name},"
+    @message = "Someone fulfilled your request for a parking spot on Project Champa!"
+    @transaction = transaction
+    mail(to: transaction.buyer.email,
+         subject: @@subjects[:new_transaction_buyer],
+         template_name: 'new_transaction')
   end
+
+  def request_fulfilled_seller(transaction)
+    @greeting = "Hi #{transaction.seller.first_name},"
+    @message = "You fulfilled a request for a parking spot on Project Champa!"
+    @transaction = transaction
+    mail(to: transaction.seller.email,
+         subject: @@subjects[:new_transaction_seller],
+         template_name: 'new_transaction')
+  end  
 
   def building_request
     @greeting = "Hi"

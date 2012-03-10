@@ -507,3 +507,13 @@ several of these events require different notifications for different types of u
 this means the same event will trigger multiple notifications, with multiple templates
 
 need to factor out resource rendering and greeting into view helpers
+
+a single object to encapsulate subject, greeting, and message info for an email?
+
+handle case where a user has not spots registered, but attempts to fulfill a request
+
+you shouldn't be able to fulfill your own request
+
+sending mail slow down page load, need to do this asynchronously
+
+might need to clear out last page request on logout

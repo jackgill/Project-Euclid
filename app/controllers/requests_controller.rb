@@ -121,11 +121,15 @@ class RequestsController < ApplicationController
   def rent
     @request = Request.find(params[:request])
     spot_id = params[:spot]
-    result = @request.fulfill(@user, params[:spot_id])
+    success, transaction = @request.fulfill(@user, params[:spot_id])
 
-    msg = result ?
+    msg = success ?
       'You have fulfilled this request' :
       'Sorry, this fulfillment could not be processed'
+
+    if success
+      RequestFulfilledEvent.new(transaction).notify
+    end
     
     respond_to do |format|
       format.html { return message(msg) }

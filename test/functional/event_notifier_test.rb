@@ -27,25 +27,50 @@ class EventNotifierTest < ActionMailer::TestCase
     assert_match "new listing", mail.body.encoded
   end
 
-  test "listing_fulfilled" do
-    listing = listings(:one)
-    buyer = users(:alice)
+  test "listing_fulfilled_buyer" do
+    transaction = transactions(:one)
     
-    mail = EventNotifier.listing_fulfilled_buyer(listing, [ buyer ])
+    mail = EventNotifier.listing_fulfilled_buyer(transaction)
 
-    assert_equal EventNotifier.subjects[:listing_fulfilled_buyer], mail.subject
-    assert_equal [buyer.email], mail.to
+    assert_equal EventNotifier.subjects[:new_transaction_buyer], mail.subject
+    assert_equal [transaction.buyer.email], mail.to
     assert_equal [from_address], mail.from
-    assert_match "You rented a spot", mail.body.encoded
+    assert_match "You reserved a parking spot on Project Champa!", mail.body.encoded
   end
 
-  test "request_fulfilled" do
-    mail = EventNotifier.request_fulfilled
-    assert_equal "Request fulfilled", mail.subject
-    assert_equal ["to@example.org"], mail.to
+  test "listing_fulfilled_seller" do
+    transaction = transactions(:one)
+    
+    mail = EventNotifier.listing_fulfilled_seller(transaction)
+
+    assert_equal EventNotifier.subjects[:new_transaction_seller], mail.subject
+    assert_equal [transaction.seller.email], mail.to
     assert_equal [from_address], mail.from
-    assert_match "Hi", mail.body.encoded
+    assert_match "Someone reserved your parking spot on Project Champa!", mail.body.encoded
   end
+
+  test "request_fulfilled_buyer" do
+    transaction = transactions(:one)
+    
+    mail = EventNotifier.request_fulfilled_buyer(transaction)
+
+    assert_equal EventNotifier.subjects[:new_transaction_buyer], mail.subject
+    assert_equal [transaction.buyer.email], mail.to
+    assert_equal [from_address], mail.from
+    assert_match "Someone fulfilled your request for a parking spot on Project Champa!", mail.body.encoded
+  end
+
+  test "request_fulfilled_seller" do
+    transaction = transactions(:one)
+    
+    mail = EventNotifier.request_fulfilled_seller(transaction)
+
+    assert_equal EventNotifier.subjects[:new_transaction_seller], mail.subject
+    assert_equal [transaction.seller.email], mail.to
+    assert_equal [from_address], mail.from
+    assert_match "You fulfilled a request for a parking spot on Project Champa!", mail.body.encoded
+  end
+
 
   test "building_request" do
     mail = EventNotifier.building_request

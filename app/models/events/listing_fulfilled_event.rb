@@ -1,16 +1,10 @@
 class ListingFulfilledEvent < Event
-
-  def initialize(listing, fulfiller)
-    @listing = listing
-    @fulfiller = fulfiller
-  end
-
-  def get_subscribers()
-    return [ @listing.lister, @fulfiller ]
+  def initialize(transaction)
+    @transaction = transaction
   end
 
   def notify()
-    subscribers = get_subscribers()
-    EventNotifier.listing_fufilled(@request, subscribers).deliver
+    EventNotifier.listing_fulfilled_buyer(@transaction).deliver
+    EventNotifier.listing_fulfilled_seller(@transaction).deliver
   end
 end

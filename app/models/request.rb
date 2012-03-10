@@ -28,10 +28,6 @@ class Request < ActiveRecord::Base
                                   end_date: end_date,
                                   price: bid_price
                                   )
-    if transaction.save
-      true
-    else
-      transaction.errors
-    end
+    return transaction.save, transaction
   end
 end

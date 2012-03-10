@@ -18,30 +18,6 @@ class EventTest < ActiveSupport::TestCase
     assert_equal subscribers.sort, [ users(:bob), users(:admin) ].sort
   end
 
-  # When a listing is fulfilled, notify the lister
-  # and the fulfiller
-  test "listing fulfilled subscribers" do
-    fulfiller = users(:alice)
-    listing = listings(:one)
-    event = ListingFulfilledEvent.new listing, fulfiller
-    
-    subscribers = event.get_subscribers
-
-    assert_equal subscribers.sort, [ listing.lister, fulfiller ].sort
-  end
-  
-  # When a request is fulfilled, notify the requester
-  # and the fulfiller
-  test "request fulfilled subscribers" do
-    fulfiller = users(:alice)
-    request = requests(:one)
-    event = RequestFulfilledEvent.new request, fulfiller
-    
-    subscribers = event.get_subscribers
-    
-    assert_equal subscribers.sort, [ request.requester, fulfiller ].sort
-  end
-
   # When a new building is requested, notify all the
   # admin users
   test "building request subscribers" do

@@ -72,6 +72,6 @@ class Availability < ActiveRecord::Base
                                   end_date: rental_end_date,
                                   price: listing.ask_price
                                   )
-    transaction.save
+    return transaction.save, transaction
   end
 end

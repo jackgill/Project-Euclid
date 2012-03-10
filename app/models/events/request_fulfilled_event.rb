@@ -1,16 +1,10 @@
 class RequestFulfilledEvent < Event
-
-  def initialize(request, fulfiller)
-    @request = request
-    @fulfiller = fulfiller
-  end
-
-  def get_subscribers()
-    return [ @request.requester, @fulfiller ]
+  def initialize(transaction)
+    @transaction = transaction
   end
 
   def notify()
-    subscribers = get_subscribers()
-    EventNotifier.request_fufilled(@request, subscribers).deliver
+    EventNotifier.request_fulfilled_buyer(@transaction).deliver
+    EventNotifier.request_fulfilled_seller(@transaction).deliver
   end
 end
