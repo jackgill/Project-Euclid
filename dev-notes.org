@@ -485,35 +485,29 @@ config.filter_parameters << :password
 - offer / counter-offer system
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
+** Transaction cancellation mechanism
+- need to add notifications when a transaction you're involved in is cancelled
 * Misc
 ** TODO need a way for users to change their email. user prefs page?
+- pull preferences into users table?
 ** TODO need not null and default values for preferences table
 
 ** TODO need an admin interface to user preferences
 ** TODO examine attr_accessible issue in light of github security breach:
 https://github.com/rails/rails/issues/5228
+** TODO handle case where a user has no spots registered, but attempts to fulfill a request
+
+** TODO you shouldn't be able to fulfill your own request
+** TODO need to clear out last page request on logout
 ** why again does the 'view requests' page not show start and end dates?
 ** Notifications system
-- need to add notifications when a transaction you're involved in is cancelled
-should enable logging for mailings
-seeing a weird error where an undeliverable address causes a template parsing warning
-pull preferences into users table?
-need test for new listing subscribers
-
-should event notifier accept an event as a parameter?
-
-several of these events require different notifications for different types of users
-
-this means the same event will trigger multiple notifications, with multiple templates
-
-need to factor out resource rendering and greeting into view helpers
-
-a single object to encapsulate subject, greeting, and message info for an email?
-
-handle case where a user has not spots registered, but attempts to fulfill a request
-
-you shouldn't be able to fulfill your own request
-
-sending mail slow down page load, need to do this asynchronously
-
-might need to clear out last page request on logout
+- seeing a weird error where an undeliverable address causes a template parsing warning
+- need test for new listing subscribers
+- should event notifier accept an event as a parameter?
+- a single object to encapsulate subject, greeting, and message info for an email?
+- sending mail slows down page load, need to do this asynchronously
+*** TODO need logging for mailings
+log to database? trim after 30 days?
+need a way to generate reports
+web portal?
+is the 'sent' folder for the champa account good enough?
