@@ -4,8 +4,6 @@ gem 'rails', '3.2.0'
 gem 'pg'
 gem 'minitest'
 gem 'jquery-rails'
-#gem 'eventmachine', '1.0.0.beta.4.1'
-#gem 'thin'
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -19,4 +17,8 @@ group :test do
   # Pretty printed test output
   gem 'turn', :require => false
   gem 'sqlite3'
+end
+
+group :production do
+  gem 'thin'
 end
