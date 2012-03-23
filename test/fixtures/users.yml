@@ -1,5 +1,3 @@
-# Read about fixtures at http://api.rubyonrails.org/classes/Fixtures.html
-
 bob:
   first_name: Bob
   last_name: LNU
@@ -7,6 +5,9 @@ bob:
   login: bob
   salt: foo
   hashed_password: as if
+  building: timber_ridge
+  notify_new_request: false
+  notify_new_listing: true
 
 alice:
   first_name: Alice
@@ -15,7 +16,10 @@ alice:
   login: alice
   salt: foo
   hashed_password: as if
-
+  building: spire
+  notify_new_request: true
+  notify_new_listing: false
+  
 admin:
   first_name: Admin
   last_name: LNU
@@ -24,4 +28,7 @@ admin:
   salt: foo
   hashed_password: as if
   is_admin: true
+  building: timber_ridge
+  notify_new_request: true
+  notify_new_listing: true
   

@@ -41,8 +41,8 @@ class ApplicationController < ActionController::Base
   
   def require_building
     # If we have a user, set the building from their preferences
-    if @user != nil && @user.user_preference != nil
-      @building = @user.user_preference.building
+    if @user != nil
+      @building = @user.building
     else
       # If we don't have a user, check the session
       if session[:building_id] != nil

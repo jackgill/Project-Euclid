@@ -8,25 +8,21 @@ Transaction.delete_all
 Spot.delete_all
 Request.delete_all
 User.delete_all
-UserPreference.delete_all
 Building.delete_all
 
 # Utility methods to add new resources objects
 def add_user(name, is_admin, building_id, notify_new_request= false, notify_new_listing=false)
   user_id = User.create(
-              first_name: name,
-              last_name: 'LNU',
-              email: 'jack@jackmgill.com',
-              login: name,
-              password: 'foo',
-              is_admin: is_admin,
-              ).id
-  UserPreference.create(
+                        first_name: name,
+                        last_name: 'LNU',
+                        email: 'jack@jackmgill.com',
+                        login: name,
+                        password: 'foo',
+                        is_admin: is_admin,
                         building_id: building_id,
-                        user_id: user_id,
                         notify_new_request: notify_new_request,
                         notify_new_listing: notify_new_listing
-                        )
+                        ).id
   return user_id
 end
 

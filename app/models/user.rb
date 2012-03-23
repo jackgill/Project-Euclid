@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :request, :foreign_key => :requester_id, dependent: :destroy
   has_many :transaction_as_seller, :foreign_key => :seller_id, :class_name => 'Transaction', dependent: :destroy
   has_many :transaction_as_buyer, :foreign_key => :buyer_id, :class_name => 'Transaction', dependent: :destroy
-  has_one :user_preference, :dependent => :destroy
+  belongs_to :building
   
   validates :first_name, :presence => true
   validates :last_name, :presence => true

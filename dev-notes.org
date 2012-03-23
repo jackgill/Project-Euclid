@@ -89,6 +89,12 @@ use M-x customize-group RET mumamo RET to change the background color
 ** Name, domain registration
 ** Skin
 ** UI testing w/ family/friends
+** Critical path:
+- email only, no separate login
+- cancel transaction (unless within 24 hours)
+- notification queue
+- audit trail
+
 * Heroku
 ** Install
 gem install heroku
@@ -493,6 +499,7 @@ config.filter_parameters << :password
 ** TODO need a way for users to change their email. user prefs page?
 - pull preferences into users table
 ** TODO need not null and default values for preferences table
+** TODO separate password change page?
 ** TODO examine attr_accessible issue in light of github security breach:
 https://github.com/rails/rails/issues/5228
 ** TODO handle case where a user has no spots registered, but attempts to fulfill a request
@@ -510,8 +517,17 @@ log to database? trim after 30 days?
 need a way to generate reports
 web portal?
 is the 'sent' folder for the champa account good enough?
-** Critical path:
-- email only, no separate login
-- cancel transaction (unless within 24 hours)
-- notification queue
-- audit trail
+** TODO email only, no separate login
+need to get rid of login column
+move to logging in w/ email address
+** scratch
+need to get the db schema right for users / user_preferences
+need to add building_id, notify_new_request, notify_new_listing to users table
+need to update seed data to reflect new structure
+need appropriate "not null" and default value constraints for preferences columns
+need to expose to end user a form for editing user data
+
+create a migration to
+1) drop prefs table
+2) add prefs columns to users table
+3) get constraints right for prefs columns

@@ -36,7 +36,6 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
     @shown_user = User.find(params[:id])
-    @user_preference = @shown_user.user_preference
   end
 
   # POST /users
@@ -46,13 +45,6 @@ class UsersController < ApplicationController
     
     respond_to do |format|
       if @shown_user.save
-        @preferences = UserPreference.new({
-                                            building_id: @building.id,
-                                            user_id: @shown_user.id
-                                          })
-        @preferences.save
-        # TODO: check for error on save
-        
         format.html {
           # If this was new account creation, log in the user
           # and send them to the path they initially requested

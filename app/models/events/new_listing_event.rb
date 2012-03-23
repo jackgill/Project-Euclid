@@ -8,7 +8,7 @@ class NewListingEvent < Event
   end
 
   def get_subscribers()
-    return UserPreference.where("notify_new_listing = ?", true).map { |user_preference| user_preference.user }
+    return User.where("notify_new_listing = ?", true)
   end
 
   def notify()

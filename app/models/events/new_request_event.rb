@@ -6,7 +6,7 @@ class NewRequestEvent < Event
   end
 
   def get_subscribers()
-    return UserPreference.where("notify_new_request = ?", true).map { |user_preference| user_preference.user }
+    return User.where("notify_new_request = ?", true)
   end
 
   def notify()
