@@ -23,12 +23,10 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
-    # The original availability is deleted
-    assert_raise ActiveRecord::RecordNotFound do
-      Availability.find(original_availability.id)
-    end
+    # The original availability was marked as taken
+    assert_equal true, original_availability.taken
 
-    availabilities = Availability.where(:listing_id => original_availability.listing_id)
+    availabilities = Availability.where(listing_id: original_availability.listing_id, taken: false)
 
     # Two new availabilities were created
     assert_equal 2, availabilities.length, 'Two new availabilities were created'
@@ -62,14 +60,12 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
-    # The original availability is deleted
-    assert_raise ActiveRecord::RecordNotFound do
-      Availability.find(original_availability.id)
-    end
+    # The original availability was marked as taken
+    assert_equal true, original_availability.taken
 
     # The later availability was created
-    availabilities = Availability.where(:listing_id => original_availability.listing_id)
-
+    availabilities = Availability.where(listing_id: original_availability.listing_id, taken: false)
+    
     # One new availability was created
     assert_equal 1, availabilities.length, "Earlier availability was created"
 
@@ -98,13 +94,11 @@ class AvailabilityTest < ActiveSupport::TestCase
 
     original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
-    # The original availability is deleted
-    assert_raise ActiveRecord::RecordNotFound do
-      Availability.find(original_availability.id)
-    end
+    # The original availability was marked as taken
+    assert_equal true, original_availability.taken
 
     # The earlier availability was created
-    availabilities = Availability.where(:listing_id => original_availability.listing_id)
+    availabilities = Availability.where(listing_id: original_availability.listing_id, taken: false)
 
     # One new availability was created
     assert_equal availabilities.length, 1
@@ -131,17 +125,17 @@ class AvailabilityTest < ActiveSupport::TestCase
     rental_start_date = original_availability.start_date
     rental_end_date = original_availability.end_date
 
-    original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
+    success, transaction = original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
 
-    # The original availability is deleted
-    assert_raise ActiveRecord::RecordNotFound do
-      Availability.find(original_availability.id)
-    end
+    assert_equal true, success
+    
+    # The original availability was marked as taken
+    assert_equal true, original_availability.taken
 
     availabilities = Availability.where(:listing_id => original_availability.listing_id)
 
     # No new availabilities were created
-    assert_equal availabilities.length, 0
+    assert_equal availabilities.length, 1
 
     transactions = Transaction.where(
                                      start_date: rental_start_date,

@@ -18,8 +18,9 @@ class Availability < ActiveRecord::Base
       raise Exceptions::UserFacingException.new("Oops! You can't rent your own spot.")
     end
     
-    # delete this availability
-    destroy
+    # mark this availability as taken
+    self.taken = true
+    return [ false ] unless save
     
     # create up to two new availability objects to represent
     # the remaining availability for this listing

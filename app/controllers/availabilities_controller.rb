@@ -99,7 +99,8 @@ class AvailabilitiesController < ApplicationController
     @availabilities = Availability.
       where(:building_id => params[:building]).
       where("start_date <= ?", @start_date).
-      where("end_date >= ?", @end_date)
+      where("end_date >= ?", @end_date).
+      where("taken = false")
 
     # Load these into session so that "Rent" action can access them
     session[:start_date] = @start_date

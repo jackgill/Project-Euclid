@@ -94,7 +94,6 @@ use M-x customize-group RET mumamo RET to change the background color
 - cancel transaction (unless within 24 hours)
 - notification queue
 - audit trail
-
 * Heroku
 ** Install
 gem install heroku
@@ -478,6 +477,8 @@ I say go for it!
 ** per building page - projectchampa.com/spire
 ** remove password from logs
 config.filter_parameters << :password
+** separate password change page
+
 * Someday/maybe
 - upgrade to ruby 1.9.3?
 - specify versions of all gems in Gemfile
@@ -491,15 +492,13 @@ config.filter_parameters << :password
 - offer / counter-offer system
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
-** Transaction cancellation mechanism
+* Misc
+** DONE need a way for users to change their email. user prefs page?
+** DONE need not null and default values for preferences table
+** TODO Transaction cancellation mechanism
 - need to add notifications when a transaction you're involved in is cancelled
 - from dashboard, next to transaction details is a cancellation button
 - check timeframe (no cancellations within 24 hours)
-* Misc
-** TODO need a way for users to change their email. user prefs page?
-- pull preferences into users table
-** TODO need not null and default values for preferences table
-** TODO separate password change page?
 ** TODO examine attr_accessible issue in light of github security breach:
 https://github.com/rails/rails/issues/5228
 ** TODO handle case where a user has no spots registered, but attempts to fulfill a request
@@ -521,13 +520,14 @@ is the 'sent' folder for the champa account good enough?
 need to get rid of login column
 move to logging in w/ email address
 ** scratch
-need to get the db schema right for users / user_preferences
-need to add building_id, notify_new_request, notify_new_listing to users table
-need to update seed data to reflect new structure
-need appropriate "not null" and default value constraints for preferences columns
-need to expose to end user a form for editing user data
+so, what happens when we cancel a transaction?
+- transaction is deleted
+- parties are notified
+- availability restored?
+  currently, availability is destroyed when a transaction is created
+  need to flag it as "taken"?
+  do we also need to undo the fragmentation of the availability?
 
-create a migration to
-1) drop prefs table
-2) add prefs columns to users table
-3) get constraints right for prefs columns
+alright, I need to add a "taken" column to availability, fix the rent action to only flag the availability as taken, and verify that everything still works
+
+next, I need to come up with a strategy for untaking availability. clearly, the affected availability should have taken set to false. but what about its potentially neighboring availability? it seems like I should check for neighboring availability and combine it. that sounds kind of complicated and error-prone. fuck.

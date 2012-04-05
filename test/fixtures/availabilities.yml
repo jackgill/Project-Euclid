@@ -5,9 +5,11 @@ one:
   building: timber_ridge
   start_date: <%= DateTime.now %>
   end_date: <%= DateTime.now + 10 %>
+  taken: false
 
 two:
   listing: two
   building: spire
   start_date: 2012-01-05
   end_date: 2012-01-14
+  taken: false
