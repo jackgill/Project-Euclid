@@ -528,6 +528,6 @@ so, what happens when we cancel a transaction?
   need to flag it as "taken"?
   do we also need to undo the fragmentation of the availability?
 
-alright, I need to add a "taken" column to availability, fix the rent action to only flag the availability as taken, and verify that everything still works
+I need to come up with a strategy for untaking availability. clearly, the affected availability should have taken set to false. but what about its potentially neighboring availability? it seems like I should check for neighboring availability and combine it. that sounds kind of complicated and error-prone. fuck.
 
-next, I need to come up with a strategy for untaking availability. clearly, the affected availability should have taken set to false. but what about its potentially neighboring availability? it seems like I should check for neighboring availability and combine it. that sounds kind of complicated and error-prone. fuck.
+restore_availability? gonna need some tests around this.

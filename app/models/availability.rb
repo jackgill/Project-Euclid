@@ -42,6 +42,14 @@ class Availability < ActiveRecord::Base
     create_transaction(rental_start_date, rental_end_date, buyer, seller)
   end
 
+  def restore()
+    # Mark availability as not taken
+    self.taken = false
+    return false unless save
+
+    # TODO: join on adjoining availability
+  end
+
   private
   
   def create_earlier_availability(rental_start_date)

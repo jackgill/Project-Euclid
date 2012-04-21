@@ -135,7 +135,7 @@ class AvailabilityTest < ActiveSupport::TestCase
     availabilities = Availability.where(:listing_id => original_availability.listing_id)
 
     # No new availabilities were created
-    assert_equal availabilities.length, 1
+    assert_equal 1, availabilities.length, "No new availabilities were created"
 
     transactions = Transaction.where(
                                      start_date: rental_start_date,
@@ -155,5 +155,12 @@ class AvailabilityTest < ActiveSupport::TestCase
     assert_raise Exceptions::UserFacingException do
       original_availability.rent(rental_start_date, rental_end_date, buyer, seller)
     end
+  end
+
+  test "restore availability" do
+    availability = availabilities(:taken)
+    availability.restore()
+    
+    assert_equal false, availability.taken, "Availability was marked as not taken"
   end
 end
