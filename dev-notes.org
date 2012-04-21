@@ -520,6 +520,7 @@ is the 'sent' folder for the champa account good enough?
 ** TODO email only, no separate login
 need to get rid of login column
 move to logging in w/ email address
+** TODO examine moving some of the listing/availability/transaction creation logic into the models
 ** scratch
 so, what happens when we cancel a transaction?
 - transaction is deleted

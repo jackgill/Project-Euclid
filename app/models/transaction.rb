@@ -21,6 +21,6 @@ class Transaction < ActiveRecord::Base
   end
 
   def cancel()
-    
+    availability.restore()
   end
 end
