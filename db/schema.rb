@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120421200250) do
+ActiveRecord::Schema.define(:version => 20120421220517) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "listing_id"
@@ -90,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20120421200250) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "availability_id"
+    t.boolean  "cancelled",       :default => false, :null => false
   end
 
   create_table "users", :force => true do |t|

@@ -6,5 +6,6 @@ class TransactionTest < ActiveSupport::TestCase
     transaction.cancel()
 
     assert_equal false, transaction.availability.taken, "Availability was marked as not taken"
+    assert_equal true, transaction.cancelled, "Transaction was marked as cancelled"
   end
 end

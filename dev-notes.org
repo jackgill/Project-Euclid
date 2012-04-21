@@ -521,10 +521,7 @@ is the 'sent' folder for the champa account good enough?
 need to get rid of login column
 move to logging in w/ email address
 ** TODO examine moving some of the listing/availability/transaction creation logic into the models
+** TODO need transaction reminder notifications
 ** scratch
-so, what happens when we cancel a transaction?
-- transaction is deleted
-- parties are notified
-
-
-
+- notifications
+- UI for transaction cancellation

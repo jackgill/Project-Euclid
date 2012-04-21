@@ -8,4 +8,4 @@ one:
   start_date: <%= DateTime.now %>
   end_date: <%= DateTime.now + 10%>
   price: 9.99
-
+  cancelled: false

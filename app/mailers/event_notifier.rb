@@ -57,7 +57,16 @@ class EventNotifier < ActionMailer::Base
     mail(to: transaction.seller.email,
          subject: @@subjects[:new_transaction_seller],
          template_name: 'new_transaction')
-  end  
+  end
+
+  def transaction_cancelled_buyer(transaction)
+    @greeting = "Hi #{transaction.buyer.first_name},"
+    @message = "Someone fulfilled your request for a parking spot on Project Champa!"
+    @transaction = transaction
+    mail(to: transaction.buyer.email,
+         subject: @@subjects[:new_transaction_buyer],
+         template_name: 'new_transaction')
+  end
 
   def building_request
     @greeting = "Hi"

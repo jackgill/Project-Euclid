@@ -75,6 +75,7 @@ def add_transaction(building_id, spot_id, buyer_id, seller_id, start_date, end_d
                      start_date: start_date,
                      end_date: end_date,
                      price: price,
+                     cancelled: false
                      ).id
 end
 

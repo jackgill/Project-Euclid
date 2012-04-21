@@ -22,5 +22,7 @@ class Transaction < ActiveRecord::Base
 
   def cancel()
     availability.restore()
+    self.cancelled = true
+    save()
   end
 end
