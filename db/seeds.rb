@@ -42,11 +42,36 @@ def add_spot(building_id, number, floor, owner_id)
               ).id
 end
 
-def add_transaction(spot_id, buyer_id, seller_id, start_date, end_date, price)
+def add_listing(lister_id, building_id, spot_id, start_date, end_date, ask_price)
+
+end
+
+def add_availability(listing_id, building_id, start_date, end_date)
+
+end
+
+def add_transaction(building_id, spot_id, buyer_id, seller_id, start_date, end_date, price)
+  # Create the listing
+  listing_id = Listing.create(
+                              lister_id: seller_id,
+                              building_id: building_id,
+                              spot_id: spot_id,
+                              start_date: start_date,
+                              start_date: end_date,
+                              ask_price: price
+                              ).id
+  
+  availability_id = Availability.create(
+                                        listing_id: listing_id,
+                                        building_id: building_id,
+                                        start_date: start_date,
+                                        end_date: end_date
+                                        ).id
   Transaction.create(
                      spot_id: spot_id,
                      buyer_id: buyer_id,
                      seller_id: seller_id,
+                     availability_id: availability_id,
                      start_date: start_date,
                      end_date: end_date,
                      price: price,
@@ -70,4 +95,4 @@ spot2 = add_spot(timber_ridge, 1, 2, joe)
 spot3 = add_spot(spire, 9, 37, alice)
 spot4 = add_spot(spire, 7, 12, eve)
 
-add_transaction(spot2, bob, alice, Date.today, Date.today + 1, 10)
+add_transaction(timber_ridge, spot2, bob, alice, Date.today, Date.today + 1, 10)

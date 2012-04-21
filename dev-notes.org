@@ -455,6 +455,7 @@ gets rid of a couple big switches
 I say go for it!
 
 * Icebox
+** availability.restore needs to join adjacent availability
 ** requester needs to confirm fulfillment
 ** store search terms in session?
 ** Messaging system
@@ -523,11 +524,6 @@ move to logging in w/ email address
 so, what happens when we cancel a transaction?
 - transaction is deleted
 - parties are notified
-- availability restored?
-  currently, availability is destroyed when a transaction is created
-  need to flag it as "taken"?
-  do we also need to undo the fragmentation of the availability?
 
-I need to come up with a strategy for untaking availability. clearly, the affected availability should have taken set to false. but what about its potentially neighboring availability? it seems like I should check for neighboring availability and combine it. that sounds kind of complicated and error-prone. fuck.
 
-restore_availability? gonna need some tests around this.
+

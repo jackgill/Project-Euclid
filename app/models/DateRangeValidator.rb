@@ -1,5 +1,15 @@
 class DateRangeValidator < ActiveModel::Validator
   def validate(record)
+    if record.start_date == nil
+      record.errors[:start_date] << 'must be present'
+      return
+    end
+
+    if record.end_date == nil
+      record.errors[:end_date] << 'must be present'
+      return
+    end
+    
     if record.start_date <= DateTime.now - 1
       record.errors[:start_date] << 'must not be in the past'
     end

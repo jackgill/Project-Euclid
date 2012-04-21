@@ -6,6 +6,7 @@ class Transaction < ActiveRecord::Base
   belongs_to :spot
   belongs_to :buyer, :foreign_key => :buyer_id, :class_name => 'User'
   belongs_to :seller, :foreign_key => :seller_id, :class_name => 'User'
+  belongs_to :availability
   
   validates :spot_id, :presence => true
   validates :buyer_id, :presence => true
@@ -17,5 +18,9 @@ class Transaction < ActiveRecord::Base
 
   def is_owner(user)
     return user.id == buyer_id || user.id == seller_id
+  end
+
+  def cancel()
+    
   end
 end

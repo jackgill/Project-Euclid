@@ -4,14 +4,8 @@ one:
   spot: one
   buyer: bob
   seller: alice
+  availability: taken
   start_date: <%= DateTime.now %>
-  end_date: <%= DateTime.now + 1%>
+  end_date: <%= DateTime.now + 10%>
   price: 9.99
 
-two:
-  spot: two
-  buyer: alice
-  seller: bob
-  start_date: 2011-10-31
-  end_date: 2011-10-31
-  price: 9.99
