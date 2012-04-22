@@ -7,6 +7,7 @@ class EventNotifier < ActionMailer::Base
     new_listing: "New listing on Project Champa",
     new_transaction_buyer: "You have rented a parking spot on Project Champa",
     new_transaction_seller: "Your parking spot has been rented on Project Champa",
+    cancelled_transaction: "Transaction cancelled on Project Champa",
   }
 
   def self.subjects
@@ -59,13 +60,19 @@ class EventNotifier < ActionMailer::Base
          template_name: 'new_transaction')
   end
 
-  def transaction_cancelled_buyer(transaction)
-    @greeting = "Hi #{transaction.buyer.first_name},"
-    @message = "Someone fulfilled your request for a parking spot on Project Champa!"
+  def transaction_cancelled(transaction, canceller)
+    # figure out which party cancelled the transaction
+    cancellee = transaction.buyer
+    if canceller.id == transaction.buyer.id
+      cancellee = buyer
+    end
+    
+    @greeting = "Hi #{cancellee.first_name},"
+    @message = "A transaction you were involved in has been cancelled:"
     @transaction = transaction
-    mail(to: transaction.buyer.email,
-         subject: @@subjects[:new_transaction_buyer],
-         template_name: 'new_transaction')
+    mail(to: cancellee.email,
+         subject: @@subjects[:cancelled_transaction],
+         template_name: 'cancelled_transaction')
   end
 
   def building_request

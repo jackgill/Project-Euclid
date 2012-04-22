@@ -27,7 +27,7 @@
   <li>
   <%= "#{transaction.spot.building.name} #{transaction.spot.number}: #{transaction.start_date} to #{transaction.end_date} at $#{transaction.price}"%>
   |
-  <%= link_to 'Cancel', transaction, confirm: 'Are you sure?', method: :delete %>
+  <%= link_to 'Cancel', controller: :transactions, action: :cancel, id: transaction.id, confirm: 'Are you sure?', method: :post %>
   </li> 
 <% end %>
 </ul>
@@ -39,7 +39,7 @@
   <li>
   <%= "#{transaction.spot.building.name} #{transaction.spot.number}: #{transaction.start_date} to #{transaction.end_date} at $#{transaction.price}"%>
   |
-  <%= link_to 'Cancel', transaction, confirm: 'Are you sure?', method: :delete %>
+  <%= link_to 'Cancel', controller: :transactions, action: :cancel, id: transaction.id, confirm: 'Are you sure?', method: :post %>
   </li> 
 <% end %>
 </ul>

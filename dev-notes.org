@@ -497,8 +497,6 @@ config.filter_parameters << :password
 ** DONE need a way for users to change their email. user prefs page?
 ** DONE need not null and default values for preferences table
 ** TODO Transaction cancellation mechanism
-- need to add notifications when a transaction you're involved in is cancelled
-- from dashboard, next to transaction details is a cancellation button
 - check timeframe (no cancellations within 24 hours)
 ** TODO examine attr_accessible issue in light of github security breach:
 https://github.com/rails/rails/issues/5228
@@ -523,5 +521,4 @@ move to logging in w/ email address
 ** TODO examine moving some of the listing/availability/transaction creation logic into the models
 ** TODO need transaction reminder notifications
 ** scratch
-- notifications
-- UI for transaction cancellation
+

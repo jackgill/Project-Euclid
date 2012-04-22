@@ -1,7 +1,7 @@
 class TransactionsController < ApplicationController
   before_filter :require_admin, only: [ :index ]
-  before_filter :find_transaction, only: [ :show, :edit, :update, :destroy ]
-  before_filter :require_owner_or_admin, only: [ :edit, :update, :destroy ]
+  before_filter :find_transaction, only: [ :show, :edit, :update, :destroy, :cancel ]
+  before_filter :require_owner_or_admin, only: [ :edit, :update, :destroy, :cancel ]
   
   # GET /transactions
   # GET /transactions.json
@@ -76,6 +76,20 @@ class TransactionsController < ApplicationController
     respond_to do |format|
       format.html { message('You have successfully cancelled this transaction') }
       format.json { head :ok }
+    end
+  end
+
+  def cancel
+    
+    respond_to do |format|    
+      if @transaction.cancel
+        # send notifications
+        TransactionCancelledEvent.new(@transaction, @user).notify
+        
+        format.html { message('You have successfully cancelled this transaction') }
+      else
+        format.html { message('This transaction could not be cancelled') }
+      end
     end
   end
 

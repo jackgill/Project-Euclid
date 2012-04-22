@@ -89,8 +89,8 @@ ActiveRecord::Schema.define(:version => 20120421220517) do
     t.decimal  "price"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "availability_id"
     t.boolean  "cancelled",       :default => false, :null => false
+    t.integer  "availability_id",                    :null => false
   end
 
   create_table "users", :force => true do |t|

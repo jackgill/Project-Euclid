@@ -1,4 +1,7 @@
 Euclid::Application.routes.draw do
+  # Transactions
+  get "transactions/cancel"
+  
   # Listings
   get "availabilities/search"
   get "availabilities/results"  

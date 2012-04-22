@@ -80,7 +80,8 @@ class Availability < ActiveRecord::Base
                                   seller_id: seller.id,
                                   start_date: rental_start_date,
                                   end_date: rental_end_date,
-                                  price: listing.ask_price
+                                  price: listing.ask_price,
+                                  availability_id: self.id
                                   )
     return transaction.save, transaction
   end
