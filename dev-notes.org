@@ -108,6 +108,9 @@ heroku run rake db:migrate
 ** open site on heroku
 heroku open
 http://electric-lightning-9621.heroku.com/
+** execute arbitrary sql against prod db
+ActiveRecord::Base.establish_connection
+ActiveRecord::Base.connection.execute(
 * Rails
 ** Install
 *** Linux
@@ -521,4 +524,3 @@ move to logging in w/ email address
 ** TODO examine moving some of the listing/availability/transaction creation logic into the models
 ** TODO need transaction reminder notifications
 ** scratch
-

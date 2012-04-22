@@ -72,7 +72,7 @@ class EventNotifier < ActionMailer::Base
     @transaction = transaction
     mail(to: cancellee.email,
          subject: @@subjects[:cancelled_transaction],
-         template_name: 'cancelled_transaction')
+         template_name: 'transaction_cancelled')
   end
 
   def building_request
