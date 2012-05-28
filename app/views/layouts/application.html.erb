@@ -7,38 +7,71 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+	<div class="container">
+		<div class="row">
+			<!-- <div class="span2"> --> <!--Start sidebar content-->
+				<!--
+			  <ul class="nav nav-list">
+				  <li class="nav-header">
+				    <%= link_to "Search for a Spot", :controller => :availabilities, :action => :search %>
+				  </li>
+				  <li class="nav-header">
+				    <%= link_to "View Requests", :controller => :requests, :action => :results %>
+				  </li>
+				  <li class="nav-header">
+				    <%= link_to "Rent Your Spot", :controller => :spots, :action => :yours %>
+				  </li>
+				  <li class="nav-header">
+				    <%= link_to "Request a Spot", :controller => :requests, :action => :new %>
+				  </li>
+				  <li class="nav-header">
+				    <%= link_to "User Dashboard", :controlller => :home, :action => :dashboard %>
+				  </li>
+			  </ul>
+			  -->
+			<!-- </div> --> <!-- End sidebar content -->
+			
+			<div class="span10"> <!-- Start body content -->
+				
+				<% if flash[:notice] -%>
+					<div id="notice"><%= flash[:notice] %></div>
+				  <% end %>
 
-  <% if flash[:notice] -%>
-  <div id="notice"><%= flash[:notice] %></div>
-  <% end -%>
+				  <div id="header"> <!-- Start header -->
+					  
+					  <div class="left">
+						  <%= link_to "Home", :controller => "home", :action => "index" %>
+						  
+						  <% if @user && @user.is_admin %>
+							| <%= link_to "Admin", :controller => "admin", :action => "index" %>
+						  <% end %>
+						  
+						  <% if @building != nil %>
+							| Your current building is <%=@building.name%>.
+                               <% if @user == nil %>
+								 <%= link_to "Change", :controller => "home", :action => "building" %>
+                               <% else %>
+								 <%= link_to "Change", :controller => "users", :action => "edit", :id => @user.id %>
+							  <% end %>
+                          <% end %>
+					  </div>
+					  
+					  <div class="right">
+						  Welcome, 
+						<% if session[:user_id] && session[:user_id] != :logged_out && @user%>
+						  <%= link_to get_name(@user), :controller => 'users', :action => 'show', :id => @user.id %>
+						  <%= link_to "Log out", :controller => "account", :action => :logout %>
+					  <% else %>
+						<%= get_name(@user) %>
+						<%= link_to "Log in", :controller => "account", :action => :login %>
+						  <% end %>
+						</div>
+				  </div> <!-- End header -->
 
-  <div id="header">
-	<div class="left">
-	  <%= link_to "Home", :controller => "home", :action => "index" %>
-	  <% if @user && @user.is_admin %>
-	    | <%= link_to "Admin", :controller => "admin", :action => "index" %>
-	  <% end %>
-	  <% if @building != nil %>
-	  | Your current building is <%=@building.name%>.
-	  <% if @user == nil %>
-	   <%= link_to "Change", :controller => "home", :action => "building" %>
-	  <% else %>
-	  <%= link_to "Change", :controller => "users", :action => "edit", :id => @user.id %>
-	  <% end %>
-	  <% end %>
+				  <%= yield %>
+				  
+			</div> <!-- end body content -->
+		</div>
 	</div>
-	<div class="right">
-		Welcome, 
-	<% if session[:user_id] && session[:user_id] != :logged_out && @user%>
-	<%= link_to get_name(@user), :controller => 'users', :action => 'show', :id => @user.id %>
-	<%= link_to "Log out", :controller => "account", :action => :logout %>
-	<% else %>
-	<%= get_name(@user) %>
-	<%= link_to "Log in", :controller => "account", :action => :login %>
-	<% end %>
-	</div>
-  </div>
-
-  <%= yield %>
 </body>
 </html>
