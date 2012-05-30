@@ -1,6 +1,17 @@
 <h1>Your Spots</h1>
-<% for spot in @your_spots %>
-<%= link_to spot.building.name + ' ' + spot.number.to_s, :controller => :spots, :action => :show, :id => spot.id %> <br/>
-<% end %>
-<br/>
-<%= link_to "Register a spot", :controller => :spots, :action => :new %>
+<table class="table">
+  <tbody>
+	<% for spot in @your_spots %>
+	  <tr>
+		  <td>
+			  <%= spot.building.name + ' ' + spot.number.to_s %>
+		  </td>
+		  <td>
+  <%= link_to "Rent this spot", { :controller => :spots, :action => :show, :id => spot.id }, { class: "btn btn-primary" }%>
+		  </td>
+	</tr>
+	<% end %>
+  </tbody>
+</table>
+
+<%= link_to "Register a spot", { :controller => :spots, :action => :new }, { class: "btn btn-info" } %>

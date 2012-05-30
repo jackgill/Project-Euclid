@@ -1,6 +1,6 @@
 <h1>Search Results</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Lister</th>
 	<th>Building</th>
@@ -16,13 +16,17 @@
     <td><%= availability.listing.spot.floor %></td>
     <td><%= availability.listing.ask_price %></td>
 	<td>
-<%= link_to 'Rent this spot',
-:controller => 'availabilities',
-:action => 'rent',
-:availability => availability.id,
-:start_date => availability.start_date,
-:end_date => availability.end_date,
-%>
+	<%= link_to('Rent this spot',
+            {  :controller => 'availabilities',
+              :action => 'rent',
+              :availability => availability.id,
+              :start_date => availability.start_date,
+              :end_date => availability.end_date,
+            },
+            {
+              :class => "btn btn-primary"
+            })
+    %>
 	</td>
   </tr>
 <% end %>

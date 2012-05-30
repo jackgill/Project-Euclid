@@ -1,6 +1,6 @@
 <h1>Requests</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Requester</th>
     <th>Bid price</th>
@@ -13,9 +13,14 @@
     <td><%= request.bid_price %></td>
 	<td>
 <%= link_to 'Fulfill this request',
-:controller => 'requests',
-:action => 'fulfill',
-:request => request.id,
+{
+  :controller => 'requests',
+  :action => 'fulfill',
+  :request => request.id,
+},
+{
+  class: "btn btn-primary"
+}
 %>
 	</td>
   </tr>
