@@ -94,8 +94,8 @@ class AvailabilitiesController < ApplicationController
   end
 
   def results
-    @start_date = build_date_from_params(params[:start_date])
-    @end_date = build_date_from_params(params[:end_date])
+    @start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+    @end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
     @availabilities = Availability.
       where(:building_id => params[:building]).
       where("start_date <= ?", @start_date).

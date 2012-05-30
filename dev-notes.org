@@ -528,3 +528,5 @@ Front end strategy:
 1. Use bootstrap.
 2. Add some basic styling with bootstrap components
 3. Lay the foundation for a decent custom design
+
+add html5 shim?

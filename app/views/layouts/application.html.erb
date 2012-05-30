@@ -33,10 +33,6 @@
 			
 			<div class="span10"> <!-- Start body content -->
 				
-				<% if flash[:notice] -%>
-					<div id="notice"><%= flash[:notice] %></div>
-				  <% end %>
-
 				  <div id="header"> <!-- Start header -->
 					  
 					  <div class="left">
@@ -68,6 +64,11 @@
 						</div>
 				  </div> <!-- End header -->
 
+				<% if flash[:notice] -%>
+					<div id="notice"><%= flash[:notice] %></div>
+				<% end %>
+
+				  
 				  <%= yield %>
 				  
 			</div> <!-- end body content -->

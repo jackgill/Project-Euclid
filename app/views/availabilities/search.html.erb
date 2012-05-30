@@ -2,13 +2,14 @@
 <%= form_tag("/availabilities/results", :method => "get") do %>
 
 <%= hidden_field_tag(:building, @building.id) %>
+
 <%= label_tag(:start_date, "Start date:") %>
-<%= date_select(:start_date, :date, :default => Date.today) %>
+<%= text_field_tag(:start_date, Date.today.strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
 <br/>
 
 <%= label_tag(:end_date, "End date:") %>
-<%= date_select(:end_date, :date, :default => Date.today + 1) %>
+<%= text_field_tag(:end_date, (Date.today + 1).strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
 <br/>
 
-<%= submit_tag("Search") %>
+<%= submit_tag("Search", class: "btn btn-primary") %>
 <% end %>
