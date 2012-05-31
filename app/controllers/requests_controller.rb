@@ -43,6 +43,8 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(params[:request])
+    @request.start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+    @request.end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
 
     respond_to do |format|
       if @request.save

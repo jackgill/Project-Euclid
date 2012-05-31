@@ -24,18 +24,18 @@
   <%= f.hidden_field :building_id, :value => @building.id %>
   <% end %>
     <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
+    <%= f.label :start_date %>
+	<%= text_field_tag(:start_date, Date.today.strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
+    <%= f.label :end_date %>
+	<%= text_field_tag(:end_date, (Date.today + 1).strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
   </div>
   <div class="field">
-    <%= f.label :bid_price %><br />
+    <%= f.label :bid_price %>
     <%= f.text_field :bid_price %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

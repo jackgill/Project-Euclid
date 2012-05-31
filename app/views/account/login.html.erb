@@ -1,20 +1,21 @@
-<div class="euclid-form">
-	<p>
-		Don't have an account? <%= link_to "Create one", :controller => :users, :action => :new %>
-	</p>
-  <%= form_tag do %>
-  <fieldset>
-	<legend>Please Log In </legend>
-	<div>
-	  <label for="login">User Name:</label>
-	  <%= text_field_tag :login, params[:login] %>
-	</div>
-	<div>
-	  <label for="password">Password:</label>
-	  <%= password_field_tag :password, params[:password] %>
-	</div>
-	<div>
-	  <%= submit_tag "Login" %>
-  </fieldset>
-  <% end %>
+<div class="row">
+  <div class="span6">
+	  <h3>Please Log In</h3>
+	  <%= form_tag do %>
+		<fieldset>
+			<label for="login">User Name:</label>
+			<%= text_field_tag :login, params[:login] %>
+			<label for="password">Password:</label>
+		  <%= password_field_tag :password, params[:password] %>
+		  <br/>
+          <%= submit_tag "Login", class: 'btn btn-primary' %>
+		</fieldset>
+	  <% end %>
+  </div>
+  <div class="span4">
+	  <h3>Don't have an account?</h3>
+	  <%= link_to "Create one", { :controller => :users, :action => :new }, { class: 'btn btn-info' } %>
+  </div>
 </div>
+
+

@@ -2,9 +2,9 @@
 <%= form_tag("/requests/rent", :method => "get") do %>
   <%= hidden_field_tag 'request', params[:request] %>
   <div class="field">
-    <%= label_tag :spot_id %><br />
+    <%= label_tag :spot_id %>
 	<%= select_tag :spot_id, (@spots.collect { |s|  '<option value="' + s.id.to_s + '">' + s.building.name + ' ' + s.number.to_s + '</option>'  }).join('').html_safe %>
   </div>
 
-  <%= submit_tag("Fulfill") %>
+  <%= submit_tag("Fulfill", class: 'btn btn-primary') %>
 <% end %>

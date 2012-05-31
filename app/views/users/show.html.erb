@@ -23,5 +23,4 @@
   <%= @shown_user.is_admin %>
 </p>
 <% end %>
-<%= link_to 'Edit', edit_user_path(@shown_user) %> |
-<%= link_to 'Back', users_path %>
+<%= link_to 'Edit', edit_user_path(@shown_user), class: 'btn btn-info' %>

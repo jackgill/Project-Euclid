@@ -506,7 +506,9 @@ https://github.com/rails/rails/issues/5228
 ** TODO handle case where a user has no spots registered, but attempts to fulfill a request
 ** TODO you shouldn't be able to fulfill your own request
 ** TODO need to clear out last page request on logout
+** TODO for the 'new listing' form, if there is a validation error, the error page will incorrectly display the building and spot selects, since they are only hidden if the values are present on the query string. this needs to be fixed, and additionally there should be a server-side check that the user can only create listings for spots they own.
 ** why again does the 'view requests' page not show start and end dates?
+** TODO better error message when you try to fulfill your own request
 ** Notifications system
 - seeing a weird error where an undeliverable address causes a template parsing warning
 - need test for new listing subscribers
@@ -531,3 +533,6 @@ Front end strategy:
 
 add html5 shim?
 
+prettify admin tool
+style flash
+use bootstrap modal for confirmation dialogs

@@ -1,6 +1,6 @@
 <h1>Listing availabilities</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>Listing</th>
 	<th>Building</th>
@@ -17,13 +17,13 @@
 	  <td><%= availability.building.name %></td>
     <td><%= availability.start_date %></td>
     <td><%= availability.end_date %></td>
-    <td><%= link_to 'Show', availability %></td>
-    <td><%= link_to 'Edit', edit_availability_path(availability) %></td>
-    <td><%= link_to 'Destroy', availability, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', availability, class: 'btn btn-primary btn-mini' %></td>
+    <td><%= link_to 'Edit', edit_availability_path(availability), class: 'btn btn-info btn-mini' %></td>
+    <td><%= link_to 'Destroy', availability, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New Availability', new_availability_path %>
+<%= link_to 'New Availability', new_availability_path, class: 'btn btn-primary' %>

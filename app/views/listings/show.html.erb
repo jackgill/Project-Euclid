@@ -30,7 +30,7 @@
 
 
 <% if @user && (@user.is_admin || @user.id == @listing.lister.id) %>
-<%= link_to 'Edit', edit_listing_path(@listing) %>
+<%= link_to 'Edit', edit_listing_path(@listing), class: 'btn btn-info' %>
 <% end %>
 
 

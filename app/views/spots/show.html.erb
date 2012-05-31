@@ -20,7 +20,7 @@
 
 
 <% if @user && (@spot.owner_id == @user.id || @user.is_admin) %>
-<%= link_to 'Edit', edit_spot_path(@spot) %>
- |
-<%= link_to 'Make Spot Available', :controller => :listings, :action => :new, :spot => @spot.id, :building => @spot.building.id %>
+<%= link_to 'Edit', edit_spot_path(@spot), class: 'btn btn-info' %>
+
+<%= link_to 'Make Spot Available', { :controller => :listings, :action => :new, :spot => @spot.id, :building => @spot.building.id }, { class: 'btn btn-primary' } %>
 <% end %>

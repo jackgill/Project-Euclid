@@ -1,6 +1,6 @@
 <h1>Listing users</h1>
 
-<table>
+<table class="table">
   <tr>
     <th>First name</th>
     <th>Last name</th>
@@ -19,13 +19,13 @@
     <td><%= user.email %></td>
     <td><%= user.login %></td>
     <td><%= user.is_admin %></td>	
-    <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete %></td>
+    <td><%= link_to 'Show', user, class: 'btn btn-primary btn-mini' %></td>
+    <td><%= link_to 'Edit', edit_user_path(user), class: 'btn btn-info btn-mini' %></td>
+    <td><%= link_to 'Destroy', user, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New User', new_user_path %>
+<%= link_to 'New User', new_user_path, class: 'btn btn-primary' %>

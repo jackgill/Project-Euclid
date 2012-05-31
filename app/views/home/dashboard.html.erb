@@ -1,45 +1,111 @@
 <h1>User Dashboard</h1>
 <h2>Listings</h2>
-<ul>
+<% if @listings.length > 0 %>
+<table class="table">
+  <thead>
+	<tr>
+	  <th>Spot</th>
+	  <th>Start Date</th>
+	  <th>End Date</th>
+	  <th></th>
+	</tr>
+  </thead>
+  <tbody>
 <% for listing in @listings %>
-  <li>
-	  <%= "#{listing.building.name} #{listing.spot.number}: #{listing.start_date} to #{listing.end_date}"%>
-	  |
-       <%= link_to 'Remove', listing, confirm: 'Are you sure?', method: :delete %>
-  </li> 
+  <tr>
+	  <td><%= "#{listing.building.name} #{listing.spot.number}" %></td>
+	  <td><%= listing.start_date %></td>
+	  <td><%= listing.end_date %></td>
+	  <td><%= link_to 'Remove', listing, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
+  </tr> 
 <% end %>
-</ul>
+  </tbody>
+</table>
+<% else %>
+  No listings
+<% end %>
 
 <h2>Requests</h2>
-<ul>
+<% if @requests.length > 0 %>
+<table class="table">
+  <thead>
+	<tr>
+	  <th>Start Date</th>
+	  <th>End Date</th>
+	  <th>Bid Price</th>
+	  <th></th>
+	</tr>
+  </thead>
+  <tbody>
 <% for request in @requests %>
-  <li>
-	  <%= "#{request.start_date} to #{request.end_date} at $#{request.bid_price}"%>
-	  |
-	  <%= link_to 'Remove', request, confirm: 'Are you sure?', method: :delete %>
-  </li> 
+  <tr>
+	  <td><%= request.start_date %></td>
+	  <td><%= request.end_date %></td>
+	  <td><%= request.bid_price %></td>
+	  <td><%= link_to 'Remove', request, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
+  </tr> 
 <% end %>
-</ul>
+  </tbody>
+</table>
+<% else %>
+  No requests
+<% end %>
+
 
 <h2>Spots I am renting from others</h2>
-<ul>
+<% if @transactions_buyer.length > 0 %>
+<table class="table">
+  <thead>
+	<tr>
+	  <th>Spot</th>
+	  <th>Start Date</th>
+	  <th>End Date</th>
+	  <th>Price</th>
+	  <th></th>
+	</tr>
+  </thead>
+  <tbody>
 <% for transaction in @transactions_buyer %>
-  <li>
-  <%= "#{transaction.spot.building.name} #{transaction.spot.number}: #{transaction.start_date} to #{transaction.end_date} at $#{transaction.price}"%>
-  |
-  <%= link_to 'Cancel', controller: :transactions, action: :cancel, id: transaction.id, confirm: 'Are you sure?', method: :post %>
-  </li> 
+  <tr>
+	  <td><%= "#{transaction.spot.building.name} #{transaction.spot.number}" %></td>
+	  <td><%= transaction.start_date %></td>
+	  <td><%= transaction.end_date%></td>
+	  <td><%= transaction.price%></td>
+           <td><%= link_to 'Cancel', { controller: :transactions, action: :cancel, id: transaction.id }, { confirm: 'Are you sure?', method: :post, class: 'btn btn-danger btn-mini'} %></td>
+	</tr>
 <% end %>
-</ul>
+  </tbody>
+</table>
+<% else %>
+  You aren't renting any spots
+<% end %>
 
 
 <h2>Spots others are renting from me</h2>
-<ul>
+<% if @transactions_seller.length > 0 %>
+<table class="table">
+  <thead>
+	<tr>
+	  <th>Spot</th>
+	  <th>Start Date</th>
+	  <th>End Date</th>
+	  <th>Price</th>
+	  <th></th>
+	</tr>
+  </thead>
+  <tbody>
 <% for transaction in @transactions_seller %>
-  <li>
-  <%= "#{transaction.spot.building.name} #{transaction.spot.number}: #{transaction.start_date} to #{transaction.end_date} at $#{transaction.price}"%>
-  |
-  <%= link_to 'Cancel', controller: :transactions, action: :cancel, id: transaction.id, confirm: 'Are you sure?', method: :post %>
-  </li> 
+  <tr>
+	  <td><%= "#{transaction.spot.building.name} #{transaction.spot.number}" %></td>
+	  <td><%= transaction.start_date %></td>
+	  <td><%= transaction.end_date%></td>
+	  <td><%= transaction.price%></td>
+      <td><%= link_to 'Cancel', { controller: :transactions, action: :cancel, id: transaction.id }, { confirm: 'Are you sure?', method: :post, class: 'btn btn-danger btn-mini'} %></td
+  </tr>
 <% end %>
-</ul>
+</tbody>
+</table>
+<% else %>
+  None of your spots are being rented
+<% end %>
+

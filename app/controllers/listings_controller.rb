@@ -44,6 +44,8 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(params[:listing])
+    @listing.start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
+    @listing.end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
 
     respond_to do |format|
       if @listing.save

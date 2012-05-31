@@ -26,28 +26,28 @@
 	<%= f.hidden_field :building_id, :value => params[:building] %>
   <% else %>
   <div class="field">
-    <%= f.label :building_id %><br />
+    <%= f.label :building_id %>
     <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
   </div>
   <div class="field">
-    <%= f.label :spot_id %><br />
+    <%= f.label :spot_id %>
 	<%= f.select :spot_id, Spot.all.collect { |s| [ s.building.name + ' ' + s.number.to_s, s.id ] } %>
   </div>
   <% end %>
 
   <div class="field">
-    <%= f.label :start_date %><br />
-    <%= f.date_select :start_date %>
+    <%= f.label :start_date %>
+    <%= text_field_tag(:start_date, Date.today.strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
   </div>
   <div class="field">
-    <%= f.label :end_date %><br />
-    <%= f.date_select :end_date %>
+    <%= f.label :end_date %>
+    <%= text_field_tag(:end_date, (Date.today + 1).strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
   </div>
   <div class="field">
-    <%= f.label :ask_price %><br />
+    <%= f.label :ask_price %>
     <%= f.text_field :ask_price %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

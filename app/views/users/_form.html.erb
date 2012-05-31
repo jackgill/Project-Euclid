@@ -11,39 +11,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :first_name %><br />
+    <%= f.label :first_name %>
     <%= f.text_field :first_name %>
-  </div>
-  <div class="field">
-    <%= f.label :last_name %><br />
+
+    <%= f.label :last_name %>
     <%= f.text_field :last_name %>
-  </div>
-  <div class="field">
-    <%= f.label :email %><br />
+
+    <%= f.label :email %>
     <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :login %><br />
+
+    <%= f.label :login %>
     <%= f.text_field :login, :autocomplete => :off %>
-  </div>
-  <div class="field">
-    <%= f.label :password %><br />
+
+    <%= f.label :password %>
     <%= f.password_field :password, :size => 40 %>
-  </div>
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
+
+    <%= f.label :password_confirmation %>
     <%= f.password_field :password_confirmation, :size => 40 %>
-  </div>
+
 
   <% if @user && @user.is_admin %>
-  <div class="field">
-    <%= f.label :is_admin %><br />
+    <%= f.label :is_admin %>
     <%= f.check_box :is_admin %>
-  </div>
   <% end %>
   
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class: 'btn btn-primary' %>
   </div>
 <% end %>

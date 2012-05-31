@@ -1,10 +1,8 @@
 <h1>Please select a building</h1>
 <%= form_tag do %>
-<div class="field">
-    <%= label_tag(:building_id, "Building:") %><br />
-    <%= select_tag(:building_id, options_for_select(Building.all.collect { |b| [ b.name, b.id ] })) %>
-</div>
-<div class="actions">
-	<%= submit_tag("Submit") %>
-</div>
+  <%= label_tag(:building_id, "Building:") %>
+  <%= select_tag(:building_id, options_for_select(Building.all.collect { |b| [ b.name, b.id ] })) %>
+  <div class="actions">
+	<%= submit_tag("Submit", class: 'btn btn-primary') %>
+  </div>
 <% end %>
