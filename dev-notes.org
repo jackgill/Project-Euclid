@@ -542,3 +542,4 @@ use bootstrap modal for confirmation dialogs
 - badge for number of requests
 - "about us" in footer
 - activity summary on home page
+- dashboard should suggest actions
