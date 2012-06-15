@@ -25,11 +25,11 @@
   <% end %>
     <div class="field">
     <%= f.label :start_date %>
-	<%= text_field_tag(:start_date, Date.today.strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
+	<%= f.text_field(:start_date, value: Date.today.strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
   </div>
   <div class="field">
     <%= f.label :end_date %>
-	<%= text_field_tag(:end_date, (Date.today + 1).strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
+	<%= f.text_field(:end_date, value: (Date.today + 1).strftime("%m/%d/%Y"), :data => { :datepicker => "datepicker" }) %>
   </div>
   <div class="field">
     <%= f.label :bid_price %>
