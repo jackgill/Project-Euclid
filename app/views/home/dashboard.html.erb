@@ -1,5 +1,7 @@
 <h1>User Dashboard</h1>
-<h2>Listings</h2>
+<div class="row">
+<div class="span6">
+<h2>My Listings</h2>
 <% if @listings.length > 0 %>
 <table class="table">
   <thead>
@@ -25,32 +27,8 @@
   No listings
 <% end %>
 
-<h2>Requests</h2>
-<% if @requests.length > 0 %>
-<table class="table">
-  <thead>
-	<tr>
-	  <th>Start Date</th>
-	  <th>End Date</th>
-	  <th>Bid Price</th>
-	  <th></th>
-	</tr>
-  </thead>
-  <tbody>
-<% for request in @requests %>
-  <tr>
-	  <td><%= request.start_date %></td>
-	  <td><%= request.end_date %></td>
-	  <td><%= request.bid_price %></td>
-	  <td><%= link_to 'Remove', request, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
-  </tr> 
-<% end %>
-  </tbody>
-</table>
-<% else %>
-  No requests
-<% end %>
-
+</div>
+<div class="span6">
 
 <h2>Spots I am renting from others</h2>
 <% if @transactions_buyer.length > 0 %>
@@ -79,6 +57,40 @@
 <% else %>
   You aren't renting any spots
 <% end %>
+
+</div>
+</div>
+
+<div class="row">
+	<div class="span6">
+<h2>My Requests</h2>
+<% if @requests.length > 0 %>
+<table class="table">
+  <thead>
+	<tr>
+	  <th>Start Date</th>
+	  <th>End Date</th>
+	  <th>Bid Price</th>
+	  <th></th>
+	</tr>
+  </thead>
+  <tbody>
+<% for request in @requests %>
+  <tr>
+	  <td><%= request.start_date %></td>
+	  <td><%= request.end_date %></td>
+	  <td><%= request.bid_price %></td>
+	  <td><%= link_to 'Remove', request, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
+  </tr> 
+<% end %>
+  </tbody>
+</table>
+<% else %>
+  No requests
+<% end %>
+
+</div>
+<div class="span6">
 
 
 <h2>Spots others are renting from me</h2>
@@ -109,3 +121,5 @@
   None of your spots are being rented
 <% end %>
 
+</div>
+</div>

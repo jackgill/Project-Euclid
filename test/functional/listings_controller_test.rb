@@ -18,14 +18,17 @@ class ListingsControllerTest < ActionController::TestCase
   end
 
   test "should create listing" do
-    listing = @listing
-    listing.start_date = @listing.end_date + 1
-    listing.end_date = @listing.end_date + 2
-    
-    assert_difference('Listing.count') do
-      post :create, listing: listing.attributes
-    end
+    attributes = @listing.attributes
 
+    # Create a new listing just like the first test listing,
+    # but further in the future
+    attributes[:start_date] = (@listing.start_date + 11).strftime("%m/%d/%Y")
+    attributes[:end_date] = (@listing.end_date + 12).strftime("%m/%d/%Y")
+
+    assert_difference('Listing.count') do
+      post :create, listing: attributes
+    end
+    
     assert_redirected_to listing_path(assigns(:listing))
   end
 

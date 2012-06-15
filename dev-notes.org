@@ -483,6 +483,7 @@ I say go for it!
 config.filter_parameters << :password
 ** separate password change page
 
+** aliases for building names
 * Someday/maybe
 - upgrade to ruby 1.9.3?
 - specify versions of all gems in Gemfile
@@ -499,6 +500,7 @@ config.filter_parameters << :password
 * Misc
 ** DONE need a way for users to change their email. user prefs page?
 ** DONE need not null and default values for preferences table
+** TODO need to extract date parsing and error handling logic in listings and request controllers
 ** TODO Transaction cancellation mechanism
 - check timeframe (no cancellations within 24 hours)
 ** TODO examine attr_accessible issue in light of github security breach:
@@ -536,3 +538,7 @@ add html5 shim?
 prettify admin tool
 style flash
 use bootstrap modal for confirmation dialogs
+
+- badge for number of requests
+- "about us" in footer
+- activity summary on home page

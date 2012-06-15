@@ -19,6 +19,11 @@ class RequestsControllerTest < ActionController::TestCase
   end
 
   test "should create request" do
+
+    # Format start/end dates
+    @test_request.start_date = (@test_request.start_date).strftime("%m/%d/%Y")
+    @test_request.end_date = (@test_request.end_date).strftime("%m/%d/%Y")
+    
     assert_difference('Request.count') do
       post :create, request: @test_request.attributes
     end

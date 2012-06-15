@@ -44,11 +44,20 @@ class ListingsController < ApplicationController
   # POST /listings.json
   def create
     @listing = Listing.new(params[:listing])
-    @listing.start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
-    @listing.end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
 
+    # Attempt to parse dates
+    valid_dates = true
+    begin
+      @listing.start_date = Date.strptime(params[:listing][:start_date], "%m/%d/%Y")
+      @listing.end_date = Date.strptime(params[:listing][:end_date], "%m/%d/%Y")
+    rescue Exception => e
+      valid_dates = false
+      #@listing.errors.add(:start_date, 'Missing/invalid start or end date')
+      @listing.errors.add(:start_date, e.message)
+    end
+    
     respond_to do |format|
-      if @listing.save
+      if valid_dates && @listing.save 
 
         @availability = Availability.new({
                                            listing_id: @listing.id,

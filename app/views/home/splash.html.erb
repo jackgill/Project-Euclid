@@ -1,5 +1,9 @@
 <h1>Welcome to Project Champa</h1>
-<%= link_to "Search for a Spot", :controller => :availabilities, :action => :search %>
-<br>
-<%= link_to "Rent Your Spot", :controller => :spots, :action => :yours %>
-<br>
+<div class="row">
+  <div class="span2 offset2">
+<%= link_to "Search for a Spot", { :controller => :availabilities, :action => :search }, { class: 'btn btn-large btn-primary' } %>
+</div>
+<div class="span2 offset2">
+<%= link_to "Rent Your Spot", { :controller => :spots, :action => :yours }, { class: 'btn btn-large btn-primary' } %>
+</div>
+</div>

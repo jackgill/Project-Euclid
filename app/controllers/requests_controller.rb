@@ -43,11 +43,17 @@ class RequestsController < ApplicationController
   # POST /requests.json
   def create
     @request = Request.new(params[:request])
-    @request.start_date = Date.strptime(params[:start_date], "%m/%d/%Y")
-    @request.end_date = Date.strptime(params[:end_date], "%m/%d/%Y")
 
+    valid_dates = true
+    begin
+      @request.start_date = Date.strptime(params[:request][:start_date], "%m/%d/%Y")
+      @request.end_date = Date.strptime(params[:request][:end_date], "%m/%d/%Y")
+    rescue
+      valid_dates = false
+    end
+    
     respond_to do |format|
-      if @request.save
+      if valid_dates && @request.save
         NewRequestEvent.new(@request).notify
         
         format.html { redirect_to @request, notice: 'Request was successfully created.' }
