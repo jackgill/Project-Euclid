@@ -1,5 +1,42 @@
-<h1>Welcome to Parking Exchange</h1>
-<%= link_to "Search for a Spot", { :controller => :availabilities, :action => :search }, { class: "btn btn-primary" } %>
-<%= link_to "Rent Your Spot", { :controller => :spots, :action => :yours }, { class: "btn btn-primary" }  %> 
-<%= link_to "Request a Spot", { :controller => :requests, :action => :new }, { class: "btn btn-primary" } %> 
 
+<h1>Welcome back to Parking Exchange</h1>
+
+<p class="welcome">
+	Hi, <%= @user.first_name %>. What would you like to do today?
+</p>
+
+<div class="row">
+	<div class="span4">
+<dl>
+	<dt>
+	  <%= link_to "Search for a Spot", { :controller => :availabilities, :action => :search }, { class: "btn btn-primary btn-large" } %>
+	</dt>
+	<dd>
+	  Search for available parking spots
+	</dd>
+	 
+	<dt>
+		<%= link_to "Rent Your Spot", { :controller => :spots, :action => :yours }, { class: "btn btn-primary btn-large" }  %>
+	</dt>
+	<dd>
+		Rent your parking spot to others.
+	</dd>
+</dl>
+</div>
+<div class="span4">
+<dl>
+	<dt>
+		<%= link_to "Request a Spot", { :controller => :requests, :action => :new }, { class: "btn btn-primary btn-large" } %>
+	</dt>
+	<dd>
+		Make a request for someone to rent a parking spot to you
+	</dd>
+	<dt>
+		<%= link_to "View Dashboard", { :controller => :home, :action => :dashboard }, { class: "btn btn-primary btn-large" } %>
+	</dt>
+	<dd>
+		View your user dashboard, including all your listings, requests, and rentals
+	</dd>
+</dl>
+</div>
+</row>
