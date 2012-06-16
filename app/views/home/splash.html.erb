@@ -1,13 +1,14 @@
-<div class="row">
-	<div class="offset3">
-		<h1>Welcome to Parking Exchange</h1>
+<div class="hero-unit">
+	<h1>Welcome to Parking Exchange</h1>
+	<p>
+		Parking Exchange lets you rent spots from your neighbors, and rent your spot to them.
+	</p>
+	<div class="row">
+	  <div class="span2 offset2">
+	  <%= link_to "Search for a Spot", { :controller => :availabilities, :action => :search }, { class: 'btn btn-large btn-primary' } %>
+		</div>
+		<div class="span2 offset2">
+			<%= link_to "Rent Your Spot", { :controller => :spots, :action => :yours }, { class: 'btn btn-large btn-primary' } %>
+			  </div>
 	</div>
-</div>
-<div class="row">
-  <div class="span2 offset2">
-<%= link_to "Search for a Spot", { :controller => :availabilities, :action => :search }, { class: 'btn btn-large btn-primary' } %>
-</div>
-<div class="span2 offset2">
-<%= link_to "Rent Your Spot", { :controller => :spots, :action => :yours }, { class: 'btn btn-large btn-primary' } %>
-</div>
-</div>
+</div<
