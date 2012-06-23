@@ -177,6 +177,24 @@ Need to do some revenue projections based on usage volume, and our cut.
 cost project + revenue = rudimentary business model?
 ** Purpose
 A lot of tech startups are criticized for being "products, not companies". A company is something that exists across multiple product lines and generations of leadership. Do we want a company? Or are we content with just a product? Either would be fine, and really there's very little difference between them in the early stages. But it seems like a company might be a good vehicle for our longer-term financial and social ambitions. A company would need a statement of purpose such as "applying a lean products methodology to interesting and lucrative problems." The various products offered by this company would offer us a revenue stream which would allow us to lead a somewhat more comfortable lifestyle than would otherwise be possible.
+** Business plan
+- one spot request every other day
+- $1 per transaction ($10 a transaction, we take 10%)
+- 500 units in the spire
+- $15 / month for short term in the spire
+- 15 long term rentals per month
+- avg price of long term rental is $150 / month
+- $2250 / month for long term rentals, if we take 10% then we have $225 / month
+- long term rentals also have less incentive to book a spot
+- revenue from long term rentals dominates
+- short term rentals need to be able to grow automatically (but may not, and may require a salesperson)
+- avg length of long term rental is six month
+- over the course of six months, suppose we can capture 50% of the market
+- market may be as high as six short requests / day
+- if people want this, worst case is $140 / month revenue
+- if people want this, best case is $300 / month revenue
+- 8 such buildings per metro area = $2400 / month for denver
+- 20 such cities in the USA = $19,200 / month
 * Brainstorming
 ** counter offers:
 field for transaction owner
@@ -484,6 +502,8 @@ config.filter_parameters << :password
 ** separate password change page
 
 ** aliases for building names
+** badge for number of requests
+** activity summary on home page
 * Someday/maybe
 - upgrade to ruby 1.9.3?
 - specify versions of all gems in Gemfile
@@ -527,19 +547,13 @@ need to get rid of login column
 move to logging in w/ email address
 ** TODO examine moving some of the listing/availability/transaction creation logic into the models
 ** TODO need transaction reminder notifications
+** TODO request editing is broken -- spurious validation errors, "Show | Back" links should be removed
+** TODO add html5 shim?
+** TODO use bootstrap modal for confirmation dialogs?
+** TODO "about us" in footer
+** TODO dashboard should suggest actions
 ** scratch
-Front end strategy:
-1. Use bootstrap.
-2. Add some basic styling with bootstrap components
-3. Lay the foundation for a decent custom design
 
-add html5 shim?
+the exciting young denver venture that's changing the way people park at home
 
-prettify admin tool
-style flash
-use bootstrap modal for confirmation dialogs
-
-- badge for number of requests
-- "about us" in footer
-- activity summary on home page
-- dashboard should suggest actions
+selling to businesses is dead
