@@ -52,6 +52,25 @@ pg_ctl start -D /usr/local/pgsql/data
 createuser -P (create user euclid, password foo)
 createuser -P (create user jack, password foo)
 createdb euclid_development
+*** Ubuntu
+sudo apt-get install postgresql
+sudo apt-get install postgresql-server-dev-all
+gem install pg
+sudo -u postgres psql template1
+create user jack password 'foo';
+create user euclid password 'foo';
+create database euclid_development;
+grant all privileges on database euclid_development to jack;
+grant all privileges on database euclid_development to euclid;
+\q
+sudo emacs /etc/postgresql/9.1/main/pg_hba.conf
+change 
+local   all             all                                     peer
+to 
+local   all             all                                     md5
+sudo /etc/init.d/postgresql restart
+rake db:schema:load
+rake db:seed
 ** to start the database server: 
 - postgres -D (path to data directory)
 *** Windows
@@ -74,7 +93,7 @@ initially, connect as user 'postgres' and create a new role, a new database, and
  psql -U postgres
  create user jack password 'password' (NOTE: user name will be lower-cased)
  create database (database name);
- grant all privileges on (database name) to (user name);
+ grant all privileges on database (database name) to (user name);
 ** to get the postgres db adapter for ruby:
 sudo gem install pg
 ** restart postgres server process
@@ -476,40 +495,7 @@ gets rid of a couple big switches
 I say go for it!
 
 * Icebox
-** availability.restore needs to join adjacent availability
-** requester needs to confirm fulfillment
-** store search terms in session?
-** Messaging system
-- Analagous to facebook messaging
-- Provides an "escape valve" for behaviors that aren't captured in the system
-- Another mechanism for notifications
-- Insulates user's private emails from one another
-** lightning offers
-- I have forgotten what this feature is supposed to do.
-** private offer facility
-** confirmation number
-- create a "actions" table
-- each row contains an action ID and enough information to debug problems with the action
-- the user is given the action ID as a "confirmation number" in case they need customer support
-** creation of listing or request via email
-- probably don't need this
-** calendar to view your spot's availability
-- would be a nice UI touch
-
-** per building page - projectchampa.com/spire
-** remove password from logs
-config.filter_parameters << :password
-** separate password change page
-
-** aliases for building names
-** badge for number of requests
-** activity summary on home page
 * Someday/maybe
-- upgrade to ruby 1.9.3?
-- specify versions of all gems in Gemfile
-- need some integration tests covering common user stories
-- need to beef up unit/functional test coverage
-- check UX for post-user-creation when no page was requested
 * Features
 ** Choose building page
 - if the users building isn't available, there should be a form to request it
@@ -518,40 +504,6 @@ config.filter_parameters << :password
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
 * Misc
-** DONE need a way for users to change their email. user prefs page?
-** DONE need not null and default values for preferences table
-** TODO need to extract date parsing and error handling logic in listings and request controllers
-** TODO Transaction cancellation mechanism
-- check timeframe (no cancellations within 24 hours)
-** TODO examine attr_accessible issue in light of github security breach:
-https://github.com/rails/rails/issues/5228
-** TODO handle case where a user has no spots registered, but attempts to fulfill a request
-** TODO you shouldn't be able to fulfill your own request
-** TODO need to clear out last page request on logout
-** TODO for the 'new listing' form, if there is a validation error, the error page will incorrectly display the building and spot selects, since they are only hidden if the values are present on the query string. this needs to be fixed, and additionally there should be a server-side check that the user can only create listings for spots they own.
-** why again does the 'view requests' page not show start and end dates?
-** TODO better error message when you try to fulfill your own request
-** Notifications system
-- seeing a weird error where an undeliverable address causes a template parsing warning
-- need test for new listing subscribers
-- should event notifier accept an event as a parameter?
-- a single object to encapsulate subject, greeting, and message info for an email?
-- sending mail slows down page load, need to do this asynchronously
-** TODO need logging for mailings
-log to database? trim after 30 days?
-need a way to generate reports
-web portal?
-is the 'sent' folder for the champa account good enough?
-** TODO email only, no separate login
-need to get rid of login column
-move to logging in w/ email address
-** TODO examine moving some of the listing/availability/transaction creation logic into the models
-** TODO need transaction reminder notifications
-** TODO request editing is broken -- spurious validation errors, "Show | Back" links should be removed
-** TODO add html5 shim?
-** TODO use bootstrap modal for confirmation dialogs?
-** TODO "about us" in footer
-** TODO dashboard should suggest actions
 ** scratch
 
 the exciting young denver venture that's changing the way people park at home
