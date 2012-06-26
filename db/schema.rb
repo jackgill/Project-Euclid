@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120626022540) do
+ActiveRecord::Schema.define(:version => 20120626031000) do
 
   create_table "availabilities", :force => true do |t|
     t.integer  "listing_id"
@@ -97,7 +97,6 @@ ActiveRecord::Schema.define(:version => 20120626022540) do
     t.string   "first_name"
     t.string   "last_name"
     t.string   "email"
-    t.string   "login"
     t.string   "hashed_password"
     t.string   "salt"
     t.datetime "created_at"
