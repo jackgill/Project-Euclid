@@ -2,9 +2,9 @@ require 'date'
 
 # Wipe the resources tables
 # Note: order matters due to foreign key constraints
+Transaction.delete_all
 Availability.delete_all
 Listing.delete_all
-Transaction.delete_all
 Spot.delete_all
 Request.delete_all
 User.delete_all
