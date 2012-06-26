@@ -28,10 +28,10 @@
 <%= link_to 'Edit', edit_availability_path(@availability) %>
 <% else %>
 <%= link_to 'Rent this spot',
-:controller => 'availabilities',
-:action => 'rent',
-:availability => @availability.id,
+{:controller => 'availabilities',
+:action => 'rent'},
+{:availability => @availability.id,
 :start_date => @availability.start_date,
-:end_date => @availability.end_date,
+:end_date => @availability.end_date}
 %>
 <% end %>
