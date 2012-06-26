@@ -11,11 +11,8 @@ class User < ActiveRecord::Base
   validates :first_name, :presence => true
   validates :last_name, :presence => true
   validates :email, :presence => true
-  validates :login, :presence => true
-
-  # TODO: turned off email uniqueness validation to allow testing, should re-enable this before launching
-  #validates_uniqueness_of :email
-  validates_uniqueness_of :login
+  
+  validates_uniqueness_of :email
 
   attr_accessor :password_confirmation
   validates_confirmation_of :password
@@ -24,8 +21,8 @@ class User < ActiveRecord::Base
 
   @@global_salt = "euclid"
 
-  def self.authenticate(login, clear_password)
-    user = self.find_by_login(login)
+  def self.authenticate(email, clear_password)
+    user = self.find_by_email(email)
     if user
       provided_password = hash_password(clear_password, user.salt)
       if provided_password != user.hashed_password

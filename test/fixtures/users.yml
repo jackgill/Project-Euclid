@@ -2,7 +2,6 @@ bob:
   first_name: Bob
   last_name: LNU
   email: bob@example.com
-  login: bob
   salt: foo
   hashed_password: as if
   building: timber_ridge
@@ -13,7 +12,6 @@ alice:
   first_name: Alice
   last_name: LNU
   email: alice@example.com
-  login: alice
   salt: foo
   hashed_password: as if
   building: spire
@@ -24,7 +22,6 @@ admin:
   first_name: Admin
   last_name: LNU
   email: admin@example.com
-  login: admin
   salt: foo
   hashed_password: as if
   is_admin: true

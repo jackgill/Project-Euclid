@@ -15,8 +15,7 @@ def add_user(name, is_admin, building_id, notify_new_request= false, notify_new_
   user_id = User.create(
                         first_name: name,
                         last_name: 'LNU',
-                        email: 'jack@jackmgill.com',
-                        login: name,
+                        email: 'jack+' + name + '@jackmgill.com',
                         password: 'foo',
                         is_admin: is_admin,
                         building_id: building_id,
