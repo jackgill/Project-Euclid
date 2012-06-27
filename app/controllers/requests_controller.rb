@@ -128,6 +128,11 @@ class RequestsController < ApplicationController
 
   def rent
     @request = Request.find(params[:request])
+
+    if @request.requester.id == @user.id
+      return message('Sorry, you cannot fulfill your own request')
+    end
+
     spot_id = params[:spot]
     success, transaction = @request.fulfill(@user, params[:spot_id])
 

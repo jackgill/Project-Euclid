@@ -503,9 +503,17 @@ I say go for it!
 - offer / counter-offer system
 - hybrid system allows immediate acceptance of an offer, or counter-offer
 - confirmation of rental
+* Test plan
+- create new user
 * Misc
 ** scratch
 
 the exciting young denver venture that's changing the way people park at home
 
 selling to businesses is dead
+
+need script which will run unit tests THEN deploy to heroku
+
+requested_path is user creation form, but it shouldn't be
+
+clear session on logout
