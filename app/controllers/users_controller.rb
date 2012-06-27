@@ -42,7 +42,8 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     @shown_user = User.new(params[:user])
-    
+    @shown_user.building_id = session[:building_id]
+
     respond_to do |format|
       if @shown_user.save
         format.html {
@@ -57,7 +58,7 @@ class UsersController < ApplicationController
               redirect_to :controller => 'spots', :action => 'yours'
             end
           else
-            redirect_to @shown_user, notice: 'User was successfully created.'
+            redirect_to( { controller: home, action: index}, { notice: 'User was successfully created.' })
           end
         }
         format.json { render json: @shown_user, status: :created, location: @shown_user }
