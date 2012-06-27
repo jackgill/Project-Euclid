@@ -5,8 +5,8 @@ class UsersControllerTest < ActionController::TestCase
     session[:building_id] = buildings(:timber_ridge).id
     session[:user_id] = users(:bob).id
     @user = users(:bob)
-    # change these fields so that the model validation which
-    # prevent duplicate logins/emails won't prevent create/update
+    # change email so that the model validation which
+    # prevent duplicate emails won't prevent create/update
     # for this user
     @user.email += '1'
   end

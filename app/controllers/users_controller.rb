@@ -58,7 +58,7 @@ class UsersController < ApplicationController
               redirect_to :controller => 'spots', :action => 'yours'
             end
           else
-            redirect_to( { controller: home, action: index}, { notice: 'User was successfully created.' })
+            redirect_to( { controller: 'home', action: 'index'}, { notice: 'User was successfully created.' })
           end
         }
         format.json { render json: @shown_user, status: :created, location: @shown_user }
