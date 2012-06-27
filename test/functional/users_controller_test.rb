@@ -8,7 +8,6 @@ class UsersControllerTest < ActionController::TestCase
     # change these fields so that the model validation which
     # prevent duplicate logins/emails won't prevent create/update
     # for this user
-    @user.login += '1'
     @user.email += '1'
   end
 
