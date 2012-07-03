@@ -30,6 +30,15 @@ class ListingsController < ApplicationController
   def new
     @listing = Listing.new
 
+    # The spot detail page will embed these parameters into the query string for each button
+    # We can transfer them to the session here in case there are form validation errors,
+    # and they are needed to re-render the form
+    if params[:spot] && params[:building]
+      session[:spot] =  params[:spot]
+      session[:building] = params[:building]
+    end
+
+
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @listing }

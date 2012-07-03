@@ -21,10 +21,10 @@
   <% end %>
 
   
-  <% if params[:spot] && params[:building] %>
-	<%= f.hidden_field :spot_id, :value => params[:spot] %>
-	<%= f.hidden_field :building_id, :value => params[:building] %>
-  <% else %>
+  <% if session[:spot] && session[:building] %>
+	<%= f.hidden_field :spot_id, :value => session[:spot] %>
+	<%= f.hidden_field :building_id, :value => session[:building] %>
+  <% elsif @user.is_admin %>
   <div class="field">
     <%= f.label :building_id %>
     <%= f.select :building_id, Building.all.collect { |b| [ b.name, b.id ] } %>
@@ -33,6 +33,8 @@
     <%= f.label :spot_id %>
 	<%= f.select :spot_id, Spot.all.collect { |s| [ s.building.name + ' ' + s.number.to_s, s.id ] } %>
   </div>
+  <% else %>
+  Error: building and spot not specified.
   <% end %>
 
   <div class="field">
