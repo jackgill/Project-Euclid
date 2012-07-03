@@ -9,7 +9,7 @@ class AdminController < ApplicationController
   end
 
   def impersonate
-    _user = User.find_by_login(params[:user])
+    _user = User.find_by_email(params[:user])
     session[:user_id] = _user.id
     redirect_to :controller => 'home', :action => 'index'
   end
