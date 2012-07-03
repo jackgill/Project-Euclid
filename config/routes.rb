@@ -27,6 +27,7 @@ Euclid::Application.routes.draw do
   get "requests/results"
   get "requests/fulfill"
   get "requests/rent"
+  get "requests/error"
 
   # Resources
   resources :transactions

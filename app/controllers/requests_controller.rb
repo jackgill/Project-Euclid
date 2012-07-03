@@ -121,8 +121,12 @@ class RequestsController < ApplicationController
   def fulfill
     @spots = Spot.where(owner_id: @user.id)
 
-    respond_to do |format|
-      format.html
+    if @spots.length == 0
+      redirect_to action: :error
+    else
+      respond_to do |format|
+        format.html
+      end
     end
   end
 
@@ -147,5 +151,8 @@ class RequestsController < ApplicationController
     respond_to do |format|
       format.html { return message(msg) }
     end
+  end
+
+  def error
   end
 end
