@@ -24,7 +24,7 @@
   </tbody>
 </table>
 <% else %>
-  No listings
+You haven't created any listings. <%= link_to 'Create a listing', { controller: 'spots', action: 'yours' }, { class: 'btn btn-info btn-mini' } %>
 <% end %>
 
 </div>
@@ -55,7 +55,7 @@
   </tbody>
 </table>
 <% else %>
-  You aren't renting any spots
+  You aren't renting any spots. <%= link_to 'Search for a spot', { controller: 'availabilities', action: 'search' }, { class: 'btn btn-info btn-mini' } %>
 <% end %>
 
 </div>
@@ -86,7 +86,7 @@
   </tbody>
 </table>
 <% else %>
-  No requests
+  You haven't made any requests. <%= link_to 'Make a request', { controller: 'requests', action: 'new' }, { class: 'btn btn-info btn-mini' } %>
 <% end %>
 
 </div>
@@ -118,7 +118,7 @@
 </tbody>
 </table>
 <% else %>
-  None of your spots are being rented
+  None of your spots are being rented.
 <% end %>
 
 </div>
