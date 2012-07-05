@@ -4,6 +4,8 @@
   <tr>
     <th>Requester</th>
     <th>Bid price</th>
+    <th>Start Date</th>
+    <th>End Date</th>
     <th></th>
   </tr>
 
@@ -11,6 +13,8 @@
   <tr>
     <td><%= format_user(request.requester) %></td>
     <td><%= request.bid_price %></td>
+    <td><%= request.start_date %></td>
+    <td><%= request.end_date %></td>
 	<td>
 <%= link_to 'Fulfill this request',
 {
