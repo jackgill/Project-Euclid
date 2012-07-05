@@ -514,6 +514,6 @@ selling to businesses is dead
 
 need script which will run unit tests THEN deploy to heroku
 
-requested_path is user creation form, but it shouldn't be
+need unit test for transaction cancellation notification
 
-clear session on logout
+there's a time zone issue w/ storing start dates - namely, they're in UTC, which is probably not correct.

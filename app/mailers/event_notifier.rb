@@ -64,7 +64,7 @@ class EventNotifier < ActionMailer::Base
     # figure out which party cancelled the transaction
     cancellee = transaction.buyer
     if canceller.id == transaction.buyer.id
-      cancellee = buyer
+      cancellee = transaction.buyer
     end
     
     @greeting = "Hi #{cancellee.first_name},"

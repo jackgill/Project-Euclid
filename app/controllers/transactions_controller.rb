@@ -80,7 +80,10 @@ class TransactionsController < ApplicationController
   end
 
   def cancel
-    
+    if (@transaction.start_date - 24.hours) < DateTime.now
+      return message("You cannot cancel transactions within 24 hours of the start date")
+    end
+
     respond_to do |format|    
       if @transaction.cancel
         # send notifications
