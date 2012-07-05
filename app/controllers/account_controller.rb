@@ -9,6 +9,7 @@ class AccountController < ApplicationController
         session[:user_id] = user.id
         if session[:requested_path]
           redirect_to session[:requested_path]
+          session[:requested_path] = nil
         else
           redirect_to(:controller => "home", :action => "index")
         end
@@ -20,6 +21,7 @@ class AccountController < ApplicationController
 
   def logout
     session[:user_id] = :logged_out
+    reset_session
     flash[:notice] = "logged out"
     redirect_to(:action => "login")
   end

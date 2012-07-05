@@ -30,6 +30,7 @@ class HomeController < ApplicationController
       # TODO: check that this is a valid building id
       session[:building_id] = params[:building_id]
       redirect_to session[:requested_path]
+      session[:requested_path] = nil
     end
   end
 end
