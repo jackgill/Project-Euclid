@@ -30,11 +30,15 @@ class Listing < ActiveRecord::Base
     for listing in listings
       # If the listing id is the same, it's the same listing
       # If the listing id is different, or not present, it's a duplicate
-      if listing.id != id
+      if listing.id != self.id
         # TODO: this error message should link to the duplicate listing
         # it should also be more grammatically correct
         errors.add(:start_date, 'there is already a listing for this spot in this date range')
       end
     end
+  end
+
+  def cancel()
+    update_attribute(:cancelled, true)
   end
 end

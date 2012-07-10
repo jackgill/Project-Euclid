@@ -1,6 +1,6 @@
 class ListingsController < ApplicationController
   before_filter :require_admin, only: [ :index ]
-  before_filter :find_listing, only: [ :show, :edit, :update, :destroy ]
+  before_filter :find_listing, only: [ :show, :edit, :update, :destroy, :cancel ]
   before_filter :require_owner_or_admin, only: [ :edit, :update, :destroy ]
   
   # GET /listings
@@ -110,6 +110,21 @@ class ListingsController < ApplicationController
     respond_to do |format|
       format.html { return message 'You have successfully deleted this listing' }
       format.json { head :ok }
+    end
+  end
+
+  def cancel
+    respond_to do |format|    
+      if @listing.cancel
+        format.html { message('You have successfully cancelled this listing') }
+      else
+        message_str = 'This listing could not be cancelled: ' + @listing.errors.size.to_s
+        
+        @listing.errors do |error|
+          message_str += @listing.errors[error]
+        end
+        format.html { message(message_str) }
+      end
     end
   end
 

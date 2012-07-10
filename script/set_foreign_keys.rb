@@ -11,13 +11,17 @@ def execute(string)
   end
 end
 
-def add_foreign_key(from_table, from_column, to_table)
-    constraint_name = "fk_#{from_table}_#{from_column}"
+def add_foreign_key(from_table, from_column, to_table, cascade=false)
+  constraint_name = "fk_#{from_table}_#{from_column}"
     
-    execute %{ALTER TABLE #{from_table}
-              ADD CONSTRAINT #{constraint_name}
-              FOREIGN KEY (#{from_column})
-              REFERENCES #{to_table}(id)}
+  sql = %{ALTER TABLE #{from_table}
+          ADD CONSTRAINT #{constraint_name}
+          FOREIGN KEY (#{from_column})
+          REFERENCES #{to_table}(id)}
+
+  sql += " ON DELETE CASCADE" if cascade
+
+  execute sql
 end
 
 add_foreign_key('Spots', 'owner_id', 'Users')

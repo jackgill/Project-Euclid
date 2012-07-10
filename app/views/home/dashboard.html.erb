@@ -18,7 +18,7 @@
 	  <td><%= "#{listing.building.name} #{listing.spot.number}" %></td>
 	  <td><%= listing.start_date %></td>
 	  <td><%= listing.end_date %></td>
-	  <td><%= link_to 'Remove', listing, confirm: 'Are you sure?', method: :delete, class: 'btn btn-danger btn-mini' %></td>
+	  <td><%= link_to 'Remove', { controller: :listings, action: :cancel, id: listing.id }, confirm: 'Are you sure?', method: :post, class: 'btn btn-danger btn-mini' %></td>
   </tr> 
 <% end %>
   </tbody>

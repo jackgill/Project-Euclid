@@ -3,10 +3,13 @@ Euclid::Application.routes.draw do
   get "transactions/cancel"
   
   # Listings
+  get "listings/cancel"
+
+  # Availabilities
   get "availabilities/search"
   get "availabilities/results"  
   get "availabilities/rent"
-  
+
   # Account
   get "account/login"
   get "account/logout"
