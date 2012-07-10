@@ -16,18 +16,24 @@ class Request < ActiveRecord::Base
   validates_with DateRangeValidator
   
   def fulfill(seller, spot_id)
-    # delete this request
-    destroy
+    success = false
+    new_transaction = nil
 
-    # create a new transaction between the buyer and the seller
-    transaction = Transaction.new(
-                                  spot_id: spot_id,
-                                  buyer_id: requester_id,
-                                  seller_id: seller.id,
-                                  start_date: start_date,
-                                  end_date: end_date,
-                                  price: bid_price
-                                  )
-    return transaction.save, transaction
+    ActiveRecord::Base.transaction do
+      # delete this request
+      destroy
+
+      # create a new transaction between the buyer and the seller
+      new_transaction = Transaction.new(
+                                    spot_id: spot_id,
+                                    buyer_id: requester_id,
+                                    seller_id: seller.id,
+                                    start_date: start_date,
+                                    end_date: end_date,
+                                    price: bid_price
+                                    )
+      success = new_transaction.save
+    end
+    return success, new_transaction
   end
 end

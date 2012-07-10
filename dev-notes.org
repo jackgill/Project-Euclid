@@ -507,22 +507,10 @@ I say go for it!
 - create new user
 * Misc
 ** scratch
-
-the exciting young denver venture that's changing the way people park at home
-
-selling to businesses is dead
-
 need script which will run unit tests THEN deploy to heroku
 
 need unit test for transaction cancellation notification
 
 there's a time zone issue w/ storing start dates - namely, they're in UTC, which is probably not correct.
-
-we don't seem to have a process for moving completed transactions out of the table.
-
-so we can't delete a listing which has a cancelled transaction associated with it. hrm...
-what is the expected behavior? should we delete the cancelled transaction?
-should cancelled transactions be moved to a different table, w/o the fk constraint?
-or should we make listings "cancellable" as well? After all, this problem arises from the fact that listings are deleted while transactions are simply marked cancelled
 
 need transactions archive
