@@ -6,7 +6,7 @@ class HomeController < ApplicationController
   end
 
   def dashboard
-    @listings = Listing.where(lister_id: @user.id)
+    @listings = Listing.where(lister_id: @user.id).where(cancelled: false)
     @requests = Request.where(requester_id: @user.id)
     @transactions_buyer = Transaction.where(buyer_id: @user.id).where(cancelled: false)
     @transactions_seller = Transaction.where(seller_id: @user.id).where(cancelled: false)
